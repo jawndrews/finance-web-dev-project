@@ -17,10 +17,10 @@
 1. Create account (admin prompted)
 2. Sign in
 3. Edit account:
-4. personal information
-5. password
-6. View account balance
-7. Make/view payments
+  - personal information
+  - password
+4. View account balance
+5. Make/view payments
 
 **Admin User Requirements:** Member/income management
 
@@ -28,9 +28,9 @@
 2. View/add/edit/delete balances on accounts
 3. View payment history
 4. Create reports
-5. Database queries using filtered information
-6. View dashboards
-7. Pre-determined dashboards including charts and graphs for quick visual representation of the organization's data and progress
+  - Database queries using filters
+5. View dashboards
+  - Pre-determined dashboards including charts and graphs for quick visual representation of the organization's data and progress
 
 **Concerns:**
 
@@ -41,7 +41,7 @@
 5. Compatibility: the web application should be compatible with multiple browsers, including mobile devices.
 6. There are many concerns with web development and a comprehensive list would be a very long one. For the context and sake of a student project, not all concerns can be addressed, and some may be negated.
 
-**Note:** This document strictly covers target audience and requirements for various users. Separate documentation will discuss developer requirements as well as proper technologies to be used.
+**Note:** This document strictly covers target audience and requirements for various users. Separate documentation will discuss developer requirements as well as technologies to be used.
 
 **References:**
 
