@@ -10,7 +10,7 @@
 
 **Goal:** The primary goal of this project is to provide organizations a user-friendly and intuitive way to track necessary income and information about their members; with hopes to increase efficiency and time management. Future goals can be implemented as this will be an ongoing project. Users enjoy having their tasks and requirements all in one site, therefore as the project develops, more requirements can be drafted and implemented to provide more features for the users.
 
-**Users:** Memberusers and Admin users
+**Users:** Member users and Admin users
 
 **Member User Requirements:** Member portal with limited functionality
 
