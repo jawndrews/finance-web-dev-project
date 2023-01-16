@@ -15,21 +15,20 @@
 **Technology stacks considered:**
 
 1. **LAMP:**
-
-1. Linux (OS)
-1. Apache (server)
-1. MySQL (database)
-1. PHP (programming language)
+  - Linux (OS)
+  - Apache (server)
+  - MySQL (database)
+  - PHP (programming language)
 
 **Pros:** Open source, low-cost, highly documented, flexible, and easy to use
 
 **Cons:** Limited scalability, MySQL is limited with large databases
 
-1. **MERN:**
-1. MongoDB (database)
-1. js (web framework for Node.js)
-1. React (front-end framework)
-1. js (server)
+2. **MERN:**
+  - MongoDB (database)
+  - Express.js (web framework for Node.js)
+  - React (front-end framework)
+  - Node.js (server)
 
 **Pros:** Open source, scalable (huge library of modules), cloud-compatible, uses one programming language (JavaScript)
 
