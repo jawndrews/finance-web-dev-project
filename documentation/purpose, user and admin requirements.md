@@ -16,9 +16,7 @@
 
 1. Create account (admin prompted)
 2. Sign in
-3. Edit account:
-  - personal information
-  - password
+3. Edit account (personal info/password)
 4. View account balance
 5. Make/view payments
 
@@ -27,10 +25,8 @@
 1. View/add/edit/delete accounts
 2. View/add/edit/delete balances on accounts
 3. View payment history
-4. Create reports
-  - Database queries using filters
-5. View dashboards
-  - Pre-determined dashboards including charts and graphs for quick visual representation of the organization's data and progress
+4. Create reports (database queries using filters)
+5. View dashboards (charts/graphs for  visual representation of the organization's data and progress)
 
 **Concerns:**
 
