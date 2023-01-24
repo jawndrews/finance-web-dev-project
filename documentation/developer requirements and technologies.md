@@ -15,20 +15,22 @@
 **Technology stacks considered:**
 
 1. **LAMP:**
-  - Linux (OS)
-  - Apache (server)
-  - MySQL (database)
-  - PHP (programming language)
+
+- Linux (OS)
+- Apache (server)
+- MySQL (database)
+- PHP (programming language)
 
 **Pros:** Open source, low-cost, highly documented, flexible, and easy to use
 
 **Cons:** Limited scalability, MySQL is limited with large databases
 
 2. **MERN:**
-  - MongoDB (database)
-  - Express.js (web framework for Node.js)
-  - React (front-end framework)
-  - Node.js (server)
+
+- MongoDB (database)
+- Express.js (web framework for Node.js)
+- React (front-end framework)
+- Node.js (server)
 
 **Pros:** Open source, scalable (huge library of modules), cloud-compatible, uses one programming language (JavaScript)
 
@@ -48,4 +50,5 @@
 **References:**
 
 [How to choose the right tech stack for web development (educative.io)](https://www.educative.io/blog/choose-a-web-development-tech-stack)
+
 [MERN Stack Tutorial #1 - What is the MERN Stack](https://www.youtube.com/watch?v=98BzS5Oz5E4&ab_channel=TheNetNinja)
