@@ -49,3 +49,4 @@
 **References:**
 
 [How to choose the right tech stack for web development (educative.io)](https://www.educative.io/blog/choose-a-web-development-tech-stack)
+[MERN Stack Tutorial #1 - What is the MERN Stack](https://www.youtube.com/watch?v=98BzS5Oz5E4&ab_channel=TheNetNinja)
