@@ -10,27 +10,23 @@
 
 **Goal:** The primary goal of this project is to provide organizations a user-friendly and intuitive way to track necessary income and information about their members; with hopes to increase efficiency and time management. Future goals can be implemented as this will be an ongoing project. Users enjoy having their tasks and requirements all in one site, therefore as the project develops, more requirements can be drafted and implemented to provide more features for the users.
 
-**Users:** Memberusers and Admin users
+**Users:** Member users and Admin users
 
 **Member User Requirements:** Member portal with limited functionality
 
 1. Create account (admin prompted)
 2. Sign in
-3. Edit account:
-4. personal information
-5. password
-6. View account balance
-7. Make/view payments
+3. Edit account (personal info/password)
+4. View account balance
+5. Make/view payments
 
 **Admin User Requirements:** Member/income management
 
 1. View/add/edit/delete accounts
 2. View/add/edit/delete balances on accounts
 3. View payment history
-4. Create reports
-5. Database queries using filtered information
-6. View dashboards
-7. Pre-determined dashboards including charts and graphs for quick visual representation of the organization's data and progress
+4. Create reports (database queries using filters)
+5. View dashboards (charts/graphs for  visual representation of the organization's data and progress)
 
 **Concerns:**
 
@@ -41,7 +37,7 @@
 5. Compatibility: the web application should be compatible with multiple browsers, including mobile devices.
 6. There are many concerns with web development and a comprehensive list would be a very long one. For the context and sake of a student project, not all concerns can be addressed, and some may be negated.
 
-**Note:** This document strictly covers target audience and requirements for various users. Separate documentation will discuss developer requirements as well as proper technologies to be used.
+**Note:** This document strictly covers target audience and requirements for various users. Separate documentation will discuss developer requirements as well as technologies to be used.
 
 **References:**
 
