@@ -1,11 +1,13 @@
 ## Web Development Project - Fisca
 
 **About**
+
 For an independent student project, I am developing a full stack web application called Fisca.
 
 Fisca is a web application created for the purpose of member and income management for various organizations. Use cases include sororities & fraternities, gyms, country clubs, non profits, and more. For organizations that need to manage members and/or member fees, this application is for you.
 
 **Users**
+
 There are two distinct types of users: Admins and Members.
 
 Admin Features:
@@ -23,4 +25,5 @@ Member Features:
 - View payment history
 
 **Implementation**
+
 I am using various JavaScript technologies in order to develop this application, including React, Express, Node, and MongoDB, otherwise known as the MERN stack.
