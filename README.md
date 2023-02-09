@@ -11,6 +11,7 @@ For an independent student project, I am developing a full stack web application
 - Express.js
 - MongoDB
 - [Material UI](https://mui.com/) for most UI components.
+- [Nivo](https://nivo.rocks/) for data visualization.
 
 **User Features**
 
