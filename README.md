@@ -12,7 +12,7 @@ For an independent student project, I am developing a full stack web application
 - MongoDB
 - [Material UI](https://mui.com/) for most UI components.
 
-**Users Features**
+**User Features**
 
 Admins:
 - View/add/edit/remove members
