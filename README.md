@@ -24,6 +24,9 @@ Member Features:
 - Make payments
 - View payment history
 
-**Implementation**
-
-I am using various JavaScript technologies in order to develop this application, including React, Express, Node, and MongoDB. I also used [Material UI](https://mui.com/) for most UI components.
+**Technologies Used**
+React.js
+Node.js
+Express.js
+MongoDB
+[Material UI](https://mui.com/) for most UI components.
