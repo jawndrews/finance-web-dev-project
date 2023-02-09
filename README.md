@@ -26,4 +26,4 @@ Member Features:
 
 **Implementation**
 
-I am using various JavaScript technologies in order to develop this application, including React, Express, Node, and MongoDB, otherwise known as the MERN stack.
+I am using various JavaScript technologies in order to develop this application, including React, Express, Node, and MongoDB. I also used [Material UI](https://mui.com/) for most UI components.
