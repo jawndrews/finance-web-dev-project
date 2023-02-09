@@ -25,8 +25,9 @@ Member Features:
 - View payment history
 
 **Technologies Used:**
--React.js
--Node.js
--Express.js
--MongoDB
--[Material UI](https://mui.com/) for most UI components.
+
+- React.js
+- Node.js
+- Express.js
+- MongoDB
+- [Material UI](https://mui.com/) for most UI components.
