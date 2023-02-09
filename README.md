@@ -15,6 +15,7 @@ Fisca is a web application created for the purpose of member and income manageme
 - [Material UI](https://mui.com/) for most UI components.
 
 **Users**
+
 There are two distinct types of users: Admins and Members.
 
 Admin Features:
