@@ -5,10 +5,15 @@ import cors from "cors";
 import dotenv from "dotenv";
 import helmet from "helmet";
 import morgan from "morgan";
-import dashboardRoute from "./routes/dashboard.js";
-import membersRoute from "./routes/members.js";
-import paymentsRoute from "./routes/payments.js";
-import invoicesRoute from "./routes/invoices.js";
+import generalRoutes from "./routes/general.js";
+import incomeRoutes from "./routes/income.js";
+import managementRoutes from "./routes/management.js";
+
+// data imports
+import User from "./models/User.js";
+import { dataUser } from "./data/index.js";
+import Payment from "./models/Payment.js";
+import { dataPayment } from "./data/index.js";
 
 /*config*/
 dotenv.config();
@@ -22,10 +27,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
 /*routes*/
-app.use("/dashboard", dashboardRoute);
-app.use("/members", membersRoute);
-app.use("/payments", paymentsRoute);
-app.use("/invoices", invoicesRoute);
+app.use("/general", generalRoutes);
+app.use("/income", incomeRoutes);
+app.use("/management", managementRoutes);
 
 /*mongoose setup*/
 const PORT = process.env.PORT || 9000;
@@ -36,5 +40,9 @@ mongoose
   })
   .then(() => {
     app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
+
+    /* only add data one time*/
+    User.insertMany(dataUser);
+    Payment.insertMany(dataPayment);
   })
   .catch((error) => console.log(`${error} did not connect`));

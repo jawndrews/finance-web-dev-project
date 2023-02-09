@@ -28,7 +28,7 @@ export const tokensDark = {
     900: "#060a0e",
   },
   secondary: {
-    //turquoise
+    // turquoise
     100: "#dbfaf5",
     200: "#b7f4ea",
     300: "#94efe0",
@@ -39,8 +39,19 @@ export const tokensDark = {
     800: "#1e5b51",
     900: "#0f2e29",
   },
+  accent: {
+    // indigo, NOT IN USE: FIX CONTRAST
+    100: "#e2d6fb",
+    200: "#c5adf7",
+    300: "#a784f4",
+    400: "#8a5bf0",
+    500: "#6d32ec",
+    600: "#5728bd",
+    700: "#411e8e",
+    800: "#2c145e",
+    900: "#160a2f",
+  },
 };
-
 // function that reverses the color palette
 function reverseTokens(tokensDark) {
   const reversedTokens = {};
@@ -65,7 +76,7 @@ export const themeSettings = (mode) => {
       mode: mode,
       ...(mode === "dark"
         ? {
-            // palette values for dark mode
+            // palette for dark mode
             primary: {
               ...tokensDark.primary,
               main: tokensDark.primary[400],
@@ -74,6 +85,10 @@ export const themeSettings = (mode) => {
             secondary: {
               ...tokensDark.secondary,
               main: tokensDark.secondary[300],
+            },
+            accent: {
+              ...tokensDark.accent,
+              main: tokensDark.accent[500],
             },
             neutral: {
               ...tokensDark.grey,
@@ -85,7 +100,7 @@ export const themeSettings = (mode) => {
             },
           }
         : {
-            // palette values for light mode
+            // palette for light mode
             primary: {
               ...tokensLight.primary,
               main: tokensDark.grey[50],
@@ -95,6 +110,10 @@ export const themeSettings = (mode) => {
               ...tokensLight.secondary,
               main: tokensDark.secondary[600],
               light: tokensDark.secondary[700],
+            },
+            accent: {
+              ...tokensDark.accent,
+              main: tokensDark.accent[500],
             },
             neutral: {
               ...tokensLight.grey,
