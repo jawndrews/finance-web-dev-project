@@ -111,7 +111,7 @@ const Sidebar = ({
               color: theme.palette.secondary[200],
               backgroundColor: theme.palette.background.alt,
               boxSizing: "border-box",
-              borderWdith: isNonMobile ? 0 : "2px",
+              borderWidth: isNonMobile ? 0 : "2px",
               width: drawerWidth,
             },
           }}

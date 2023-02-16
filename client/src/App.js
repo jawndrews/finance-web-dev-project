@@ -8,6 +8,7 @@ import Layout from "scenes/layout";
 import Dashboard from "scenes/dashboard";
 import { Navigate } from "react-router-dom";
 import Payments from "scenes/payments";
+import Members from "scenes/members";
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
@@ -22,6 +23,7 @@ function App() {
               <Route path="/" element={<Navigate to="/dashboard" replace />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/payments" element={<Payments />} />
+              <Route path="/members" element={<Members />} />
             </Route>
           </Routes>
         </ThemeProvider>
