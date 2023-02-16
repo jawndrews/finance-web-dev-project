@@ -14,6 +14,12 @@ const PaymentSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    date: {
+      type: String,
+    },
+    paymentType: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

@@ -29,12 +29,13 @@ const UserSchema = new mongoose.Schema(
     state: String,
     country: String,
     phoneNumber: String,
-    payments: Array,
-    memberType: {
+    userType: {
       type: String,
       enum: ["user", "admin"],
       default: "admin",
     },
+    payments: Array,
+    invoices: Array,
   },
   { timestamps: true }
 );

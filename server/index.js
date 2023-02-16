@@ -14,6 +14,8 @@ import User from "./models/User.js";
 import { dataUser } from "./data/index.js";
 import Payment from "./models/Payment.js";
 import { dataPayment } from "./data/index.js";
+import Invoice from "./models/Invoice.js";
+import { dataInvoice } from "./data/index.js";
 
 /*config*/
 dotenv.config();
@@ -42,7 +44,8 @@ mongoose
     app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
 
     /* only add data one time*/
-    User.insertMany(dataUser);
-    Payment.insertMany(dataPayment);
+    //User.insertMany(dataUser);
+    //Payment.insertMany(dataPayment);
+    //Invoice.insertMany(dataInvoice);
   })
   .catch((error) => console.log(`${error} did not connect`));
