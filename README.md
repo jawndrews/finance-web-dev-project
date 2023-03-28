@@ -2,7 +2,7 @@
 
 **About**
 
-For an independent student project, I am developing a full stack web application called Fisca. Fisca is a web application created for the purpose of member and income management for various organizations. Use cases include sororities & fraternities, gyms, country clubs, non profits, and more.
+For an independent student project, I am developing a full stack web application called Fisca. Fisca is a web application created for the purpose of member and income management for various organizations. Use cases include sororities & fraternities, gyms, clubs, non profits, and more.
 
 **Technologies Used:**
 
