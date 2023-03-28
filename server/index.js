@@ -33,6 +33,16 @@ app.use("/general", generalRoutes);
 app.use("/income", incomeRoutes);
 app.use("/management", managementRoutes);
 
+/*file storage
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "public/assets");
+  },
+  fiename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
+});*/
+
 /*mongoose setup*/
 const PORT = process.env.PORT || 9000;
 mongoose
