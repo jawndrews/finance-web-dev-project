@@ -53,7 +53,7 @@ mongoose
   .then(() => {
     app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
 
-    /* only add data one time*/
+    /* import mock data */
     //User.insertMany(dataUser);
     //Payment.insertMany(dataPayment);
     //Invoice.insertMany(dataInvoice);

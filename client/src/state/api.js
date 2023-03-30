@@ -18,8 +18,12 @@ export const api = createApi({
       providesTags: ["Payments"],
     }),
     getMembers: build.query({
-      query: () => "management/members",
-      providesTags: ["Members"],
+      query: ({ page, pageSize, sort, search }) => ({
+        url: "management/members",
+        method: "GET",
+        params: { page, pageSize, sort, search },
+        providesTags: ["Members"],
+      }),
     }),
   }),
 });

@@ -4,9 +4,9 @@ import { useMemo } from "react";
 import { themeSettings } from "theme";
 import { useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import Layout from "scenes/layout";
 import Dashboard from "scenes/dashboard";
-import { Navigate } from "react-router-dom";
 import Payments from "scenes/payments";
 import Members from "scenes/members";
 
