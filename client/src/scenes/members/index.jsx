@@ -59,7 +59,7 @@ const Members = () => {
 
   return (
     <Box m="1.5rem 2.5rem">
-      <Header title="MEMBERS" subtitle="Manage your Members" />
+      <Header title="MEMBERS" subtitle="Manage Your Members" />
       <Box
         mt="40px"
         height="75vh"
@@ -76,15 +76,15 @@ const Members = () => {
             borderBotton: "none",
           },
           "& .MuiDataGrid-virtualScroller": {
-            backgroundColor: theme.palette.primary.light,
+            backgroundColor: theme.palette.background.alt,
           },
           "& .MuiDataGrid-footerContainer": {
             backgroundColor: theme.palette.background.alt,
             color: theme.palette.secondary[100],
             borderTop: "none",
           },
-          "& .MuiDataGrid-toolBarContainer .MuiButton-text": {
-            color: `${theme.palette.secondary[400]} !important`,
+          "& .MuiButton-text": {
+            color: theme.palette.primary[300],
           },
           "& .MuiButton-text:hover": {
             color: theme.palette.secondary[300],

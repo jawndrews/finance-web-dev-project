@@ -57,7 +57,7 @@ const Payments = () => {
 
   return (
     <Box m="1.5rem 2.5rem">
-      <Header title="PAYMENTS" subtitle="Payments made by your Members" />
+      <Header title="PAYMENTS" subtitle="Payments Made by Your Members" />
       <Box
         mt="40px"
         height="75vh"
@@ -74,15 +74,15 @@ const Payments = () => {
             borderBotton: "none",
           },
           "& .MuiDataGrid-virtualScroller": {
-            backgroundColor: theme.palette.primary.light,
+            backgroundColor: theme.palette.background.alt,
           },
           "& .MuiDataGrid-footerContainer": {
             backgroundColor: theme.palette.background.alt,
             color: theme.palette.secondary[100],
             borderTop: "none",
           },
-          "& .MuiDataGrid-toolBarContainer .MuiButton-text": {
-            color: `${theme.palette.secondary[200]} !important`,
+          "& .MuiButton-text": {
+            color: theme.palette.primary[300],
           },
           "& .MuiButton-text:hover": {
             color: theme.palette.secondary[300],
