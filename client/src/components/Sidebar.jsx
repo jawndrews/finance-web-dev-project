@@ -221,10 +221,17 @@ const Sidebar = ({
               })}
             </List>
           </Box>
-          <Box display="flex" justifyContent="center" alignItems="center">
+          <Box
+            position="absolute"
+            display="flex"
+            bottom="1.5rem"
+            justifyContent="center"
+            alignItems="center"
+            width="100%"
+          >
             <Typography
               sx={{
-                m: "0 0 0 0",
+                m: "0 0 0 0.5rem",
                 color: theme.palette.secondary[100],
               }}
             >
