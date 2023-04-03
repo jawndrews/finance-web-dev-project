@@ -34,8 +34,18 @@ const UserSchema = new mongoose.Schema(
       enum: ["user", "admin"],
       default: "admin",
     },
-    payments: Array,
-    invoices: Array,
+    payments: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "Payment",
+      },
+    ],
+    invoices: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "Invoice",
+      },
+    ],
   },
   { timestamps: true }
 );

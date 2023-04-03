@@ -21,6 +21,16 @@ const Members = () => {
   });
   console.log("members data", data);
 
+  function getFullName(params) {
+    return `${params.row.firstName || ""} ${params.row.lastName || ""}`;
+  }
+
+  function getAccountBalance(params) {
+    return `${
+      params.row.invoices[0].amount - params.row.payments[0].amount || ""
+    }`;
+  }
+
   const columns = [
     {
       field: "_id",
@@ -31,6 +41,7 @@ const Members = () => {
       field: "firstName",
       headerName: "Name",
       flex: 0.5,
+      valueGetter: getFullName,
     },
     {
       field: "email",
@@ -51,9 +62,10 @@ const Members = () => {
       flex: 1,
     },
     {
-      field: "payments",
+      field: "invoices",
       headerName: "Account Balance",
       flex: 1,
+      valueGetter: getAccountBalance,
     },
   ];
 

@@ -2,10 +2,6 @@ import mongoose from "mongoose";
 
 const InvoiceSchema = new mongoose.Schema(
   {
-    _id: {
-      type: String,
-      required: true,
-    },
     amount: {
       type: Number,
       required: true,
@@ -31,9 +27,12 @@ const InvoiceSchema = new mongoose.Schema(
     lateFee: {
       type: Number,
     },
-    users: {
-      type: Array,
-    },
+    users: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "User",
+      },
+    ],
   },
   { timestamps: true }
 );

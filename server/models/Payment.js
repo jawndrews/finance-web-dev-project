@@ -2,18 +2,6 @@ import mongoose from "mongoose";
 
 const PaymentSchema = new mongoose.Schema(
   {
-    _id: {
-      type: String,
-      required: true,
-    },
-    userId: {
-      type: String,
-      required: true,
-    },
-    invoiceId: {
-      type: String,
-      required: true,
-    },
     amount: {
       type: Number,
       required: true,
@@ -24,6 +12,18 @@ const PaymentSchema = new mongoose.Schema(
     paymentType: {
       type: String,
     },
+    userId: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "User",
+      },
+    ],
+    invoiceId: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "Invoice",
+      },
+    ],
   },
   { timestamps: true }
 );

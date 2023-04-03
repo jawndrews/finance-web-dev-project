@@ -7,7 +7,6 @@ import DataGridCustomToolbar from "components/DataGridCustomToolbar";
 
 const Payments = () => {
   const theme = useTheme();
-
   // values sent to the backend
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(20);
@@ -20,7 +19,14 @@ const Payments = () => {
     sort: JSON.stringify(sort),
     search,
   });
+
   console.log("payment data", data);
+
+  function getFullName(params) {
+    return `${params.row.userId[0].firstName || ""} ${
+      params.row.userId[0].lastName || ""
+    }`;
+  }
 
   const columns = [
     {
@@ -30,16 +36,12 @@ const Payments = () => {
     },
     {
       field: "userId",
-      headerName: "User ID",
+      headerName: "Member",
       flex: 1,
+      valueGetter: getFullName,
     },
     {
-      field: "invoiceId",
-      headerName: "Invoice",
-      flex: 1,
-    },
-    {
-      field: "date",
+      field: "createdAt",
       headerName: "Created Date",
       flex: 1,
     },
@@ -52,6 +54,11 @@ const Payments = () => {
       field: "amount",
       headerName: "Amount",
       flex: 0.5,
+    },
+    {
+      field: "invoiceId",
+      headerName: "Remaining Balance",
+      flex: 1,
     },
   ];
 

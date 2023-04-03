@@ -18,9 +18,11 @@ export const getPayments = async (req, res) => {
     const sortFormatted = Boolean(sort) ? generateSort() : {};
 
     const payments = await Payment.find({
-      $or: [{ userId: { $regex: new RegExp(search, "i") } }],
+      $in: [{ userId: { $regex: new RegExp(search, "i") } }],
     })
       .sort(sortFormatted)
+      .populate("userId")
+      .populate("invoiceId")
       .skip(page * pageSize)
       .limit(pageSize);
 
