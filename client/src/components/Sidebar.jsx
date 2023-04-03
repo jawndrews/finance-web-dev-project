@@ -1,7 +1,7 @@
 import React from "react";
 import {
   Box,
-  Divider,
+  Button,
   Drawer,
   IconButton,
   List,
@@ -137,6 +137,40 @@ const Sidebar = ({
                 )}
               </FlexBetween>
             </Box>
+            <Box display="flex" justifyContent="center" alignItems="center">
+              <Box
+                component="img"
+                alt="profile"
+                src={profileImage}
+                height="100px"
+                width="100px"
+                borderRadius="50%"
+                sx={{ objectFit: "cover" }}
+              />
+            </Box>
+
+            <Box textAlign="center">
+              <Typography
+                variant="h2"
+                fontWeight="bold"
+                fontSize="1.4rem"
+                sx={{
+                  color: theme.palette.secondary[100],
+                  m: "1.5rem 0 0 0",
+                }}
+              >
+                {user.firstName} {user.lastName}
+              </Typography>
+              <Typography
+                fontSize="0.8rem"
+                sx={{
+                  color: theme.palette.secondary[200],
+                  m: "0.1rem 0 1.5rem 0",
+                }}
+              >
+                {user.userType}
+              </Typography>
+            </Box>
             <List>
               {navItems.map(({ text, icon }) => {
                 if (!icon) {
@@ -187,34 +221,24 @@ const Sidebar = ({
               })}
             </List>
           </Box>
-          <Box position="absolute" bottom="2rem">
-            <Divider />
-            <FlexBetween textTransform="none" gap="1rem" m="1.5rem 2rem 0 3rem">
-              <Box
-                component="img"
-                alt="profile"
-                src={profileImage}
-                height="40px"
-                width="40px"
-                borderRadius="50%"
-                sx={{ objectFit: "cover" }}
-              />
-              <Box textAlign="left">
-                <Typography
-                  fontWeight="bold"
-                  fontSize="0.9rem"
-                  sx={{ color: theme.palette.secondary[100] }}
-                >
-                  {user.firstName} {user.lastName}
-                </Typography>
-                <Typography
-                  fontSize="0.8rem"
-                  sx={{ color: theme.palette.secondary[200] }}
-                >
-                  {user.userType}
-                </Typography>
-              </Box>
-            </FlexBetween>
+          <Box display="flex" justifyContent="center" alignItems="center">
+            <Typography
+              sx={{
+                m: "0 0 0 0",
+                color: theme.palette.secondary[100],
+              }}
+            >
+              Need Help?
+            </Typography>
+            <Button
+              sx={{
+                m: "0 0 0 1rem",
+                color: theme.palette.secondary[100],
+                backgroundColor: theme.palette.accent[500],
+              }}
+            >
+              Submit a Ticket
+            </Button>
           </Box>
         </Drawer>
       )}
