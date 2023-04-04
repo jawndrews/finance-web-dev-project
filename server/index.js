@@ -1,10 +1,14 @@
 import express from "express";
 import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 import helmet from "helmet";
 import morgan from "morgan";
+import { logger } from "./middleware/logger.js";
+import { errorHandler } from "./middleware/errorHandler.js";
+import { corsOptions } from "./config/corsOptions.js";
 import generalRoutes from "./routes/general.js";
 import incomeRoutes from "./routes/income.js";
 import managementRoutes from "./routes/management.js";
@@ -20,30 +24,25 @@ import { dataInvoice } from "./data/index.js";
 /*config*/
 dotenv.config();
 const app = express();
+app.use(logger);
+app.use(cors(corsOptions));
 app.use(express.json());
+app.use(cookieParser());
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cors());
 
 /*routes*/
+//app.use("/auth", authRoutes);
 app.use("/general", generalRoutes);
 app.use("/income", incomeRoutes);
 app.use("/management", managementRoutes);
 
-/*file storage
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "public/assets");
-  },
-  fiename: function (req, file, cb) {
-    cb(null, file.originalname);
-  },
-});*/
-
 /*mongoose setup*/
+app.use(errorHandler);
+
 const PORT = process.env.PORT || 9000;
 mongoose
   .connect(process.env.MONGO_URL, {
