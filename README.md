@@ -1,4 +1,4 @@
-## Web Development Project - Fisca
+## Full Stack Finance Web App - Fisca
 
 **About**
 
