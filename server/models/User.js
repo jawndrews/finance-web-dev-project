@@ -25,27 +25,23 @@ const UserSchema = new mongoose.Schema(
       required: true,
       min: 5,
     },
+    phoneNumber: String,
+    street: String,
     city: String,
     state: String,
     country: String,
-    phoneNumber: String,
+    dob: String,
+    zip: String,
+    profilePic: String,
+    organization: String,
+    memberStatus: String,
+    memberStartDate: String,
+    memberEndDate: String,
     userType: {
       type: String,
+      required: true,
       enum: ["user", "admin"],
-      default: "admin",
     },
-    payments: [
-      {
-        type: mongoose.Types.ObjectId,
-        ref: "Payment",
-      },
-    ],
-    invoices: [
-      {
-        type: mongoose.Types.ObjectId,
-        ref: "Invoice",
-      },
-    ],
   },
   { timestamps: true }
 );

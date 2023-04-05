@@ -28,6 +28,11 @@ const Payments = () => {
     }`;
   }
 
+  function getRemainingBalance(params) {
+    // update to get actual
+    return `${params.row.userId[0].firstName || ""}`;
+  }
+
   const columns = [
     {
       field: "_id",
@@ -42,23 +47,28 @@ const Payments = () => {
     },
     {
       field: "createdAt",
-      headerName: "Created Date",
+      headerName: "Date Created",
       flex: 1,
+      valueFormatter: (params) => new Date(params?.value).toLocaleString(),
     },
     {
       field: "paymentType",
       headerName: "Payment Type",
       flex: 1,
+      valueFormatter: (params) =>
+        (params?.value).charAt(0).toUpperCase() + (params?.value).slice(1),
     },
     {
       field: "amount",
       headerName: "Amount",
       flex: 0.5,
+      valueFormatter: (params) => (params?.value).toFixed(2),
     },
     {
       field: "invoiceId",
       headerName: "Remaining Balance",
       flex: 1,
+      valueGetter: getRemainingBalance,
     },
   ];
 

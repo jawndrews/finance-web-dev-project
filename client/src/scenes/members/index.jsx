@@ -25,22 +25,16 @@ const Members = () => {
     return `${params.row.firstName || ""} ${params.row.lastName || ""}`;
   }
 
-  function getAccountBalance(params) {
-    return `${
-      params.row.invoices[0].amount - params.row.payments[0].amount || ""
-    }`;
-  }
-
   const columns = [
     {
       field: "_id",
       headerName: "ID",
-      flex: 1,
+      flex: 0.75,
     },
     {
       field: "firstName",
       headerName: "Name",
-      flex: 0.5,
+      flex: 0.7,
       valueGetter: getFullName,
     },
     {
@@ -53,19 +47,15 @@ const Members = () => {
       headerName: "Phone Number",
       flex: 0.5,
       renderCell: (params) => {
-        return params.value.replace(/^(\d{3})(\d{3})(\d{4})/, "($1)$2-$3");
+        return params.value.replace(/^(\d{3})(\d{3})(\d{4})/, "($1) $2-$3");
       },
     },
     {
       field: "userType",
       headerName: "Permissions",
       flex: 1,
-    },
-    {
-      field: "invoices",
-      headerName: "Account Balance",
-      flex: 1,
-      valueGetter: getAccountBalance,
+      valueFormatter: (params) =>
+        (params?.value).charAt(0).toUpperCase() + (params?.value).slice(1),
     },
   ];
 

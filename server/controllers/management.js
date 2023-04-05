@@ -19,8 +19,6 @@ export const getMembers = async (req, res) => {
       $or: [{ userId: { $regex: new RegExp(search, "i") } }],
     })
       .sort(sortFormatted)
-      .populate("payments")
-      .populate("invoices")
       .skip(page * pageSize)
       .limit(pageSize);
 
