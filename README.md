@@ -2,7 +2,7 @@
 
 **About**
 
-Fisca is a web application used for member and income management for various organizations. Use cases include sororities & fraternities, gyms, clubs, non profits, etc.
+Fisca is a web application used for member and financial management for various organizations. Use cases include sororities & fraternities, gyms, clubs, non profits, etc.
 
 **Technologies Used:**
 
