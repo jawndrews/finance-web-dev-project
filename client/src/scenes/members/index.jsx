@@ -54,8 +54,8 @@ const Members = () => {
       field: "userType",
       headerName: "Permissions",
       flex: 1,
-      valueFormatter: (params) =>
-        (params?.value).charAt(0).toUpperCase() + (params?.value).slice(1),
+      //valueFormatter: (params) =>
+      //  (params?.value).charAt(0).toUpperCase() + (params?.value).slice(1),
     },
   ];
 

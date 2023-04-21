@@ -20,7 +20,7 @@ export const getUser = expressAsyncHandler(async (req, res) => {
 // @access private
 export const getAllUsers = expressAsyncHandler(async (req, res) => {
   const users = await User.find().select("-password").lean();
-  if (!users) {
+  if (!users?.length) {
     return res.status(400).json({ message: "No users found" });
   }
   res.json(users);
@@ -35,10 +35,11 @@ export const createUser = expressAsyncHandler(async (req, res) => {
     lastName,
     email,
     password,
+    phoneNumber,
     city,
     state,
     country,
-    phoneNumber,
+    organization,
   } = req.body;
 
   // validate data
@@ -47,10 +48,11 @@ export const createUser = expressAsyncHandler(async (req, res) => {
     !lastName ||
     !email ||
     !password ||
+    !phoneNumber ||
     !city ||
     !state ||
     !country ||
-    !phoneNumber
+    !organization
   ) {
     return res.status(400).json({ message: "All fields are required" });
   }
@@ -72,10 +74,11 @@ export const createUser = expressAsyncHandler(async (req, res) => {
     lastName,
     email,
     password: hashedPwd,
+    phoneNumber,
     city,
     state,
     country,
-    phoneNumber,
+    organization,
   };
 
   // create and store new user
@@ -85,7 +88,7 @@ export const createUser = expressAsyncHandler(async (req, res) => {
     //created
     res
       .status(201)
-      .json({ message: `New user ${firstName} ${lastName} created` });
+      .json({ message: `New user ${firstName} ${lastName} created.` });
   } else {
     res.status(400).json({ message: "Invalid user data received" });
   }
@@ -101,26 +104,34 @@ export const updateUser = expressAsyncHandler(async (req, res) => {
     lastName,
     email,
     password,
+    phoneNumber,
+    street,
     city,
     state,
     country,
-    phoneNumber,
+    zip,
     userType,
   } = req.body;
 
+  console.log(req.body);
+
   // validate data
   if (
+    !id ||
     !firstName ||
     !lastName ||
     !email ||
-    !password ||
+    !phoneNumber ||
+    !street ||
     !city ||
     !state ||
     !country ||
-    !phoneNumber ||
+    !zip ||
     !userType
   ) {
-    return res.status(400).json({ message: "All fields are required" });
+    return res
+      .status(400)
+      .json({ message: "All fields except password are required" });
   }
 
   const user = await User.findById(id).exec();
@@ -138,13 +149,20 @@ export const updateUser = expressAsyncHandler(async (req, res) => {
       .json({ message: "Account with that email already exists" });
   }
 
+  if (password) {
+    user.password = await bcrypt.hash(password, 10);
+  }
+
   user.firstName = firstName;
   user.lastName = lastName;
   user.email = email;
+  user.phoneNumber = phoneNumber;
+  user.street = street;
   user.city = city;
   user.state = state;
   user.country = country;
-  user.phoneNumber = phoneNumber;
+  user.zip = zip;
+
   user.userType = userType;
 
   if (password) {

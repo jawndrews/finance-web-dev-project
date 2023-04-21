@@ -9,7 +9,7 @@ const InvoiceSchema = new mongoose.Schema(
     lateFee: Number,
     userId: [
       {
-        type: mongoose.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "User",
       },
     ],

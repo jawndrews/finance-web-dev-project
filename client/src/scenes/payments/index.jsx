@@ -19,26 +19,35 @@ const Payments = () => {
     sort: JSON.stringify(sort),
     search,
   });
-
   console.log("payment data", data);
 
   function getFullName(params) {
-    return `${params.row.userId[0].firstName || ""} ${
-      params.row.userId[0].lastName || ""
-    }`;
+    const user = params.row.userId[0];
+    if (!user) {
+      return "";
+    }
+    return `${user.firstName || ""} ${user.lastName || ""}`;
   }
 
   function getRemainingBalance(params) {
-    // update to get actual
-    return `${params.row.userId[0].firstName || ""}`;
+    //negative balances
+    let remainingBalance = params.row.invoiceId[0].amount - params.row.amount;
+
+    const formattedBalance = remainingBalance.toLocaleString("en-US", {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+
+    if (remainingBalance < 0) {
+      return "$0.00"; //update in future if international currencies are needed
+    } else {
+      return `${formattedBalance || ""}`;
+    }
   }
 
   const columns = [
-    {
-      field: "_id",
-      headerName: "ID",
-      flex: 1,
-    },
     {
       field: "userId",
       headerName: "Member",
@@ -47,7 +56,7 @@ const Payments = () => {
     },
     {
       field: "createdAt",
-      headerName: "Date Created",
+      headerName: "Payment Date",
       flex: 1,
       valueFormatter: (params) => new Date(params?.value).toLocaleString(),
     },
@@ -55,14 +64,14 @@ const Payments = () => {
       field: "paymentType",
       headerName: "Payment Type",
       flex: 1,
-      valueFormatter: (params) =>
-        (params?.value).charAt(0).toUpperCase() + (params?.value).slice(1),
+      //valueFormatter: (params) =>
+      //  (params?.value).charAt(0).toUpperCase() + (params?.value).slice(1),
     },
     {
       field: "amount",
       headerName: "Amount",
-      flex: 0.5,
-      valueFormatter: (params) => (params?.value).toFixed(2),
+      flex: 1,
+      valueFormatter: (params) => `$${(params?.value).toFixed(2)}`,
     },
     {
       field: "invoiceId",

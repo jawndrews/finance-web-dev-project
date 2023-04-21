@@ -39,7 +39,6 @@ const UserSchema = new mongoose.Schema(
     memberEndDate: String,
     userType: {
       type: String,
-      required: true,
       enum: ["user", "admin"],
     },
   },

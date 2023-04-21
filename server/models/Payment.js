@@ -4,17 +4,15 @@ const PaymentSchema = new mongoose.Schema(
   {
     amount: Number,
     paymentType: String,
-    userId: String,
-    invoiceId: String,
     userId: [
       {
-        type: mongoose.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "User",
       },
     ],
     invoiceId: [
       {
-        type: mongoose.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "Invoice",
       },
     ],
