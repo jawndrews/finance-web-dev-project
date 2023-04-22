@@ -1,9 +1,9 @@
 import express from "express";
-import { getMembers } from "../controllers/management.js";
+import { getUsers } from "../controllers/general.js";
 
 const router = express.Router();
 
-router.get("/members", getMembers);
+router.get("/members", getUsers);
 router.get("/events");
 router.get("/communication");
 router.get("/reports");

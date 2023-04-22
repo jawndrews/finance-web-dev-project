@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Box, useTheme } from "@mui/material";
-import { useGetMembersQuery } from "state/usersApi";
+import { useGetUsersQuery } from "state/api";
 import { DataGrid } from "@mui/x-data-grid";
 import Header from "components/Header";
 import DataGridCustomToolbar from "components/DataGridCustomToolbar";
@@ -13,7 +13,7 @@ const Members = () => {
   const [sort, setSort] = useState({});
   const [search, setSearch] = useState("");
   const [searchInput, setSearchInput] = useState("");
-  const { data, isLoading } = useGetMembersQuery({
+  const { data, isLoading } = useGetUsersQuery({
     page,
     pageSize,
     sort: JSON.stringify(sort),
@@ -96,7 +96,7 @@ const Members = () => {
         <DataGrid
           loading={isLoading || !data}
           getRowId={(row) => row._id}
-          rows={(data && data.members) || []}
+          rows={(data && data.users) || []}
           columns={columns}
           rowCount={(data && data.total) || 0}
           rowsPerPageOptions={[20, 50, 100]}

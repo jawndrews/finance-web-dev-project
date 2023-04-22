@@ -1,6 +1,7 @@
 import User from "../models/User.js";
 
-export const getMembers = async (req, res) => {
+// using getUsers from general controllers instead
+/*export const getMembers = async (req, res) => {/
   try {
     // pagination
     const { page = 1, pageSize = 20, sort = null, search = "" } = req.query;
@@ -33,4 +34,4 @@ export const getMembers = async (req, res) => {
   } catch (error) {
     res.status(404).json({ message: error.message }); //update to be more specific
   }
-};
+};*/
