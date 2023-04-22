@@ -17,7 +17,7 @@ export const usersApi = createApi({
       providesTags: ["User"],
     }),
     getUsers: build.query({
-      query: () => "/users",
+      query: () => "general/users",
       validateStatus: (response, result) => {
         return response.status === 200 && !result.isError;
       },
