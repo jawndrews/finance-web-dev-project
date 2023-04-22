@@ -13,11 +13,11 @@ export const paymentsApi = createApi({
   endpoints: (build) => ({
     // payments
     getPayment: build.query({
-      query: (id) => `general/payments/${id}`,
+      query: (id) => `income/payments/${id}`,
       providesTags: ["Payment"],
     }),
     getPayments: build.query({
-      query: () => "/payments",
+      query: () => "income/payments",
       validateStatus: (response, result) => {
         return response.status === 200 && !result.isError;
       },
@@ -39,7 +39,7 @@ export const paymentsApi = createApi({
     }),
     addPayment: build.mutation({
       query: (initialPaymentData) => ({
-        url: "general/payments",
+        url: "income/payments",
         method: "POST",
         body: {
           ...initialPaymentData,
@@ -49,7 +49,7 @@ export const paymentsApi = createApi({
     }),
     updatePayment: build.mutation({
       query: (initialPaymentData) => ({
-        url: "general/payments",
+        url: "income/payments",
         method: "PATCH",
         body: {
           ...initialPaymentData,
@@ -61,7 +61,7 @@ export const paymentsApi = createApi({
     }),
     deletePayment: build.mutation({
       query: ({ id }) => ({
-        url: `general/payments`,
+        url: `income/payments`,
         method: "DELETE",
         body: { id },
       }),

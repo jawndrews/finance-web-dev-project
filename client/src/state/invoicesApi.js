@@ -13,7 +13,7 @@ export const invoicesApi = createApi({
   endpoints: (build) => ({
     // invoices
     getInvoice: build.query({
-      query: (id) => `general/invoices/${id}`,
+      query: (id) => `income/invoices/${id}`,
       providesTags: ["Invoice"],
     }),
     getInvoices: build.query({
@@ -39,7 +39,7 @@ export const invoicesApi = createApi({
     }),
     addInvoice: build.mutation({
       query: (initialInvoiceData) => ({
-        url: "general/invoices",
+        url: "income/invoices",
         method: "POST",
         body: {
           ...initialInvoiceData,
@@ -49,7 +49,7 @@ export const invoicesApi = createApi({
     }),
     updateInvoice: build.mutation({
       query: (initialInvoiceData) => ({
-        url: "general/invoices",
+        url: "income/invoices",
         method: "PATCH",
         body: {
           ...initialInvoiceData,
@@ -61,7 +61,7 @@ export const invoicesApi = createApi({
     }),
     deleteInvoice: build.mutation({
       query: ({ id }) => ({
-        url: `general/invoices`,
+        url: `income/invoices`,
         method: "DELETE",
         body: { id },
       }),
