@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import { useGetPaymentsQuery } from "state/api";
+import { useGetPaymentsQuery } from "state/paymentsApi";
 import { Box, useTheme } from "@mui/material";
 import Header from "components/Header";
 import DataGridCustomToolbar from "components/DataGridCustomToolbar";

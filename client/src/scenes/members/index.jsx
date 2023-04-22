@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Box, useTheme } from "@mui/material";
-import { useGetMembersQuery } from "state/api";
+import { useGetMembersQuery } from "state/usersApi";
 import { DataGrid } from "@mui/x-data-grid";
 import Header from "components/Header";
 import DataGridCustomToolbar from "components/DataGridCustomToolbar";

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Box, useTheme } from "@mui/material";
 import Header from "components/Header";
-import { useGetInvoicesQuery } from "state/api";
+import { useGetInvoicesQuery } from "state/invoicesApi";
 import DataGridCustomToolbar from "components/DataGridCustomToolbar";
 import { DataGrid } from "@mui/x-data-grid";
 

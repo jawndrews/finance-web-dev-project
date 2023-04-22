@@ -6,14 +6,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import globalReducer from "state";
 import { Provider } from "react-redux";
 import { setupListeners } from "@reduxjs/toolkit/query";
-import { api } from "state/api";
+import { apiSlice } from "state/apiSlice.js";
 
 const store = configureStore({
   reducer: {
     global: globalReducer,
-    [api.reducerPath]: api.reducer,
+    [apiSlice.reducerPath]: apiSlice.reducer,
   },
-  middleware: (getDefault) => getDefault().concat(api.middleware),
+  middleware: (getDefault) => getDefault().concat(apiSlice.middleware),
 });
 setupListeners(store.dispatch);
 
