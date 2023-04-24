@@ -2,6 +2,7 @@ import React from "react";
 import {
   Box,
   Button,
+  Divider,
   Drawer,
   IconButton,
   List,
@@ -13,7 +14,6 @@ import {
   useTheme,
 } from "@mui/material";
 import {
-  SettingsOutlined,
   ChevronLeft,
   ChevronRightOutlined,
   HomeOutlined,
@@ -125,7 +125,7 @@ const Sidebar = ({
                     component="img"
                     alt="logo"
                     src={logoType}
-                    height="50px"
+                    height="60px"
                     width="80px"
                     sx={{ objectFit: "contain" }}
                   />
@@ -137,18 +137,34 @@ const Sidebar = ({
                 )}
               </FlexBetween>
             </Box>
+            <Divider
+              sx={{
+                m: "0 0 2rem 0",
+              }}
+            >
+              <Typography
+                variant="h2"
+                fontWeight="bold"
+                fontSize="0.9rem"
+                sx={{
+                  color: theme.palette.secondary[500],
+                }}
+              >
+                {user.organization}
+                {/*add functionality to prevent text runoff here */}
+              </Typography>
+            </Divider>
             <Box display="flex" justifyContent="center" alignItems="center">
               <Box
                 component="img"
                 alt="profile"
                 src={profileImage}
-                height="100px"
-                width="100px"
+                height="110px"
+                width="110px"
                 borderRadius="50%"
                 sx={{ objectFit: "cover" }}
               />
             </Box>
-
             <Box textAlign="center">
               <Typography
                 variant="h2"
@@ -221,31 +237,37 @@ const Sidebar = ({
               })}
             </List>
           </Box>
-          <Box
-            position="absolute"
-            display="flex"
-            bottom="1.5rem"
-            justifyContent="center"
-            alignItems="center"
-            width="100%"
-          >
-            <Typography
+          <Box>
+            <Box
+              position="absolute"
+              display="flex"
+              bottom="0rem"
+              justifyContent="center"
+              alignItems="center"
+              width="100%"
               sx={{
-                m: "0 0 0 0.5rem",
-                color: theme.palette.secondary[100],
+                p: "1rem 0 1rem 0",
+                backgroundColor: theme.palette.primary[500],
               }}
             >
-              Need Help?
-            </Typography>
-            <Button
-              sx={{
-                m: "0 0 0 1rem",
-                color: theme.palette.secondary[100],
-                backgroundColor: theme.palette.accent[500],
-              }}
-            >
-              Submit a Ticket
-            </Button>
+              <Typography
+                sx={{
+                  m: "0 0 0 0.5rem",
+                  color: theme.palette.secondary[100],
+                }}
+              >
+                Need Help?
+              </Typography>
+              <Button
+                sx={{
+                  m: "0 0 0 1rem",
+                  color: theme.palette.secondary[100],
+                  backgroundColor: theme.palette.accent[500],
+                }}
+              >
+                Submit a Ticket
+              </Button>
+            </Box>
           </Box>
         </Drawer>
       )}
