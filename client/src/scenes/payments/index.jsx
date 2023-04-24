@@ -19,7 +19,6 @@ const Payments = () => {
     sort: JSON.stringify(sort),
     search,
   });
-  console.log("payment data", data);
 
   function getFullName(params) {
     const user = params.row.userId[0];

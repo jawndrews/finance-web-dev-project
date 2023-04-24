@@ -7,6 +7,15 @@ const InvoiceSchema = new mongoose.Schema(
     description: String,
     recurring: Boolean,
     lateFee: Number,
+    activeDate: String,
+    dueDate: String,
+    isPaid: String,
+    payments: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Payment",
+      },
+    ],
     userId: [
       {
         type: mongoose.Schema.Types.ObjectId,

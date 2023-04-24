@@ -1,6 +1,36 @@
 import User from "../models/User.js";
+import Payment from "../models/Payment.js";
+import Invoice from "../models/Invoice.js";
 import bcrypt from "bcrypt";
 import expressAsyncHandler from "express-async-handler";
+
+// @desc get dashboard stats
+// @route GET /dashboard
+// @access private
+export const getDashboardStats = async (req, res) => {
+  try {
+    //members overview
+    const totalMembers = await User.countDocuments();
+
+    // payments
+    // recent payments
+    const payments = await Payment.find().limit(50).sort({ createdAt: -1 });
+    const totalPayments = await User.countDocuments();
+
+    const totalIncome = "";
+    const totalOutstanding = "";
+
+    res.status(200).json({
+      payments,
+      totalPayments,
+      totalMembers,
+      totalIncome,
+      totalOutstanding,
+    });
+  } catch (error) {
+    res.status(404).json({ message: "Stats could not be loaded" });
+  }
+};
 
 // @desc get user
 // @route GET /users
@@ -64,8 +94,10 @@ export const createUser = expressAsyncHandler(async (req, res) => {
     email,
     password,
     phoneNumber,
+    street,
     city,
     state,
+    zip,
     country,
     organization,
   } = req.body;
@@ -77,8 +109,10 @@ export const createUser = expressAsyncHandler(async (req, res) => {
     !email ||
     !password ||
     !phoneNumber ||
+    !street ||
     !city ||
     !state ||
+    !zip ||
     !country ||
     !organization
   ) {
@@ -105,6 +139,7 @@ export const createUser = expressAsyncHandler(async (req, res) => {
     phoneNumber,
     city,
     state,
+    zip,
     country,
     organization,
   };
@@ -136,9 +171,8 @@ export const updateUser = expressAsyncHandler(async (req, res) => {
     street,
     city,
     state,
-    country,
     zip,
-    userType,
+    country,
   } = req.body;
 
   console.log(req.body);
@@ -153,9 +187,8 @@ export const updateUser = expressAsyncHandler(async (req, res) => {
     !street ||
     !city ||
     !state ||
-    !country ||
     !zip ||
-    !userType
+    !country
   ) {
     return res
       .status(400)
@@ -188,8 +221,8 @@ export const updateUser = expressAsyncHandler(async (req, res) => {
   user.street = street;
   user.city = city;
   user.state = state;
-  user.country = country;
   user.zip = zip;
+  user.country = country;
 
   user.userType = userType;
 

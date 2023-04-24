@@ -45,7 +45,7 @@ const Members = () => {
     {
       field: "phoneNumber",
       headerName: "Phone Number",
-      flex: 0.5,
+      flex: 0.7,
       renderCell: (params) => {
         return params.value.replace(/^(\d{3})(\d{3})(\d{4})/, "($1) $2-$3");
       },
@@ -53,7 +53,7 @@ const Members = () => {
     {
       field: "userType",
       headerName: "Permissions",
-      flex: 1,
+      flex: 0.5,
       //valueFormatter: (params) =>
       //  (params?.value).charAt(0).toUpperCase() + (params?.value).slice(1),
     },

@@ -13,15 +13,19 @@ const initialInvoiceState = invoicesAdapter.getInitialState();
 export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_BASE_URL }),
   reducerPath: "adminApi",
-  tagTypes: ["User", "Payment", "Invoice"],
+  tagTypes: ["Users", "Payments", "Invoices"],
   endpoints: (build) => ({
     // users
     getUser: build.query({
       query: (id) => `general/users/${id}`,
-      providesTags: ["User"],
+      providesTags: ["Users"],
     }),
     getUsers: build.query({
-      query: () => "general/users",
+      query: ({ page, pageSize, sort, search }) => ({
+        url: "general/users",
+        method: "GET",
+        params: { page, pageSize, sort, search },
+      }),
       validateStatus: (response, result) => {
         return response.status === 200 && !result.isError;
       },
@@ -66,10 +70,14 @@ export const api = createApi({
     // payments
     getPayment: build.query({
       query: (id) => `income/payments/${id}`,
-      providesTags: ["Payment"],
+      providesTags: ["Payments"],
     }),
     getPayments: build.query({
-      query: () => "income/payments",
+      query: ({ page, pageSize, sort, search }) => ({
+        url: "income/payments",
+        method: "GET",
+        params: { page, pageSize, sort, search },
+      }),
       validateStatus: (response, result) => {
         return response.status === 200 && !result.isError;
       },
@@ -118,10 +126,14 @@ export const api = createApi({
     // invoices
     getInvoice: build.query({
       query: (id) => `income/invoices/${id}`,
-      providesTags: ["Invoice"],
+      providesTags: ["Invoices"],
     }),
     getInvoices: build.query({
-      query: () => "income/invoices",
+      query: ({ page, pageSize, sort, search }) => ({
+        url: "income/invoices",
+        method: "GET",
+        params: { page, pageSize, sort, search },
+      }),
       validateStatus: (response, result) => {
         return response.status === 200 && !result.isError;
       },
@@ -166,6 +178,12 @@ export const api = createApi({
         { type: "Invoice", id: arg.id },
       ],
     }),
+
+    //dashboard
+    getDashboard: build.query({
+      query: () => "general/dashboard",
+      providesTags: ["Dashboard"],
+    }),
   }),
 });
 
@@ -185,6 +203,7 @@ export const {
   useAddInvoiceMutation,
   useUpdateInvoiceMutation,
   useDeleteInvoiceMutation,
+  useGetDashboardQuery,
 } = api;
 
 // returns the query result object

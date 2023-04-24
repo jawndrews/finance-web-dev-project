@@ -1,16 +1,19 @@
 import Payment from "../models/Payment.js";
 import Invoice from "../models/Invoice.js";
 import expressAsyncHandler from "express-async-handler";
+import { ObjectId } from "mongodb";
 
-export const getPayment = expressAsyncHandler(async (req, res) => {
+export const getPayment = async (req, res) => {
   try {
     const { id } = req.params;
-    const payment = await Payment.findById(id);
+    const payment = await Payment.findById(id)
+      .populate("userId")
+      .populate("invoiceId");
     res.status(200).json(payment);
   } catch (error) {
     res.status(404).json({ message: "Payment not found" });
   }
-});
+};
 
 // payments
 export const getPayments = async (req, res) => {
@@ -29,11 +32,11 @@ export const getPayments = async (req, res) => {
     const sortFormatted = Boolean(sort) ? generateSort() : {};
 
     const payments = await Payment.find({
-      $in: [{ userId: { $regex: new RegExp(search, "i") } }],
+      $or: [{ paymentType: { $regex: new RegExp(search, "i") } }],
     })
-      .sort(sortFormatted)
       .populate("userId")
       .populate("invoiceId")
+      .sort(sortFormatted)
       .skip(page * pageSize)
       .limit(pageSize);
 
@@ -51,7 +54,7 @@ export const getPayments = async (req, res) => {
 };
 
 export const createPayment = expressAsyncHandler(async (req, res) => {
-  const { id, amount, paymentType, userId, invoiceId } = req.body;
+  const { amount, paymentType, userId, invoiceId } = req.body;
 
   // Confirm data
   if (!amount || !paymentType || !userId || !invoiceId) {
@@ -61,14 +64,21 @@ export const createPayment = expressAsyncHandler(async (req, res) => {
   const payment = await Payment.create({
     amount,
     paymentType,
-    userId,
-    invoiceId,
+    userId: ObjectId(userId),
+    invoiceId: ObjectId(invoiceId),
   });
 
-  // Populate user and invoice data in the created payment document
-  await payment.populate("userId").populate("invoiceId").execPopulate();
-
   if (payment) {
+    // Update invoice with new payment
+    const invoice = await Invoice.findById(invoiceId).exec();
+
+    if (!invoice) {
+      return res.status(404).json({ message: "Invoice not found" });
+    }
+
+    invoice.payments.push(payment);
+    await invoice.save();
+
     return res.status(201).json({ message: "New payment created" });
   } else {
     return res.status(400).json({ message: "Invalid payment data received" });
@@ -92,8 +102,8 @@ export const updatePayment = expressAsyncHandler(async (req, res) => {
 
   payment.amount = amount;
   payment.paymentType = paymentType;
-  payment.userId = userId;
-  payment.invoiceId = invoiceId;
+  payment.userId = ObjectId(userId);
+  payment.invoiceId = ObjectId(invoiceId);
 
   const updatedPayment = await payment.save();
 
@@ -109,7 +119,7 @@ export const deletePayment = expressAsyncHandler(async (req, res) => {
   }
 
   // Confirm payment exists to delete
-  const payment = await Note.findById(id).exec();
+  const payment = await Payment.findById(id).exec();
 
   if (!payment) {
     return res.status(400).json({ message: "Payment not found" });
@@ -125,7 +135,9 @@ export const deletePayment = expressAsyncHandler(async (req, res) => {
 export const getInvoice = expressAsyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
-    const invoice = await Invoice.findById(id);
+    const invoice = await Invoice.findById(id)
+      .populate("payments")
+      .populate("userId");
     res.status(200).json(invoice);
   } catch (error) {
     res.status(404).json({ message: "Invoice not found" });
@@ -148,15 +160,19 @@ export const getInvoices = async (req, res) => {
     const sortFormatted = Boolean(sort) ? generateSort() : {};
 
     const invoices = await Invoice.find({
-      $in: [{ userId: { $regex: new RegExp(search, "i") } }],
+      $or: [
+        { title: { $regex: new RegExp(search, "i") } },
+        { description: { $regex: new RegExp(search, "i") } },
+      ],
     })
-      .sort(sortFormatted)
+      .populate("payments")
       .populate("userId")
+      .sort(sortFormatted)
       .skip(page * pageSize)
       .limit(pageSize);
 
     const total = await Invoice.countDocuments({
-      name: { $regex: search, $options: "i" },
+      title: { $regex: search, $options: "i" },
     });
 
     res.status(200).json({
@@ -169,7 +185,16 @@ export const getInvoices = async (req, res) => {
 };
 
 export const createInvoice = expressAsyncHandler(async (req, res) => {
-  const { amount, title, description, recurring, lateFee, userId } = req.body;
+  const {
+    amount,
+    title,
+    description,
+    recurring,
+    lateFee,
+    activeDate,
+    dueDate,
+    userId,
+  } = req.body;
 
   // Confirm data
   if (
@@ -178,6 +203,8 @@ export const createInvoice = expressAsyncHandler(async (req, res) => {
     !description ||
     typeof recurring !== "boolean" ||
     !lateFee ||
+    !activeDate ||
+    !dueDate ||
     !userId
   ) {
     return res.status(400).json({ message: "All fields are required" });
@@ -189,7 +216,9 @@ export const createInvoice = expressAsyncHandler(async (req, res) => {
     description,
     recurring,
     lateFee,
-    userId,
+    activeDate,
+    dueDate,
+    userId: ObjectId(userId),
   };
 
   // Create and store the new invoice
@@ -204,18 +233,27 @@ export const createInvoice = expressAsyncHandler(async (req, res) => {
 });
 
 export const updateInvoice = expressAsyncHandler(async (req, res) => {
-  const { id, amount, title, description, recurring, lateFee, userId } =
-    req.body;
+  const {
+    amount,
+    title,
+    description,
+    recurring,
+    lateFee,
+    activeDate,
+    dueDate,
+    userId,
+  } = req.body;
 
   // Confirm data
   if (
-    !id ||
     !amount ||
     !title ||
     !description ||
     typeof recurring !== "boolean" ||
     !lateFee ||
-    !invoiceId
+    !activeDate ||
+    !dueDate ||
+    !userId
   ) {
     return res.status(400).json({ message: "All fields are required" });
   }
@@ -232,7 +270,9 @@ export const updateInvoice = expressAsyncHandler(async (req, res) => {
   invoice.descrition = description;
   invoice.recurring = recurring;
   invoice.lateFee = lateFee;
-  invoice.userId = userId;
+  invoice.activeDate = activeDate;
+  invoice.dueDate = dueDate;
+  invoice.userId = ObjectId(userId);
 
   const updatedInvoice = await invoice.save();
 
@@ -258,7 +298,7 @@ export const deleteInvoice = expressAsyncHandler(async (req, res) => {
 
   const result = await invoice.deleteOne();
 
-  const reply = `Invoice "'${result.title}'" with ID ${result._id} deleted`;
+  const reply = `Invoice "'${result.title}'" with ID ${result.id} deleted`;
 
   res.json(reply);
 });

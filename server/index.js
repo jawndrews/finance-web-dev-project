@@ -56,5 +56,9 @@ mongoose
     //User.insertMany(dataUser);
     //Payment.insertMany(dataPayment);
     //Invoice.insertMany(dataInvoice);
+
+    /* populate data */
+    //Invoice.find().populate("userId");
+    //Invoice.find().populate("payments");
   })
   .catch((error) => console.log(`${error} did not connect`));
