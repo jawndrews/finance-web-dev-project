@@ -6,9 +6,9 @@ Fisca is a web application used for member and financial management for various 
 
 **Technologies Used:**
 
-- React.js
+- ReactJS
 - Node.js
-- Express.js
+- Express
 - MongoDB
 - [Material UI](https://mui.com/) for most UI components.
 - [Nivo](https://nivo.rocks/) for data visualization.
