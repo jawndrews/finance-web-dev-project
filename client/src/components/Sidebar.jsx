@@ -31,6 +31,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import FlexBetween from "./FlexBetween";
 import profileImage from "assets/pfp.jpeg";
 import logoType from "assets/logotype.svg";
+import { useGetUserQuery } from "state/api";
 
 // nav items
 const navItems = [

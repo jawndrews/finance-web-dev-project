@@ -11,6 +11,7 @@ export const verifyJWT = (req, res, next) => {
 
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
     if (err) return res.status(403).json({ message: "Forbidden" });
+    req.id = decoded.UserInfo._id;
     req.user = decoded.UserInfo.email;
     req.userType = decoded.UserInfo.userType;
     next();

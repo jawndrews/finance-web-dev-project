@@ -88,11 +88,14 @@ export const login = expressAsyncHandler(async (req, res) => {
 
   const match = await bcrypt.compare(password, foundUser.password);
 
+  const userId = foundUser._id;
+
   if (!match) return res.status(401).json({ message: "Unauthorized" });
 
   const accessToken = jwt.sign(
     {
       UserInfo: {
+        id: foundUser._id,
         email: foundUser.email,
         userType: foundUser.userType,
       },
@@ -114,7 +117,7 @@ export const login = expressAsyncHandler(async (req, res) => {
     maxAge: 7 * 24 * 60 * 60 * 1000,
   });
 
-  res.json({ accessToken });
+  res.json({ accessToken, userId });
 });
 
 export const refresh = (req, res) => {

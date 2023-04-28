@@ -48,6 +48,7 @@ const Login = () => {
       setEmail("");
       setPassword("");
       navigate("/dashboard");
+
       window.location.reload(); // BANDAID FIX FOR LOGIN BUG 4-27:1 -- NOT OPTIMAL!!!
     } catch (err) {
       if (!err.status) {
@@ -64,7 +65,7 @@ const Login = () => {
   };
   const handleUserInput = (e) => setEmail(e.target.value);
   const handlePwdInput = (e) => setPassword(e.target.value);
-  const handleToggle = () => setPersist((prev) => !prev);
+  const handleToggle = () => setPersist((prev) => !prev); // could be causing a bug where user can go back and be authenticated again
 
   const errClass = errMsg ? "errmsg" : "offscreen";
 
