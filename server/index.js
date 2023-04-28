@@ -9,6 +9,7 @@ import morgan from "morgan";
 import { logger } from "./middleware/logger.js";
 import { errorHandler } from "./middleware/errorHandler.js";
 import { corsOptions } from "./config/corsOptions.js";
+import authRoutes from "./routes/auth.js";
 import generalRoutes from "./routes/general.js";
 import incomeRoutes from "./routes/income.js";
 import managementRoutes from "./routes/management.js";
@@ -35,7 +36,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 /*routes*/
-//app.use("/auth", authRoutes);
+app.use("/auth", authRoutes);
 app.use("/general", generalRoutes);
 app.use("/income", incomeRoutes);
 app.use("/management", managementRoutes);

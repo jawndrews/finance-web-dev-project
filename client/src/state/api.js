@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import { createSelector, createEntityAdapter } from "@reduxjs/toolkit";
+import { setCredentials } from "./auth/authSlice";
 
 const usersAdapter = createEntityAdapter({});
 const paymentsAdapter = createEntityAdapter({});
@@ -10,12 +11,59 @@ const initialUserState = usersAdapter.getInitialState();
 const initialPaymentState = paymentsAdapter.getInitialState();
 const initialInvoiceState = invoicesAdapter.getInitialState();
 
+const baseQuery = fetchBaseQuery({
+  baseUrl: process.env.REACT_APP_BASE_URL,
+  credentials: "include",
+  prepareHeaders: (headers, { getState }) => {
+    const token = getState().auth.token;
+
+    if (token) {
+      headers.set("Authorization", `Bearer ${token}`);
+    }
+    return headers;
+  },
+});
+
+const baseQueryWithReauth = async (args, api, extraOptions) => {
+  // args // request url, method, body
+  // api // signal, dispatch, getState()
+  // extraOptions // custom
+  let result = await baseQuery(args, api, extraOptions);
+
+  if (result?.error?.status === 403) {
+    console.log("sending refresh token");
+
+    const refreshResult = await baseQuery("/auth/refresh", api, extraOptions);
+
+    if (refreshResult?.data) {
+      api.dispatch(setCredentials({ ...refreshResult.data }));
+
+      result = await baseQuery(args, api, extraOptions);
+    } else {
+      if (refreshResult?.error?.status === 403) {
+        refreshResult.error.data.message = "Your login has expired. ";
+      }
+      return refreshResult;
+    }
+  }
+
+  return result;
+};
+
 export const api = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_BASE_URL }),
+  baseQuery: baseQueryWithReauth,
   reducerPath: "adminApi",
   tagTypes: ["Users", "Payments", "Invoices"],
   endpoints: (build) => ({
     // users
+    getUserByEmail: build.query({
+      query: (email) => ({
+        url: `general/users/by_email`,
+        method: "GET",
+        params: { email },
+      }),
+      providesTags: ["Users"],
+    }),
     getUser: build.query({
       query: (id) => `general/users/${id}`,
       providesTags: ["Users"],
@@ -188,6 +236,7 @@ export const api = createApi({
 });
 
 export const {
+  useGetUserByEmailQuery,
   useGetUserQuery,
   useGetUsersQuery,
   useAddUserMutation,

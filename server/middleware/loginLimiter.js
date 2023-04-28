@@ -12,7 +12,7 @@ export const loginLimiter = rateLimit({
       `Too Many Requests: ${options.message.message}\t${req.method}\t${req.url}\t${req.headers.origin}`,
       "errLog.log"
     );
-    req.status(options.statusCode).send(options.message);
+    res.status(options.statusCode).send(options.message);
   },
   standardHeaders: true,
   legacyHeaders: true,

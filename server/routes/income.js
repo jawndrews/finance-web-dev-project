@@ -11,8 +11,11 @@ import {
   updateInvoice,
   deleteInvoice,
 } from "../controllers/income.js";
+import { verifyJWT } from "../middleware/verifyJWT.js";
 
 const router = express.Router();
+
+router.use(verifyJWT);
 
 router.get("/payments/:id", getPayment);
 router.get("/payments", getPayments);

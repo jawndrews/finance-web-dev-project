@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   LightModeOutlined,
   DarkModeOutlined,
@@ -9,9 +9,11 @@ import {
   ExitToAppOutlined,
   Settings,
 } from "@mui/icons-material";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import FlexBetween from "components/FlexBetween";
 import { useDispatch } from "react-redux";
 import { setMode } from "state";
+import { useSendLogoutMutation } from "state/auth/authApiSlice";
 import profileImage from "assets/pfp.jpeg";
 import {
   Box,
@@ -30,10 +32,26 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
   const dispatch = useDispatch();
   const theme = useTheme();
 
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  const [sendLogout, { isLoading, isSuccess, isError, error }] =
+    useSendLogoutMutation();
+
   const [anchorEl, setAnchorEl] = useState(null);
   const isOpen = Boolean(anchorEl);
   const handleClick = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
+
+  useEffect(() => {
+    if (isSuccess) navigate("/login");
+  }, [isSuccess, navigate]);
+
+  const onLogoutClicked = () => sendLogout();
+
+  if (isLoading) return <p>Logging Out...</p>;
+
+  if (isError) return <p>Error: {error.data?.message}</p>;
 
   return (
     <AppBar
@@ -73,7 +91,6 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
           <IconButton>
             <SettingsOutlined sx={{ fontSize: "25px" }} />
           </IconButton>
-
           <FlexBetween>
             <Button
               onClick={handleClick}
@@ -119,9 +136,17 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
               onClose={handleClose}
               anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
             >
-              <MenuItem onClick={handleClose}>
-                <ExitToAppOutlined sx={{ mr: "1rem" }} />
-                Log Out
+              <MenuItem onClick={onLogoutClicked}>
+                <Button
+                  title="Logout"
+                  sx={{
+                    color: theme.palette.secondary[100],
+                    "&:hover": {},
+                  }}
+                >
+                  {"Log Out"}
+                  <ExitToAppOutlined sx={{ m: " 0rem 0.3rem 0rem 1rem" }} />
+                </Button>
               </MenuItem>
             </Menu>
           </FlexBetween>

@@ -1,6 +1,5 @@
 import User from "../models/User.js";
 import Payment from "../models/Payment.js";
-import Invoice from "../models/Invoice.js";
 import bcrypt from "bcrypt";
 import expressAsyncHandler from "express-async-handler";
 
@@ -31,6 +30,17 @@ export const getDashboardStats = async (req, res) => {
     res.status(404).json({ message: "Stats could not be loaded" });
   }
 };
+
+//@desc get user by email
+export const getUserByEmail = expressAsyncHandler(async (req, res) => {
+  try {
+    const { email } = req.params;
+    const user = await User.findById(email);
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(404).json({ message: "User not found" });
+  }
+});
 
 // @desc get user
 // @route GET /users
@@ -99,6 +109,7 @@ export const createUser = expressAsyncHandler(async (req, res) => {
     state,
     zip,
     country,
+    dob,
     organization,
   } = req.body;
 
@@ -114,6 +125,7 @@ export const createUser = expressAsyncHandler(async (req, res) => {
     !state ||
     !zip ||
     !country ||
+    !dob ||
     !organization
   ) {
     return res.status(400).json({ message: "All fields are required" });
@@ -141,6 +153,7 @@ export const createUser = expressAsyncHandler(async (req, res) => {
     state,
     zip,
     country,
+    dob,
     organization,
   };
 
@@ -173,6 +186,7 @@ export const updateUser = expressAsyncHandler(async (req, res) => {
     state,
     zip,
     country,
+    dob,
   } = req.body;
 
   console.log(req.body);
@@ -188,7 +202,8 @@ export const updateUser = expressAsyncHandler(async (req, res) => {
     !city ||
     !state ||
     !zip ||
-    !country
+    !country ||
+    !dob
   ) {
     return res
       .status(400)
@@ -223,6 +238,7 @@ export const updateUser = expressAsyncHandler(async (req, res) => {
   user.state = state;
   user.zip = zip;
   user.country = country;
+  user.dob = dob;
 
   user.userType = userType;
 
