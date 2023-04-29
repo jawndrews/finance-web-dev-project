@@ -54,10 +54,10 @@ export const getPayments = async (req, res) => {
 };
 
 export const createPayment = expressAsyncHandler(async (req, res) => {
-  const { amount, paymentType, userId, invoiceId } = req.body;
+  const { amount, paymentType, userId, invoiceId, date } = req.body;
 
   // Confirm data
-  if (!amount || !paymentType || !userId || !invoiceId) {
+  if (!amount || !paymentType || !userId || !invoiceId || !date) {
     return res.status(400).json({ message: "All fields are required" });
   }
 
@@ -66,6 +66,7 @@ export const createPayment = expressAsyncHandler(async (req, res) => {
     paymentType,
     userId: ObjectId(userId),
     invoiceId: ObjectId(invoiceId),
+    date,
   });
 
   if (payment) {
@@ -86,10 +87,10 @@ export const createPayment = expressAsyncHandler(async (req, res) => {
 });
 
 export const updatePayment = expressAsyncHandler(async (req, res) => {
-  const { id, amount, paymentType, userId, invoiceId } = req.body;
+  const { id, amount, paymentType, userId, invoiceId, date } = req.body;
 
   // Confirm data
-  if (!id || !amount || !paymentType || !userId || !invoiceId) {
+  if (!id || !amount || !paymentType || !userId || !invoiceId || !date) {
     return res.status(400).json({ message: "All fields are required" });
   }
 
@@ -104,6 +105,7 @@ export const updatePayment = expressAsyncHandler(async (req, res) => {
   payment.paymentType = paymentType;
   payment.userId = ObjectId(userId);
   payment.invoiceId = ObjectId(invoiceId);
+  payment.date = date;
 
   const updatedPayment = await payment.save();
 

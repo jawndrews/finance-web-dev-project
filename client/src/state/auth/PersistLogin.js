@@ -82,7 +82,7 @@ const PersistLogin = () => {
           sx={{
             fontSize: "2rem",
             m: "2rem",
-            color: "#F08A5B",
+            color: theme.palette.accent[400],
           }}
         >
           {error.data?.message}
@@ -94,7 +94,7 @@ const PersistLogin = () => {
               fontSize: "1rem",
               color: theme.palette.primary[100],
               "&:hover": {
-                color: theme.palette.secondary[600],
+                color: theme.palette.secondary[300],
               },
             }}
           >

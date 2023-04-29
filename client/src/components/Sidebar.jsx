@@ -282,7 +282,7 @@ const Sidebar = ({
                           color:
                             active === lcText
                               ? theme.palette.primary[600]
-                              : theme.palette.secondary[200],
+                              : theme.palette.secondary[100],
                         }}
                       >
                         {icon}

@@ -16,6 +16,7 @@ const PaymentSchema = new mongoose.Schema(
         ref: "Invoice",
       },
     ],
+    date: String,
   },
   { timestamps: true }
 );

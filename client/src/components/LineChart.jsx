@@ -1,24 +1,82 @@
 import { ResponsiveLine } from "@nivo/line";
 import { useTheme } from "@mui/material";
 import { useGetPaymentsQuery } from "state/api";
+import { Box, CircularProgress } from "@mui/material";
 
 const LineChart = () => {
   const theme = useTheme();
-  const { data } = useGetPaymentsQuery({});
+  const { data, isLoading } = useGetPaymentsQuery({ pageSize: 100 });
 
-  //const formattedData = payments.map((payment) => ({
-  //  x: payment.createdAt, // use the payment creation date as the x-axis value
-  //  y: payment.amount, // use the payment amount as the y-axis value
-  //}));
+  if (isLoading)
+    return (
+      <Box
+        sx={{
+          position: "fixed",
+          top: "0",
+          left: "0",
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <CircularProgress>
+          <p>Loading...</p>
+        </CircularProgress>
+      </Box>
+    );
+
+  function groupByMonth(payments) {
+    const groupedPayments = {};
+
+    payments.forEach((payment) => {
+      const date = new Date(payment.date);
+      const month = date.getMonth() + 1;
+      const year = date.getFullYear();
+      const key = `${year}-${month}`;
+
+      if (!groupedPayments[key]) {
+        groupedPayments[key] = {
+          year,
+          month,
+          total: 0,
+        };
+      }
+
+      groupedPayments[key].total += payment.amount;
+    });
+
+    return Object.values(groupedPayments).sort(
+      (a, b) => new Date(a.year, a.month) - new Date(b.year, b.month)
+    );
+  }
+
+  const groupedPayments = groupByMonth(data.payments);
+
+  const formattedData = [
+    {
+      id: "Income",
+      data: groupedPayments.map((payment) => ({
+        x: `${payment.year}-${payment.month}`,
+        y: payment.total,
+      })),
+    },
+  ];
 
   return (
     <ResponsiveLine
-      data={data}
+      data={formattedData}
+      colors={
+        theme.palette.mode === "dark"
+          ? theme.palette.accent[400]
+          : theme.palette.accent[500]
+      }
       theme={{
         axis: {
           domain: {
             line: {
-              stroke: theme.palette.primary[100],
+              stroke: theme.palette.primary[300],
             },
           },
           legend: {
@@ -51,7 +109,7 @@ const LineChart = () => {
       xScale={{ type: "point" }}
       yScale={{
         type: "linear",
-        min: "auto",
+        min: "0",
         max: "auto",
         stacked: true,
         reverse: false,
@@ -61,12 +119,17 @@ const LineChart = () => {
       axisTop={null}
       axisRight={null}
       axisBottom={{
+        format: (value) => {
+          const [year, month] = value.split("-");
+          const twoDigitYear = year.slice(-2);
+          return `${month}/${twoDigitYear}`;
+        },
         orient: "bottom",
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: "transportation",
-        legendOffset: 36,
+        legend: "Month",
+        legendOffset: 42,
         legendPosition: "middle",
       }}
       axisLeft={{
@@ -74,8 +137,8 @@ const LineChart = () => {
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: "count",
-        legendOffset: -40,
+        legend: "Amount",
+        legendOffset: -55,
         legendPosition: "middle",
       }}
       enableGridX={false}
@@ -86,6 +149,8 @@ const LineChart = () => {
       pointBorderColor={{ from: "serieColor" }}
       pointLabelYOffset={-12}
       useMesh={true}
+      enableArea={true}
+      areaOpacity={0.1}
       legends={[
         {
           anchor: "bottom-right",

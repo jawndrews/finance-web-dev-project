@@ -180,7 +180,10 @@ const Login = () => {
                 sx={{
                   m: "2rem 0",
                   p: "1rem",
-                  backgroundColor: palette.secondary[500],
+                  backgroundColor:
+                    theme.palette.mode === "dark"
+                      ? palette.secondary[500]
+                      : palette.secondary[400],
                   color: palette.background.alt,
                   "&:hover": { color: palette.secondary[500] },
                 }}
@@ -195,7 +198,10 @@ const Login = () => {
                   checked={persist}
                   sx={{
                     "&.Mui-checked": {
-                      color: palette.secondary[500],
+                      color:
+                        theme.palette.mode === "dark"
+                          ? palette.secondary[500]
+                          : palette.secondary[400],
                     },
                   }}
                 />

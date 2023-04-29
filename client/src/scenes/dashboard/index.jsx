@@ -16,14 +16,19 @@ import {
   Description,
 } from "@mui/icons-material";
 import { DataGrid } from "@mui/x-data-grid";
-import { useGetDashboardQuery } from "state/api";
+import { useGetDashboardQuery, useGetPaymentQuery } from "state/api";
 import StatBox from "components/StatBox";
 import { useEffect } from "react";
+import LineChart from "components/LineChart";
+import { useState } from "react";
 
 const Dashboard = () => {
   const theme = useTheme();
   const isNonMediumScreens = useMediaQuery("(min-width: 1200px)");
-  const { data, isLoading } = useGetDashboardQuery;
+  const [page, setPage] = useState(0);
+  const [pageSize, setPageSize] = useState(20);
+  const [sort, setSort] = useState({});
+  const { data, isLoading } = useGetDashboardQuery();
 
   function getFullName(params) {
     const user = params.row.userId[0];
@@ -55,7 +60,7 @@ const Dashboard = () => {
       flex: 1,
     },
     {
-      field: "createdAt",
+      field: "date",
       headerName: "Date",
       flex: 1,
     },
@@ -132,7 +137,10 @@ const Dashboard = () => {
           p="1rem"
           borderRadius="0.55rem"
         >
-          Line Chart Here
+          <Typography variant="h6" sx={{ color: theme.palette.secondary[100] }}>
+            {/*Income*/}
+          </Typography>
+          <LineChart />
         </Box>
 
         <StatBox
@@ -191,8 +199,18 @@ const Dashboard = () => {
           <DataGrid
             loading={isLoading || !data}
             getRowId={(row) => row._id}
-            rows={(data && data.payments) || []}
+            rows={(data && data.recentPayments) || []}
             columns={columns}
+            rowCount={(data && data.total) || 0}
+            rowsPerPageOptions={[20, 50, 100]}
+            pagination
+            page={page}
+            pageSize={pageSize}
+            paginationMode="server"
+            sortingMode="server"
+            onPageChange={(newPage) => setPage(newPage)}
+            onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+            onSortModelChange={(newSortModel) => setSort(...newSortModel)}
           />
         </Box>
         <Box

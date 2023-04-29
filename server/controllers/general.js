@@ -13,16 +13,23 @@ export const getDashboardStats = async (req, res) => {
 
     // payments
     // recent payments
-    const payments = await Payment.find().limit(50).sort({ createdAt: -1 });
+    const recentPayments = await Payment.find()
+      .limit(50)
+      .sort({ createdAt: -1 });
     const totalPayments = await User.countDocuments();
 
-    const totalIncome = "";
+    const allPayments = await Payment.find({});
+    const totalIncome = await payments.reduce(
+      (total, payment) => total + payment.amount,
+      0
+    );
     const totalOutstanding = "";
 
     res.status(200).json({
-      payments,
-      totalPayments,
       totalMembers,
+      recentPayments,
+      totalPayments,
+      allPayments,
       totalIncome,
       totalOutstanding,
     });
@@ -30,17 +37,6 @@ export const getDashboardStats = async (req, res) => {
     res.status(404).json({ message: "Stats could not be loaded" });
   }
 };
-
-//@desc get user by email
-export const getUserByEmail = expressAsyncHandler(async (req, res) => {
-  try {
-    const { email } = req.params;
-    const user = await User.findById(email);
-    res.status(200).json(user);
-  } catch (error) {
-    res.status(404).json({ message: "User not found" });
-  }
-});
 
 // @desc get user
 // @route GET /users
