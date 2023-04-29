@@ -28,13 +28,61 @@ import {
 } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import useAuth from "hooks/useAuth";
 import FlexBetween from "./FlexBetween";
 import profileImage from "assets/pfp.jpeg";
-import logoType from "assets/logotype.svg";
-import { useGetUserQuery } from "state/api";
+import logoColorForDark from "assets/svg/logo-color.svg";
+import logoColorForLight from "assets/svg/logo-dark.svg";
 
 // nav items
-const navItems = [
+const navItemsAdmin = [
+  {
+    text: "Dashboard",
+    icon: <HomeOutlined />,
+  },
+  {
+    text: "Income",
+    icon: null,
+  },
+  {
+    text: "Payments",
+    icon: <PaymentsOutlined />,
+  },
+  {
+    text: "Invoices",
+    icon: <DescriptionOutlined />,
+  },
+  {
+    text: "Transactions",
+    icon: <ReceiptLongOutlined />,
+  },
+  {
+    text: "Management",
+    icon: null,
+  },
+  {
+    text: "Members",
+    icon: <GroupsOutlined />,
+  },
+  {
+    text: "Events",
+    icon: <CalendarMonthOutlined />,
+  },
+  {
+    text: "Communication",
+    icon: <EmailOutlined />,
+  },
+  {
+    text: "Reports",
+    icon: <AssessmentOutlined />,
+  },
+  {
+    text: "Collections",
+    icon: <LocalPhoneOutlined />,
+  },
+];
+
+const navItemsUser = [
   {
     text: "Dashboard",
     icon: <HomeOutlined />,
@@ -82,16 +130,28 @@ const navItems = [
 ];
 
 const Sidebar = ({
-  user,
   drawerWidth,
   isSidebarOpen,
   setIsSidebarOpen,
   isNonMobile,
 }) => {
+  const { firstName, lastName, organization, userType } = useAuth();
   const { pathname } = useLocation();
   const [active, setActive] = useState("");
   const navigate = useNavigate();
   const theme = useTheme();
+  let navItems = {};
+  let logo = {};
+
+  if (userType === "admin") {
+    navItems = navItemsAdmin;
+  }
+
+  if (theme.palette.mode === "light") {
+    logo = logoColorForLight;
+  } else if (theme.palette.mode === "dark") {
+    logo = logoColorForDark;
+  }
 
   // keep track of current path (URL)
   useEffect(() => {
@@ -121,14 +181,13 @@ const Sidebar = ({
           <Box width="100%">
             <Box m="1.5rem 2rem 2rem 3rem">
               <FlexBetween color={theme.palette.secondary.main}>
-                <Box display="flex" alignItems="center" gap="0.5rem">
+                <Box display="flex" alignItems="center" width="100%">
                   <Box
                     component="img"
                     alt="logo"
-                    src={logoType}
-                    height="60px"
-                    width="80px"
-                    sx={{ objectFit: "contain" }}
+                    src={logo}
+                    width="120px"
+                    sx={{ ml: "0.5rem", objectFit: "contain" }}
                   />
                 </Box>
                 {!isNonMobile && (
@@ -148,10 +207,10 @@ const Sidebar = ({
                 fontWeight="bold"
                 fontSize="0.9rem"
                 sx={{
-                  color: theme.palette.secondary[500],
+                  color: theme.palette.secondary[400],
                 }}
               >
-                {user.organization}
+                {organization}
                 {/*add functionality to prevent text runoff here */}
               </Typography>
             </Divider>
@@ -176,7 +235,7 @@ const Sidebar = ({
                   m: "1.5rem 0 0 0",
                 }}
               >
-                {user.firstName} {user.lastName}
+                {firstName} {lastName}
               </Typography>
               <Typography
                 fontSize="0.8rem"
@@ -185,7 +244,7 @@ const Sidebar = ({
                   m: "0.1rem 0 1.5rem 0",
                 }}
               >
-                {user.userType}
+                {userType.charAt(0).toUpperCase() + userType.slice(1)}
               </Typography>
             </Box>
             <List>
@@ -239,35 +298,30 @@ const Sidebar = ({
             </List>
           </Box>
           <Box>
-            <Box
-              position="absolute"
-              display="flex"
-              bottom="0rem"
-              justifyContent="center"
-              alignItems="center"
-              width="100%"
-              sx={{
-                p: "1rem 0 1rem 0",
-                backgroundColor: theme.palette.primary[500],
-              }}
-            >
+            <Box position="flex" bottom="0rem">
+              <Divider sx={{ mt: "auto", mb: 1 }} />
               <Typography
                 sx={{
-                  m: "0 0 0 0.5rem",
+                  m: "1rem 1rem 1rem 1rem",
                   color: theme.palette.secondary[100],
                 }}
               >
-                Need Help?
+                Need Help?{" "}
+                <Button
+                  href="#"
+                  alt="submit-a-ticket"
+                  sx={{
+                    margin: "0 0 0 1rem",
+                    color: theme.palette.secondary[100],
+                    "&:hover": {
+                      color: theme.palette.secondary[100],
+                      backgroundColor: theme.palette.accent[600],
+                    },
+                  }}
+                >
+                  Submit a ticket
+                </Button>
               </Typography>
-              <Button
-                sx={{
-                  m: "0 0 0 1rem",
-                  color: theme.palette.secondary[100],
-                  backgroundColor: theme.palette.accent[500],
-                }}
-              >
-                Submit a Ticket
-              </Button>
             </Box>
           </Box>
         </Drawer>

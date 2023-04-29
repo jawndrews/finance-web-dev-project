@@ -5,13 +5,6 @@ import { setCredentials } from "./authSlice";
 
 export const authApiSlice = api.injectEndpoints({
   endpoints: (builder) => ({
-    register: builder.mutation({
-      query: (credentials) => ({
-        url: "/auth/register",
-        method: "POST",
-        body: credentials,
-      }),
-    }),
     login: builder.mutation({
       query: (credentials) => ({
         url: "/auth/login",
@@ -21,7 +14,11 @@ export const authApiSlice = api.injectEndpoints({
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         try {
           const result = await queryFulfilled;
-          dispatch(setCredentials({ accessToken: result.data.accessToken }));
+          dispatch(
+            setCredentials({
+              accessToken: result.data.accessToken,
+            })
+          );
         } catch (err) {
           console.log(err);
         }
@@ -37,7 +34,9 @@ export const authApiSlice = api.injectEndpoints({
           const { data } = await queryFulfilled;
           console.log(data);
           dispatch(logOut());
-          dispatch(api.util.resetApiState());
+          setTimeout(() => {
+            dispatch(api.util.resetApiState());
+          }, 1000);
         } catch (err) {
           console.log(err);
         }
@@ -51,7 +50,7 @@ export const authApiSlice = api.injectEndpoints({
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
-          console.log(data);
+          console.log("refresh data", data);
           const { accessToken } = data;
           dispatch(setCredentials({ accessToken }));
         } catch (err) {

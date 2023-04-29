@@ -4,6 +4,7 @@ import { useGetPaymentsQuery } from "state/api";
 import { Box, useTheme } from "@mui/material";
 import Header from "components/Header";
 import DataGridCustomToolbar from "components/DataGridCustomToolbar";
+import { useEffect } from "react";
 
 const Payments = () => {
   const theme = useTheme();
@@ -19,6 +20,10 @@ const Payments = () => {
     sort: JSON.stringify(sort),
     search,
   });
+
+  useEffect(() => {
+    document.title = "Payments | Fisca";
+  }, []);
 
   function getFullName(params) {
     const user = params.row.userId[0];

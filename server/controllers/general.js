@@ -111,6 +111,9 @@ export const createUser = expressAsyncHandler(async (req, res) => {
     country,
     dob,
     organization,
+    active,
+    memberEndDate,
+    userType,
   } = req.body;
 
   // validate data
@@ -126,7 +129,10 @@ export const createUser = expressAsyncHandler(async (req, res) => {
     !zip ||
     !country ||
     !dob ||
-    !organization
+    !organization ||
+    !active ||
+    !memberEndDate ||
+    !userType
   ) {
     return res.status(400).json({ message: "All fields are required" });
   }
@@ -155,6 +161,9 @@ export const createUser = expressAsyncHandler(async (req, res) => {
     country,
     dob,
     organization,
+    active,
+    memberEndDate,
+    userType,
   };
 
   // create and store new user

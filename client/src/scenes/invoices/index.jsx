@@ -4,6 +4,7 @@ import Header from "components/Header";
 import { useGetInvoicesQuery } from "state/api";
 import DataGridCustomToolbar from "components/DataGridCustomToolbar";
 import { DataGrid } from "@mui/x-data-grid";
+import { useEffect } from "react";
 
 const Invoices = () => {
   const theme = useTheme();
@@ -28,6 +29,10 @@ const Invoices = () => {
     }
     return `${user.firstName || ""} ${user.lastName || ""}`;
   }
+
+  useEffect(() => {
+    document.title = "Invoices | Fisca";
+  }, []);
 
   const columns = [
     {

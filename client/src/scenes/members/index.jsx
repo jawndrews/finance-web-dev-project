@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { Box, useTheme } from "@mui/material";
+import { Box, useTheme, Button } from "@mui/material";
+import { PersonAdd } from "@mui/icons-material";
 import { useGetUsersQuery } from "state/api";
 import { DataGrid } from "@mui/x-data-grid";
 import Header from "components/Header";
 import DataGridCustomToolbar from "components/DataGridCustomToolbar";
+import FlexBetween from "components/FlexBetween";
+import { useEffect } from "react";
 
 const Members = () => {
   const theme = useTheme();
@@ -24,6 +27,10 @@ const Members = () => {
   function getFullName(params) {
     return `${params.row.firstName || ""} ${params.row.lastName || ""}`;
   }
+
+  useEffect(() => {
+    document.title = "Members | Fisca";
+  }, []);
 
   const columns = [
     {
@@ -61,7 +68,28 @@ const Members = () => {
 
   return (
     <Box m="1.5rem 2.5rem">
-      <Header title="MEMBERS" subtitle="Manage Your Members" />
+      <FlexBetween>
+        <Header title="MEMBERS" subtitle="Manage Your Members" />
+        <Box>
+          <Button
+            sx={{
+              backgroundColor: theme.palette.secondary.light,
+              color: theme.palette.background.alt,
+              fontSize: "14px",
+              fontWeight: "bold",
+              padding: "10px 20px",
+              ml: "35px",
+              mt: "6px",
+              "&:hover": {
+                color: theme.palette.secondary.light,
+              },
+            }}
+          >
+            <PersonAdd sx={{ mr: "15px" }} />
+            Add Members
+          </Button>
+        </Box>
+      </FlexBetween>
       <Box
         mt="40px"
         height="75vh"

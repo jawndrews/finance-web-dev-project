@@ -7,12 +7,12 @@ import {
   SettingsOutlined,
   ArrowDropDownOutlined,
   ExitToAppOutlined,
-  Settings,
 } from "@mui/icons-material";
-import { useNavigate, Link, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import FlexBetween from "components/FlexBetween";
 import { useDispatch } from "react-redux";
 import { setMode } from "state";
+import useAuth from "hooks/useAuth";
 import { useSendLogoutMutation } from "state/auth/authApiSlice";
 import profileImage from "assets/pfp.jpeg";
 import {
@@ -35,6 +35,7 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
+  const { firstName, lastName, userType } = useAuth();
   const [sendLogout, { isLoading, isSuccess, isError, error }] =
     useSendLogoutMutation();
 
@@ -117,13 +118,13 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
                   fontSize="0.85rem"
                   sx={{ color: theme.palette.secondary[100] }}
                 >
-                  {user.firstName} {user.lastName}
+                  {firstName} {lastName}
                 </Typography>
                 <Typography
                   fontSize="0.75rem"
                   sx={{ color: theme.palette.secondary[200] }}
                 >
-                  {user.userType}
+                  {userType.charAt(0).toUpperCase() + userType.slice(1)}
                 </Typography>
               </Box>
               <ArrowDropDownOutlined

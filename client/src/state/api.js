@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
+import { setCredentials, logOut } from "./auth/authSlice";
 import { createSelector, createEntityAdapter } from "@reduxjs/toolkit";
-import { setCredentials } from "./auth/authSlice";
 
 const usersAdapter = createEntityAdapter({});
 const paymentsAdapter = createEntityAdapter({});
@@ -18,7 +17,7 @@ const baseQuery = fetchBaseQuery({
     const token = getState().auth.token;
 
     if (token) {
-      headers.set("Authorization", `Bearer ${token}`);
+      headers.set("authorization", `Bearer ${token}`);
     }
     return headers;
   },
@@ -36,13 +35,18 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
     const refreshResult = await baseQuery("/auth/refresh", api, extraOptions);
 
     if (refreshResult?.data) {
-      api.dispatch(setCredentials({ ...refreshResult.data }));
+      const user = api.getState().auth.user;
 
+      // store new token
+      api.dispatch(setCredentials({ ...refreshResult.data, user }));
+
+      // retry original query with access token
       result = await baseQuery(args, api, extraOptions);
     } else {
       if (refreshResult?.error?.status === 403) {
         refreshResult.error.data.message = "Your login has expired. ";
       }
+      api.dispatch(logOut());
       return refreshResult;
     }
   }
@@ -56,14 +60,6 @@ export const api = createApi({
   tagTypes: ["Users", "Payments", "Invoices"],
   endpoints: (build) => ({
     // users
-    getUserByEmail: build.query({
-      query: (email) => ({
-        url: `general/users/by_email`,
-        method: "GET",
-        params: { email },
-      }),
-      providesTags: ["Users"],
-    }),
     getUser: build.query({
       query: (id) => `general/users/${id}`,
       providesTags: ["Users"],

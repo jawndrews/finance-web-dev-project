@@ -9,17 +9,21 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { useRef, useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "state/auth/authSlice";
 import { useLoginMutation } from "state/auth/authApiSlice";
 import { usePersist } from "hooks/usePersist";
+import loginBackgroundImage from "assets/login-background.png";
+import logoColorForDark from "assets/svg/logo-color.svg";
+import logoColorForLight from "assets/svg/logo-dark.svg";
 
 const Login = () => {
   const theme = useTheme();
   const { palette } = useTheme();
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
   const isNonMobile = useMediaQuery("(min-width:600px)");
+
   const userRef = useRef();
   const errRef = useRef();
   const [email, setEmail] = useState("");
@@ -29,16 +33,19 @@ const Login = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const [login, { isLoading }] = useLoginMutation();
 
   useEffect(() => {
-    //userRef.current.focus();
+    userRef.current.focus();
   }, []);
 
   useEffect(() => {
     setErrMsg("");
   }, [email, password]);
+
+  useEffect(() => {
+    document.title = "Login | Fisca";
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -69,6 +76,14 @@ const Login = () => {
 
   const errClass = errMsg ? "errmsg" : "offscreen";
 
+  let logo = "";
+
+  if (theme.palette.mode === "light") {
+    logo = logoColorForLight;
+  } else if (theme.palette.mode === "dark") {
+    logo = logoColorForDark;
+  }
+
   if (isLoading)
     return (
       <Box
@@ -90,16 +105,26 @@ const Login = () => {
     );
 
   return (
-    <Box>
+    <Box
+      sx={{
+        backgroundImage: `url(/assets/login-background.png)`,
+      }}
+    >
       <Box
         width="100%"
         backgroundColor={theme.palette.background.alt}
         p="1rem 6%"
         textAlign="center"
       >
-        <Typography fontWeight="bold" fontSize="32px" color="secondary">
-          Fisca
-        </Typography>
+        <Box display="block" alignItems="center" width="100%">
+          <Box
+            component="img"
+            alt="logo"
+            src={logo}
+            width="120px"
+            sx={{ objectFit: "contain" }}
+          />
+        </Box>
       </Box>
 
       <Box
@@ -131,9 +156,10 @@ const Login = () => {
                 type="email"
                 name="email"
                 value={email}
+                inputRef={userRef}
                 onChange={handleUserInput}
                 autoComplete="off"
-                sx={{ ref: { userRef }, gridColumn: "span 4" }}
+                sx={{ gridColumn: "span 4" }}
               />
               <TextField
                 className="form_input"

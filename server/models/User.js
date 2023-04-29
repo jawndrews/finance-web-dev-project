@@ -33,13 +33,11 @@ const UserSchema = new mongoose.Schema(
     country: String,
     dob: String,
     organization: String,
+    active: Boolean,
     memberStatus: String,
     memberStartDate: String,
     memberEndDate: String,
-    userType: {
-      type: String,
-      enum: ["user", "admin"],
-    },
+    userType: String,
   },
   { timestamps: true }
 );

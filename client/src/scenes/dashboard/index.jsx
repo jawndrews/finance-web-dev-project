@@ -18,6 +18,7 @@ import {
 import { DataGrid } from "@mui/x-data-grid";
 import { useGetDashboardQuery } from "state/api";
 import StatBox from "components/StatBox";
+import { useEffect } from "react";
 
 const Dashboard = () => {
   const theme = useTheme();
@@ -31,6 +32,10 @@ const Dashboard = () => {
     }
     return `${user.firstName || ""} ${user.lastName || ""}`;
   }
+
+  useEffect(() => {
+    document.title = "Dashboard | Fisca";
+  }, []);
 
   const columns = [
     {
@@ -74,9 +79,14 @@ const Dashboard = () => {
               fontSize: "14px",
               fontWeight: "bold",
               padding: "10px 20px",
+              ml: "35px",
+              mt: "6px",
+              "&:hover": {
+                color: theme.palette.secondary.light,
+              },
             }}
           >
-            <DownloadOutlined sx={{ mr: "10px" }} />
+            <DownloadOutlined sx={{ mr: "15px" }} />
             Download Reports
           </Button>
         </Box>
