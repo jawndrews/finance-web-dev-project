@@ -8,22 +8,66 @@ import expressAsyncHandler from "express-async-handler";
 // @access private
 export const getDashboardStats = async (req, res) => {
   try {
-    //members overview
+    // members
+    // members overview
     const totalMembers = await User.countDocuments();
 
     // payments
-    // recent payments
-    const recentPayments = await Payment.find()
-      .limit(50)
-      .sort({ createdAt: -1 });
     const totalPayments = await User.countDocuments();
 
     const allPayments = await Payment.find({});
-    const totalIncome = await payments.reduce(
+
+    const sortedPayments = allPayments.sort((a, b) => {
+      return new Date(b.date) - new Date(a.date);
+    });
+    const recentPayments = sortedPayments.slice(0, 50);
+
+    const totalIncome = await allPayments.reduce(
       (total, payment) => total + payment.amount,
       0
     );
-    const totalOutstanding = "";
+
+    function getCurrentMonthPayments(payments) {
+      const currentDate = new Date();
+      const currentMonth = currentDate.getMonth();
+      const currentYear = currentDate.getFullYear();
+
+      return payments.filter((payment) => {
+        const paymentDate = new Date(payment.date);
+        return (
+          paymentDate.getMonth() === currentMonth &&
+          paymentDate.getFullYear() === currentYear
+        );
+      });
+    }
+
+    const currentMonthPayments = getCurrentMonthPayments(allPayments);
+
+    const monthlyIncome = currentMonthPayments.reduce(
+      (total, payment) => total + payment.amount,
+      0
+    );
+
+    const paymentsPopulated = await Payment.find().populate("invoiceId");
+    const incomeByCategory = {};
+    paymentsPopulated.forEach((payment) => {
+      const category = payment.invoiceId.description || "Unknown";
+      if (incomeByCategory[category]) {
+        incomeByCategory[category] += payment.amount;
+      } else {
+        incomeByCategory[category] = payment.amount;
+      }
+    });
+    const pieChartData = Object.entries(incomeByCategory).map(
+      ([label, value], index) => ({
+        id: `category${index}`,
+        label,
+        value,
+      })
+    );
+
+    // invoices
+    //const totalOutstandingInvoices = await Invoice.countDocuments(); // showing all invoice, must update
 
     res.status(200).json({
       totalMembers,
@@ -31,7 +75,9 @@ export const getDashboardStats = async (req, res) => {
       totalPayments,
       allPayments,
       totalIncome,
-      totalOutstanding,
+      //totalOutstandingInvoices,
+      monthlyIncome,
+      pieChartData,
     });
   } catch (error) {
     res.status(404).json({ message: "Stats could not be loaded" });

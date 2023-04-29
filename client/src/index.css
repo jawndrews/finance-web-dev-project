@@ -8,3 +8,26 @@ body,
   width: 100%;
   font-family: "Mulish", sans-serif;
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #414747;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #6ee5a1;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6ee5a1;
+}
+
+/* Handle on Hover */
+::-webkit-scrollbar-track:hover {
+  background: #121919;
+}

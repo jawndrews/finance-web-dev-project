@@ -21,6 +21,7 @@ import StatBox from "components/StatBox";
 import { useEffect } from "react";
 import LineChart from "components/LineChart";
 import { useState } from "react";
+import PieChart from "components/PieChart";
 
 const Dashboard = () => {
   const theme = useTheme();
@@ -38,6 +39,13 @@ const Dashboard = () => {
     return `${user.firstName || ""} ${user.lastName || ""}`;
   }
 
+  function formatCurrency(amount, locale = "en-US", currency = "USD") {
+    return new Intl.NumberFormat(locale, {
+      style: "currency",
+      currency: currency,
+    }).format(amount);
+  }
+
   useEffect(() => {
     document.title = "Dashboard | Fisca";
   }, []);
@@ -50,9 +58,9 @@ const Dashboard = () => {
     },
     {
       field: "userId",
-      headerName: "Member",
+      headerName: "Member ID",
       flex: 1,
-      valueGetter: getFullName,
+      //valueGetter: getFullName,
     },
     {
       field: "paymentType",
@@ -121,7 +129,7 @@ const Dashboard = () => {
         />
         <StatBox
           title="Monthly Income"
-          value={data && data.totalIncome}
+          value={data && formatCurrency(data.monthlyIncome)}
           increase="+8%"
           description="Since last month"
           icon={
@@ -145,7 +153,7 @@ const Dashboard = () => {
 
         <StatBox
           title="Total Income"
-          value={data && data.totalIncome}
+          value={data && formatCurrency(data.totalIncome)}
           increase="+21%"
           description="Since last month"
           icon={
@@ -156,7 +164,7 @@ const Dashboard = () => {
         />
         <StatBox
           title="Total Outstanding"
-          value={data && data.totalOutstanding}
+          value="16" //{data && data.totalOutstandingInvoices}
           increase="-13%"
           description="Since last month"
           icon={
@@ -221,15 +229,16 @@ const Dashboard = () => {
           borderRadius="0.55rem"
         >
           <Typography variant="h6" sx={{ color: theme.palette.secondary[100] }}>
-            Placeholder
+            Income by Category
           </Typography>
-          Pie Chart Here...
+          <PieChart isDashboard={true} />
           <Typography
             p="0 0.6rem"
             fontSize="0.8rem"
             sx={{ color: theme.palette.secondary[200] }}
+            textAlign="center"
           >
-            Description of Pie Chart Here
+            Breakdown of payments based on invoice description.
           </Typography>
         </Box>
       </Box>

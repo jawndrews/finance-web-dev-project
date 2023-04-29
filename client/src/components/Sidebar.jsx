@@ -52,10 +52,11 @@ const navItemsAdmin = [
     text: "Invoices",
     icon: <DescriptionOutlined />,
   },
+  /*
   {
     text: "Transactions",
     icon: <ReceiptLongOutlined />,
-  },
+  },*/
   {
     text: "Management",
     icon: null,
@@ -63,7 +64,7 @@ const navItemsAdmin = [
   {
     text: "Members",
     icon: <GroupsOutlined />,
-  },
+  } /* IMPLEMENT THESE 
   {
     text: "Events",
     icon: <CalendarMonthOutlined />,
@@ -79,7 +80,7 @@ const navItemsAdmin = [
   {
     text: "Collections",
     icon: <LocalPhoneOutlined />,
-  },
+  },*/,
 ];
 
 const navItemsUser = [
@@ -140,12 +141,12 @@ const Sidebar = ({
   const [active, setActive] = useState("");
   const navigate = useNavigate();
   const theme = useTheme();
-  let navItems = {};
+  //let navItems = [{}];
   let logo = {};
 
-  if (userType === "admin") {
-    navItems = navItemsAdmin;
-  }
+  //if (userType === "admin") {
+  //  navItems = navItemsAdmin;
+  //}
 
   if (theme.palette.mode === "light") {
     logo = logoColorForLight;
@@ -248,7 +249,7 @@ const Sidebar = ({
               </Typography>
             </Box>
             <List>
-              {navItems.map(({ text, icon }) => {
+              {navItemsAdmin.map(({ text, icon }) => {
                 if (!icon) {
                   return (
                     <Typography key={text} sx={{ m: "2.25rem 0 1rem 3rem" }}>
@@ -299,7 +300,7 @@ const Sidebar = ({
           </Box>
           <Box>
             <Box position="flex" bottom="0rem">
-              <Divider sx={{ mt: "auto", mb: 1 }} />
+              <Divider sx={{ pt: "4rem", mt: "auto", mb: 1 }} />
               <Typography
                 sx={{
                   m: "1rem 1rem 1rem 1rem",
