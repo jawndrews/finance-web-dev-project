@@ -69,8 +69,8 @@ const LineChart = () => {
       data={formattedData}
       colors={
         theme.palette.mode === "dark"
-          ? theme.palette.accent[400]
-          : theme.palette.accent[500]
+          ? theme.palette.secondary[400]
+          : theme.palette.secondary[500]
       }
       theme={{
         axis: {

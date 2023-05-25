@@ -9,8 +9,8 @@ const Reports = () => {
   }, []);
 
   return (
-    <Box m="1.5rem 2.5rem">
-      <Header title="REPORTS" subtitle="Generate Downloadable Reports" />
+    <Box m="2rem 2.5rem">
+      <Header title="Reports" subtitle="Generate Downloadable Reports" />
     </Box>
   );
 };

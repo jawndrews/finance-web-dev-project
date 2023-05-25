@@ -52,11 +52,10 @@ const navItemsAdmin = [
     text: "Invoices",
     icon: <DescriptionOutlined />,
   },
-  /*
   {
     text: "Transactions",
     icon: <ReceiptLongOutlined />,
-  },*/
+  },
   {
     text: "Management",
     icon: null,
@@ -64,7 +63,7 @@ const navItemsAdmin = [
   {
     text: "Members",
     icon: <GroupsOutlined />,
-  } /* IMPLEMENT THESE 
+  },
   {
     text: "Events",
     icon: <CalendarMonthOutlined />,
@@ -80,7 +79,7 @@ const navItemsAdmin = [
   {
     text: "Collections",
     icon: <LocalPhoneOutlined />,
-  },*/,
+  },
 ];
 
 const navItemsUser = [
@@ -183,13 +182,24 @@ const Sidebar = ({
             <Box m="1.5rem 2rem 2rem 3rem">
               <FlexBetween color={theme.palette.secondary.main}>
                 <Box display="flex" alignItems="center" width="100%">
-                  <Box
+                  {/*<Box
                     component="img"
                     alt="logo"
                     src={logo}
                     width="120px"
                     sx={{ ml: "0.5rem", objectFit: "contain" }}
-                  />
+                  />*/}
+                  <Typography
+                    variant="h1"
+                    fontWeight="bolder"
+                    fontSize="2rem"
+                    textAlign="center"
+                    sx={{
+                      color: theme.palette.secondary[400],
+                    }}
+                  >
+                    Fisca
+                  </Typography>
                 </Box>
                 {!isNonMobile && (
                   <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
@@ -232,7 +242,10 @@ const Sidebar = ({
                 fontWeight="bold"
                 fontSize="1.4rem"
                 sx={{
-                  color: theme.palette.secondary[100],
+                  color:
+                    theme.palette.mode === "dark"
+                      ? theme.palette.grey[50]
+                      : theme.palette.primary[600],
                   m: "1.5rem 0 0 0",
                 }}
               >
@@ -241,8 +254,11 @@ const Sidebar = ({
               <Typography
                 fontSize="0.8rem"
                 sx={{
-                  color: theme.palette.secondary[200],
-                  m: "0.1rem 0 1.5rem 0",
+                  color:
+                    theme.palette.mode === "dark"
+                      ? theme.palette.grey[50]
+                      : theme.palette.primary[600],
+                  m: "0.4rem 0 1.5rem 0",
                 }}
               >
                 {userType.charAt(0).toUpperCase() + userType.slice(1)}
@@ -252,7 +268,16 @@ const Sidebar = ({
               {navItemsAdmin.map(({ text, icon }) => {
                 if (!icon) {
                   return (
-                    <Typography key={text} sx={{ m: "2.25rem 0 1rem 3rem" }}>
+                    <Typography
+                      key={text}
+                      sx={{
+                        m: "2.25rem 0 1rem 3rem",
+                        color:
+                          theme.palette.mode === "dark"
+                            ? theme.palette.grey[50]
+                            : theme.palette.primary[600],
+                      }}
+                    >
                       {text}
                     </Typography>
                   );
@@ -268,29 +293,51 @@ const Sidebar = ({
                       }}
                       sx={{
                         backgroundColor:
-                          active === lcText
-                            ? theme.palette.secondary[500]
-                            : "transparent",
+                          active === lcText ? "transparent" : "transparent",
                         color:
-                          active === lcText
-                            ? theme.palette.primary[600]
-                            : theme.palette.secondary[100],
+                          theme.palette.mode === "dark"
+                            ? theme.palette.grey[50]
+                            : theme.palette.primary[600],
                       }}
                     >
                       <ListItemIcon
                         sx={{
                           ml: "2rem",
                           color:
-                            active === lcText
-                              ? theme.palette.primary[600]
-                              : theme.palette.secondary[100],
+                            theme.palette.mode === "dark"
+                              ? active === lcText
+                                ? theme.palette.secondary[500]
+                                : theme.palette.grey[50]
+                              : active === lcText
+                              ? theme.palette.secondary[400]
+                              : theme.palette.primary[600],
                         }}
                       >
                         {icon}
                       </ListItemIcon>
-                      <ListItemText primary={text} />
+                      <ListItemText
+                        primary={text}
+                        sx={{
+                          color:
+                            theme.palette.mode === "dark"
+                              ? active === lcText
+                                ? theme.palette.secondary[500]
+                                : theme.palette.grey[50]
+                              : active === lcText
+                              ? theme.palette.secondary[400]
+                              : theme.palette.primary[600],
+                        }}
+                      />
                       {active === lcText && (
-                        <ChevronRightOutlined sx={{ ml: "auto" }} />
+                        <ChevronRightOutlined
+                          sx={{
+                            ml: "auto",
+                            color:
+                              theme.palette.mode === "dark"
+                                ? theme.palette.secondary[500]
+                                : theme.palette.secondary[400],
+                          }}
+                        />
                       )}
                     </ListItemButton>
                   </ListItem>
@@ -304,7 +351,10 @@ const Sidebar = ({
               <Typography
                 sx={{
                   m: "1rem 1rem 1rem 1rem",
-                  color: theme.palette.secondary[100],
+                  color:
+                    theme.palette.mode === "dark"
+                      ? theme.palette.grey[50]
+                      : theme.palette.primary[600],
                 }}
               >
                 Need Help?{" "}
@@ -313,10 +363,16 @@ const Sidebar = ({
                   alt="submit-a-ticket"
                   sx={{
                     margin: "0 0 0 1rem",
-                    color: theme.palette.secondary[100],
+                    color:
+                      theme.palette.mode === "dark"
+                        ? theme.palette.grey[50]
+                        : theme.palette.primary[600],
                     "&:hover": {
-                      color: theme.palette.secondary[100],
-                      backgroundColor: theme.palette.accent[600],
+                      color:
+                        theme.palette.mode === "dark"
+                          ? theme.palette.grey[50]
+                          : theme.palette.primary[600],
+                      backgroundColor: theme.palette.secondary[500],
                     },
                   }}
                 >

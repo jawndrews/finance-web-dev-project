@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 html,
 body,
@@ -6,7 +6,7 @@ body,
 .app {
   height: 100%;
   width: 100%;
-  font-family: "Mulish", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 ::-webkit-scrollbar {
@@ -15,19 +15,15 @@ body,
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #414747;
+  background: transparent;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #6ee5a1;
+  background: #95d86b;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #6ee5a1;
-}
-
-/* Handle on Hover */
-::-webkit-scrollbar-track:hover {
-  background: #121919;
+  background: #95d86b;
+  border-radius: 5px;
 }

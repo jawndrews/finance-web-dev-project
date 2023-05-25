@@ -81,21 +81,20 @@ const Dashboard = () => {
     },
   ];
   return (
-    <Box m="1.5rem 2.5rem">
+    <Box m="2rem 2.5rem">
       <FlexBetween>
-        <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
+        <Header title="Dashboard" subtitle="Welcome to Your Dashboard" />
         <Box>
           <Button
             sx={{
-              backgroundColor: theme.palette.secondary.light,
-              color: theme.palette.background.alt,
+              color: theme.palette.secondary[400],
               fontSize: "14px",
               fontWeight: "bold",
               padding: "10px 20px",
               ml: "35px",
               mt: "6px",
               "&:hover": {
-                color: theme.palette.secondary.light,
+                backgroundColor: theme.palette.secondary[800],
               },
             }}
           >
@@ -123,7 +122,7 @@ const Dashboard = () => {
           description="Since last month"
           icon={
             <PersonAdd
-              sx={{ color: theme.palette.secondary[300], fontSize: "26px" }}
+              sx={{ color: theme.palette.secondary[400], fontSize: "26px" }}
             />
           }
         />
@@ -134,7 +133,7 @@ const Dashboard = () => {
           description="Since last month"
           icon={
             <CalendarMonth
-              sx={{ color: theme.palette.secondary[300], fontSize: "26px" }}
+              sx={{ color: theme.palette.secondary[400], fontSize: "26px" }}
             />
           }
         />
@@ -158,7 +157,7 @@ const Dashboard = () => {
           description="Since last month"
           icon={
             <Paid
-              sx={{ color: theme.palette.secondary[300], fontSize: "26px" }}
+              sx={{ color: theme.palette.secondary[400], fontSize: "26px" }}
             />
           }
         />
@@ -169,7 +168,7 @@ const Dashboard = () => {
           description="Since last month"
           icon={
             <Description
-              sx={{ color: theme.palette.secondary[300], fontSize: "26px" }}
+              sx={{ color: theme.palette.secondary[400], fontSize: "26px" }}
             />
           }
         />
@@ -188,7 +187,10 @@ const Dashboard = () => {
             },
             "& .MuiDataGrid-columnHeaders": {
               backgroundColor: theme.palette.background.alt,
-              color: theme.palette.secondary[100],
+              color:
+                theme.palette.mode === "dark"
+                  ? theme.palette.grey[50]
+                  : theme.palette.primary[600],
               borderBottom: "none",
             },
             "& .MuiDataGrid-virtualScroller": {
@@ -196,7 +198,10 @@ const Dashboard = () => {
             },
             "& .MuiDataGrid-footerContainer": {
               backgroundColor: theme.palette.background.alt,
-              color: theme.palette.secondary[100],
+              color:
+                theme.palette.mode === "dark"
+                  ? theme.palette.grey[50]
+                  : theme.palette.primary[600],
               borderTop: "none",
             },
             "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
@@ -228,17 +233,30 @@ const Dashboard = () => {
           p="1.5rem"
           borderRadius="0.55rem"
         >
-          <Typography variant="h6" sx={{ color: theme.palette.secondary[100] }}>
+          <Typography
+            variant="h6"
+            sx={{
+              color:
+                theme.palette.mode === "dark"
+                  ? theme.palette.grey[50]
+                  : theme.palette.primary[600],
+            }}
+          >
             Income by Category
           </Typography>
           <PieChart isDashboard={true} />
           <Typography
             p="0 0.6rem"
             fontSize="0.8rem"
-            sx={{ color: theme.palette.secondary[200] }}
+            sx={{
+              color:
+                theme.palette.mode === "dark"
+                  ? theme.palette.grey[500]
+                  : theme.palette.grey[600],
+            }}
             textAlign="center"
           >
-            Breakdown of payments based on invoice description.
+            Payments categorized by invoice description
           </Typography>
         </Box>
       </Box>

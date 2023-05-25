@@ -67,9 +67,9 @@ const Members = () => {
   ];
 
   return (
-    <Box m="1.5rem 2.5rem">
+    <Box m="2rem 2.5rem">
       <FlexBetween>
-        <Header title="MEMBERS" subtitle="Manage Your Members" />
+        <Header title="Members" subtitle="Manage Your Members" />
         <Box>
           <Button
             sx={{
@@ -102,7 +102,10 @@ const Members = () => {
           },
           "& .MuiDataGrid-columnHeaders": {
             backgroundColor: theme.palette.background.alt,
-            color: theme.palette.secondary[100],
+            color:
+              theme.palette.mode === "dark"
+                ? theme.palette.grey[50]
+                : theme.palette.primary[600],
             borderBotton: "none",
           },
           "& .MuiDataGrid-virtualScroller": {
@@ -110,11 +113,17 @@ const Members = () => {
           },
           "& .MuiDataGrid-footerContainer": {
             backgroundColor: theme.palette.background.alt,
-            color: theme.palette.secondary[100],
+            color:
+              theme.palette.mode === "dark"
+                ? theme.palette.grey[50]
+                : theme.palette.primary[600],
             borderTop: "none",
           },
           "& .MuiButton-text": {
-            color: theme.palette.primary[300],
+            color:
+              theme.palette.mode === "dark"
+                ? theme.palette.grey[50]
+                : theme.palette.primary[600],
           },
           "& .MuiButton-text:hover": {
             color: theme.palette.secondary[300],

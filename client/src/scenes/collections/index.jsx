@@ -8,8 +8,8 @@ const Collections = () => {
     document.title = "Collections | Fisca";
   }, []);
   return (
-    <Box m="1.5rem 2.5rem">
-      <Header title="COLLECTIONS" subtitle="Contact Your Collections Agency" />
+    <Box m="2rem 2.5rem">
+      <Header title="Collections" subtitle="Contact Your Collections Agency" />
     </Box>
   );
 };

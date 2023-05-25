@@ -86,8 +86,8 @@ const Payments = () => {
   ];
 
   return (
-    <Box m="1.5rem 2.5rem">
-      <Header title="PAYMENTS" subtitle="Payments Made by Your Members" />
+    <Box m="2rem 2.5rem">
+      <Header title="Payments" subtitle="Payments Made by Your Members" />
       <Box
         mt="40px"
         height="75vh"
@@ -100,7 +100,10 @@ const Payments = () => {
           },
           "& .MuiDataGrid-columnHeaders": {
             backgroundColor: theme.palette.background.alt,
-            color: theme.palette.secondary[100],
+            color:
+              theme.palette.mode === "dark"
+                ? theme.palette.grey[50]
+                : theme.palette.primary[600],
             borderBotton: "none",
           },
           "& .MuiDataGrid-virtualScroller": {
@@ -108,11 +111,17 @@ const Payments = () => {
           },
           "& .MuiDataGrid-footerContainer": {
             backgroundColor: theme.palette.background.alt,
-            color: theme.palette.secondary[100],
+            color:
+              theme.palette.mode === "dark"
+                ? theme.palette.grey[50]
+                : theme.palette.primary[600],
             borderTop: "none",
           },
           "& .MuiButton-text": {
-            color: theme.palette.primary[300],
+            color:
+              theme.palette.mode === "dark"
+                ? theme.palette.grey[50]
+                : theme.palette.primary[600],
           },
           "& .MuiButton-text:hover": {
             color: theme.palette.secondary[300],

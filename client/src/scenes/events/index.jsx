@@ -8,8 +8,8 @@ const Events = () => {
     document.title = "Events | Fisca";
   }, []);
   return (
-    <Box m="1.5rem 2.5rem">
-      <Header title="EVENTS" subtitle="View and Schedule Events" />
+    <Box m="2rem 2.5rem">
+      <Header title="Events" subtitle="View and Schedule Events" />
     </Box>
   );
 };

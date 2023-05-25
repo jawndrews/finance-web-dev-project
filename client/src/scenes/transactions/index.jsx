@@ -8,8 +8,8 @@ const Transactions = () => {
     document.title = "Transactions | Fisca";
   }, []);
   return (
-    <Box m="1.5rem 2.5rem">
-      <Header title="TRANSACTIONS" subtitle="View Transaction History" />
+    <Box m="2rem 2.5rem">
+      <Header title="Transactions" subtitle="View Transaction History" />
     </Box>
   );
 };

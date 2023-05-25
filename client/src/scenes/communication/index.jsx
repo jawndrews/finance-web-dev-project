@@ -9,8 +9,8 @@ const Communication = () => {
   }, []);
 
   return (
-    <Box m="1.5rem 2.5rem">
-      <Header title="COMMUNICATION" subtitle="Contact Your Members" />
+    <Box m="2rem 2.5rem">
+      <Header title="Communication" subtitle="Contact Your Members" />
     </Box>
   );
 };

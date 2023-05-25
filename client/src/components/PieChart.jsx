@@ -80,8 +80,8 @@ const PieChart = ({ isDashboard = false }) => {
         }}
         colors={
           theme.palette.mode === "dark"
-            ? theme.palette.accent[400]
-            : theme.palette.accent[500]
+            ? theme.palette.secondary[400]
+            : theme.palette.secondary[600]
         }
         margin={
           isDashboard
@@ -94,7 +94,7 @@ const PieChart = ({ isDashboard = false }) => {
         borderWidth={1}
         borderColor={{
           from: "color",
-          modifiers: [["darker", 0.2]],
+          modifiers: [["darker", 0]],
         }}
         enableArcLinkLabels={!isDashboard}
         arcLinkLabelsTextColor={theme.palette.secondary[200]}
@@ -144,7 +144,7 @@ const PieChart = ({ isDashboard = false }) => {
             : "translate(-50%, -100%)",
         }}
       >
-        <Typography variant="h6">
+        <Typography variant="h6" sx={{ mb: "0.2rem", ml: "1rem" }}>
           {!isDashboard && "Total:"} {formatCurrency(data.totalIncome)}
         </Typography>
       </Box>
