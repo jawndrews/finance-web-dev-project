@@ -87,14 +87,17 @@ const Dashboard = () => {
         <Box>
           <Button
             sx={{
-              color: theme.palette.secondary[400],
+              color: theme.palette.secondary[300],
               fontSize: "14px",
               fontWeight: "bold",
               padding: "10px 20px",
               ml: "35px",
               mt: "6px",
               "&:hover": {
-                backgroundColor: theme.palette.secondary[800],
+                backgroundColor:
+                  theme.palette.mode === "dark"
+                    ? theme.palette.secondary[800]
+                    : theme.palette.secondary[700],
               },
             }}
           >

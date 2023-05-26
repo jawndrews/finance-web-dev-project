@@ -16,7 +16,7 @@ import { useLoginMutation } from "state/auth/authApiSlice";
 import { usePersist } from "hooks/usePersist";
 import loginBackgroundImage from "assets/login-background.png";
 import logoColorForDark from "assets/svg/logo-color.svg";
-import logoColorForLight from "assets/svg/logo-dark.svg";
+import logoColorForLight from "assets/svg/everdant-logo-black.svg";
 
 const Login = () => {
   const theme = useTheme();

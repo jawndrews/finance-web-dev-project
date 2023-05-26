@@ -32,7 +32,7 @@ import useAuth from "hooks/useAuth";
 import FlexBetween from "./FlexBetween";
 import profileImage from "assets/pfp.jpeg";
 import logoColorForDark from "assets/svg/logo-color.svg";
-import logoColorForLight from "assets/svg/logo-dark.svg";
+import logoColorForLight from "assets/svg/everdant-logo-black.svg";
 
 // nav items
 const navItemsAdmin = [
@@ -182,24 +182,13 @@ const Sidebar = ({
             <Box m="1.5rem 2rem 2rem 3rem">
               <FlexBetween color={theme.palette.secondary.main}>
                 <Box display="flex" alignItems="center" width="100%">
-                  {/*<Box
+                  <Box
                     component="img"
                     alt="logo"
                     src={logo}
                     width="120px"
                     sx={{ ml: "0.5rem", objectFit: "contain" }}
-                  />*/}
-                  <Typography
-                    variant="h1"
-                    fontWeight="bolder"
-                    fontSize="2rem"
-                    textAlign="center"
-                    sx={{
-                      color: theme.palette.secondary[400],
-                    }}
-                  >
-                    Fisca
-                  </Typography>
+                  />
                 </Box>
                 {!isNonMobile && (
                   <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
