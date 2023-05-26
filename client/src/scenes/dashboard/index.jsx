@@ -47,7 +47,7 @@ const Dashboard = () => {
   }
 
   useEffect(() => {
-    document.title = "Dashboard | Fisca";
+    document.title = "Dashboard | Everdant";
   }, []);
 
   const columns = [

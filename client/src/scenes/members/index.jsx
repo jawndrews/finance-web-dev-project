@@ -29,7 +29,7 @@ const Members = () => {
   }
 
   useEffect(() => {
-    document.title = "Members | Fisca";
+    document.title = "Members | Everdant";
   }, []);
 
   const columns = [

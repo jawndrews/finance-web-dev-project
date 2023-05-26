@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 const Communication = () => {
   useEffect(() => {
-    document.title = "Communication | Fisca";
+    document.title = "Communication | Everdant";
   }, []);
 
   return (

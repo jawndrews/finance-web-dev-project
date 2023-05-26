@@ -22,7 +22,7 @@ const Payments = () => {
   });
 
   useEffect(() => {
-    document.title = "Payments | Fisca";
+    document.title = "Payments | Everdant";
   }, []);
 
   function getFullName(params) {

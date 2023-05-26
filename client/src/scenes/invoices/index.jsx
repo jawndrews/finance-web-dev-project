@@ -31,7 +31,7 @@ const Invoices = () => {
   }
 
   useEffect(() => {
-    document.title = "Invoices | Fisca";
+    document.title = "Invoices | Everdant";
   }, []);
 
   const columns = [

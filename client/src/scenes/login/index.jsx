@@ -15,7 +15,7 @@ import { setCredentials } from "state/auth/authSlice";
 import { useLoginMutation } from "state/auth/authApiSlice";
 import { usePersist } from "hooks/usePersist";
 import loginBackgroundImage from "assets/login-background.png";
-import logoColorForDark from "assets/svg/logo-color.svg";
+import logoColorForDark from "assets/svg/everdant-logo-white.svg";
 import logoColorForLight from "assets/svg/everdant-logo-black.svg";
 
 const Login = () => {
@@ -44,7 +44,7 @@ const Login = () => {
   }, [email, password]);
 
   useEffect(() => {
-    document.title = "Login | Fisca";
+    document.title = "Login | Everdant";
   }, []);
 
   const handleSubmit = async (e) => {
