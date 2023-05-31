@@ -96,7 +96,7 @@ const Dashboard = () => {
               "&:hover": {
                 backgroundColor:
                   theme.palette.mode === "dark"
-                    ? theme.palette.secondary[800]
+                    ? theme.palette.secondary[600]
                     : theme.palette.secondary[700],
               },
             }}

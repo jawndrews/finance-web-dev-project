@@ -18,12 +18,11 @@ body,
   background: transparent;
 }
 
-/* Handle */
+/* Handle  95d86b*/
 ::-webkit-scrollbar-thumb {
-  background: #95d86b;
+  background: #999999;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #95d86b;
-  border-radius: 5px;
+  background: #95d86bd8;
 }

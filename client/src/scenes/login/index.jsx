@@ -15,8 +15,8 @@ import { setCredentials } from "state/auth/authSlice";
 import { useLoginMutation } from "state/auth/authApiSlice";
 import { usePersist } from "hooks/usePersist";
 import loginBackgroundImage from "assets/login-background.png";
-import logoColorForDark from "assets/svg/everdant-logo-white.svg";
-import logoColorForLight from "assets/svg/everdant-logo-black.svg";
+import logoColorForDark from "assets/svg/logotype-white.svg";
+import logoColorForLight from "assets/svg/logotype-black.svg";
 
 const Login = () => {
   const theme = useTheme();

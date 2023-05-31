@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Box, useTheme, Button } from "@mui/material";
 import { PersonAdd } from "@mui/icons-material";
 import { useGetUsersQuery } from "state/api";
@@ -6,7 +7,6 @@ import { DataGrid } from "@mui/x-data-grid";
 import Header from "components/Header";
 import DataGridCustomToolbar from "components/DataGridCustomToolbar";
 import FlexBetween from "components/FlexBetween";
-import { useEffect } from "react";
 
 const Members = () => {
   const theme = useTheme();
@@ -16,6 +16,7 @@ const Members = () => {
   const [sort, setSort] = useState({});
   const [search, setSearch] = useState("");
   const [searchInput, setSearchInput] = useState("");
+  const navigate = useNavigate();
   const { data, isLoading } = useGetUsersQuery({
     page,
     pageSize,
@@ -31,6 +32,10 @@ const Members = () => {
   useEffect(() => {
     document.title = "Members | Everdant";
   }, []);
+
+  const handleSubmitAdd = () => {
+    navigate("/members/create");
+  };
 
   const columns = [
     {
@@ -72,16 +77,23 @@ const Members = () => {
         <Header title="Members" subtitle="Manage Your Members" />
         <Box>
           <Button
+            onClick={handleSubmitAdd}
             sx={{
-              backgroundColor: theme.palette.secondary.light,
-              color: theme.palette.background.alt,
+              backgroundColor: theme.palette.secondary[500],
+              color:
+                theme.palette.mode === "dark"
+                  ? theme.palette.secondary[900]
+                  : theme.palette.secondary[100],
               fontSize: "14px",
               fontWeight: "bold",
               padding: "10px 20px",
               ml: "35px",
               mt: "6px",
               "&:hover": {
-                color: theme.palette.secondary.light,
+                backgroundColor:
+                  theme.palette.mode === "dark"
+                    ? theme.palette.secondary[300]
+                    : theme.palette.secondary[700],
               },
             }}
           >

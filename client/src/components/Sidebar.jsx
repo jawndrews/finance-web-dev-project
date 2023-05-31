@@ -31,8 +31,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "hooks/useAuth";
 import FlexBetween from "./FlexBetween";
 import profileImage from "assets/pfp.jpeg";
-import logoColorForDark from "assets/svg/everdant-logo-white.svg";
-import logoColorForLight from "assets/svg/everdant-logo-black.svg";
+import logoColorForDark from "assets/svg/logotype-white.svg";
+import logoColorForLight from "assets/svg/logotype-black.svg";
 
 // nav items
 const navItemsAdmin = [
