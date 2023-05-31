@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import React, { useEffect, useRef, useState } from "react";
 import { useRefreshMutation } from "./authApiSlice";
 import { usePersist } from "hooks/usePersist";
@@ -13,6 +13,7 @@ const PersistLogin = () => {
   const effectRan = useRef(false);
   const theme = useTheme();
   const { palette } = useTheme();
+  const navigate = useNavigate();
 
   const [trueSuccess, setTrueSuccess] = useState(false);
 
@@ -39,7 +40,6 @@ const PersistLogin = () => {
 
   let content;
   if (!persist) {
-    console.log("no persist");
     content = <Outlet />;
   } else if (isLoading) {
     console.log("loading");
@@ -62,44 +62,47 @@ const PersistLogin = () => {
       </Box>
     );
   } else if (isError) {
-    console.log("error");
+    console.log("Unauthorized");
+    navigate("/login");
     content = (
-      <Box
-        sx={{
-          position: "fixed",
-          top: "0",
-          left: "0",
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          flexDirection: "column",
-        }}
-      >
-        <Typography
-          display="flex"
+      <Box display="block" alignItems="center" width="100%">
+        <Box
           sx={{
-            fontSize: "2rem",
-            m: "2rem",
-            color: theme.palette.accent[400],
+            position: "fixed",
+            top: "0",
+            left: "0",
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
           }}
         >
-          {error.data?.message}
-        </Typography>
-        <Box>
-          <Link
-            href="/login"
+          <Typography
+            display="flex"
             sx={{
-              fontSize: "1rem",
-              color: theme.palette.primary[100],
-              "&:hover": {
-                color: theme.palette.secondary[300],
-              },
+              fontSize: "2rem",
+              m: "2rem",
+              color: theme.palette.accent[400],
             }}
           >
-            Please login
-          </Link>
+            Something went wrong.
+          </Typography>
+          <Box>
+            <Link
+              href="/login"
+              sx={{
+                fontSize: "1rem",
+                color: theme.palette.primary[100],
+                "&:hover": {
+                  color: theme.palette.secondary[300],
+                },
+              }}
+            >
+              <Typography sx={{ m: "2rem" }}>Please login.</Typography>
+            </Link>
+          </Box>
         </Box>
       </Box>
     );
@@ -111,7 +114,6 @@ const PersistLogin = () => {
     console.log(isUnitialized);
     content = <Outlet />;
   }
-
   return content;
 };
 

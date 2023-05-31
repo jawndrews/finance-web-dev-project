@@ -16,7 +16,7 @@ import {
   Description,
 } from "@mui/icons-material";
 import { DataGrid } from "@mui/x-data-grid";
-import { useGetDashboardQuery, useGetPaymentQuery } from "state/api";
+import { useGetDashboardQuery } from "state/api";
 import StatBox from "components/StatBox";
 import { useEffect } from "react";
 import LineChart from "components/LineChart";

@@ -7,6 +7,8 @@ import {
   Checkbox,
   useTheme,
   useMediaQuery,
+  Alert,
+  AlertTitle,
 } from "@mui/material";
 import { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -55,15 +57,29 @@ const Login = () => {
       setEmail("");
       setPassword("");
       navigate("/dashboard");
-
-      window.location.reload(); // BANDAID FIX FOR LOGIN BUG 4-27:1 -- NOT OPTIMAL!!!
+      //window.location.reload(); // BANDAID FIX FOR LOGIN BUG 4-27:1 -- NOT OPTIMAL!!!
     } catch (err) {
       if (!err.status) {
-        setErrMsg("No Server Response");
+        <Alert severity="error" sx={{ mb: "2rem" }}>
+          <AlertTitle>No server response</AlertTitle> An unexpected error
+          occurred on the server. Please try again later or contact support.
+        </Alert>;
       } else if (err.status === 400) {
-        setErrMsg("Missing Username or Password");
+        setErrMsg(
+          <Alert severity="warning" sx={{ mb: "2rem" }}>
+            <AlertTitle>Missing email or password</AlertTitle>
+            It seems you forgot to provide your email or password. Please fill
+            in both fields to proceed.
+          </Alert>
+        );
       } else if (err.status === 401) {
-        setErrMsg("Unauthorized");
+        setErrMsg(
+          <Alert severity="error" sx={{ mb: "2rem" }}>
+            <AlertTitle>Authentication failed</AlertTitle>
+            There was an error authenticating your credentials. Please try again
+            later or contact support.
+          </Alert>
+        );
       } else {
         setErrMsg(err.data?.message);
       }
@@ -106,9 +122,14 @@ const Login = () => {
 
   return (
     <Box
-      sx={{
-        backgroundImage: `url(/assets/login-background.png)`,
-      }}
+      class="loginImage"
+      style={
+        {
+          //backgroundImage: `url(${loginBackgroundImage})`,
+          //backgroundSize: "cover",
+          //height: "100vh",
+        }
+      }
     >
       <Box
         width="100%"

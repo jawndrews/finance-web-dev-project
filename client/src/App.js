@@ -19,6 +19,8 @@ import Collections from "scenes/collections";
 import Login from "scenes/login";
 import PersistLogin from "state/auth/PersistLogin";
 import Prefetch from "state/auth/Prefetch";
+import RequireAuth from "state/auth/RequireAuth";
+import { userTypes } from "config/userTypes";
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
@@ -29,20 +31,30 @@ function App() {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Routes>
+            {/* public routes */}
             <Route path="/login" element={<Login />} />
             <Route element={<PersistLogin />}>
-              <Route element={<Prefetch />}>
-                <Route element={<Layout />}>
-                  <Route path="/dashboard" element={<Dashboard />} />
-                  <Route path="/payments" element={<Payments />} />
-                  <Route path="/invoices" element={<Invoices />} />
-                  <Route path="/transactions" element={<Transactions />} />
-                  <Route path="/members" element={<Members />} />
-                  <Route path="/members/create" element={<AddMembers />} />
-                  <Route path="/events" element={<Events />} />
-                  <Route path="/communication" element={<Communication />} />
-                  <Route path="/reports" element={<Reports />} />
-                  <Route path="/collections" element={<Collections />} />
+              <Route
+                element={
+                  <RequireAuth
+                    allowedUserTypes={[...Object.values(userTypes)]}
+                  />
+                }
+              >
+                <Route element={<Prefetch />}>
+                  <Route element={<Layout />}>
+                    {/* private routes */}
+                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/payments" element={<Payments />} />
+                    <Route path="/invoices" element={<Invoices />} />
+                    <Route path="/transactions" element={<Transactions />} />
+                    <Route path="/members" element={<Members />} />
+                    <Route path="/members/create" element={<AddMembers />} />
+                    <Route path="/events" element={<Events />} />
+                    <Route path="/communication" element={<Communication />} />
+                    <Route path="/reports" element={<Reports />} />
+                    <Route path="/collections" element={<Collections />} />
+                  </Route>
                 </Route>
               </Route>
             </Route>
