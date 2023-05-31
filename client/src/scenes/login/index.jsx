@@ -57,7 +57,7 @@ const Login = () => {
       setEmail("");
       setPassword("");
       navigate("/dashboard");
-      //window.location.reload(); // BANDAID FIX FOR LOGIN BUG 4-27:1 -- NOT OPTIMAL!!!
+      window.location.reload(); // BANDAID FIX FOR LOGIN BUG 4-27:1 -- NOT OPTIMAL!!!
     } catch (err) {
       if (!err.status) {
         <Alert severity="error" sx={{ mb: "2rem" }}>
@@ -120,7 +120,7 @@ const Login = () => {
       </Box>
     );
 
-  return (
+  const content = (
     <Box
       class="loginImage"
       style={
@@ -234,6 +234,7 @@ const Login = () => {
       </Box>
     </Box>
   );
+  return content;
 };
 
 export default Login;
