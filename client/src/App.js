@@ -12,6 +12,7 @@ import Transactions from "scenes/transactions";
 import Invoices from "scenes/invoices";
 import Members from "scenes/members";
 import AddMembers from "scenes/members/AddMembers";
+import ImportMembers from "scenes/members/ImportMembers";
 import Events from "scenes/events";
 import Communication from "scenes/communication";
 import Reports from "scenes/reports";
@@ -49,7 +50,14 @@ function App() {
                     <Route path="/invoices" element={<Invoices />} />
                     <Route path="/transactions" element={<Transactions />} />
                     <Route path="/members" element={<Members />} />
-                    <Route path="/members/create" element={<AddMembers />} />
+                    <Route
+                      path="/members/create/single"
+                      element={<AddMembers />}
+                    />
+                    <Route
+                      path="/members/create/import"
+                      element={<ImportMembers />}
+                    />
                     <Route path="/events" element={<Events />} />
                     <Route path="/communication" element={<Communication />} />
                     <Route path="/reports" element={<Reports />} />

@@ -334,7 +334,7 @@ const Sidebar = ({
               })}
             </List>
           </Box>
-          <Box>
+          {/*<Box>
             <Box position="flex" bottom="0rem">
               <Divider sx={{ pt: "4rem", mt: "auto", mb: 1 }} />
               <Typography
@@ -369,7 +369,7 @@ const Sidebar = ({
                 </Button>
               </Typography>
             </Box>
-          </Box>
+                </Box>*/}
         </Drawer>
       )}
     </Box>

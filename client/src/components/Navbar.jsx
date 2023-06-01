@@ -26,6 +26,7 @@ import {
   useTheme,
   Menu,
   MenuItem,
+  Divider,
 } from "@mui/material";
 
 const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
@@ -138,16 +139,66 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
               onClose={handleClose}
               anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
             >
+              <MenuItem onClick={""}>
+                <Button
+                  title="My Account"
+                  sx={{
+                    color: theme.palette.secondary[100],
+                    "&:hover": {
+                      color:
+                        theme.palette.mode === "dark"
+                          ? theme.palette.accent[300]
+                          : theme.palette.accent[400],
+                    },
+                  }}
+                >
+                  My Account
+                </Button>
+              </MenuItem>
+              <MenuItem onClick={""}>
+                <Button
+                  title="My Organization"
+                  sx={{
+                    color: theme.palette.secondary[100],
+                    "&:hover": {
+                      color:
+                        theme.palette.mode === "dark"
+                          ? theme.palette.accent[300]
+                          : theme.palette.accent[400],
+                    },
+                  }}
+                >
+                  My Organization
+                </Button>
+              </MenuItem>
+              <Divider />
+              <MenuItem onClick={""}>
+                <Button
+                  title="Help & Feedback"
+                  sx={{
+                    color: theme.palette.secondary[100],
+                    "&:hover": {
+                      color:
+                        theme.palette.mode === "dark"
+                          ? theme.palette.accent[300]
+                          : theme.palette.accent[400],
+                    },
+                  }}
+                >
+                  Help & Feedback
+                </Button>
+              </MenuItem>
+              <Divider />
               <MenuItem onClick={onLogoutClicked}>
                 <Button
                   title="Logout"
                   sx={{
-                    color: theme.palette.secondary[100],
+                    color:
+                      theme.palette.mode === "dark" ? "#D6685C" : "#D05244",
                     "&:hover": {},
                   }}
                 >
                   {"Log Out"}
-                  <ExitToAppOutlined sx={{ m: " 0rem 0.3rem 0rem 1rem" }} />
                 </Button>
               </MenuItem>
             </Menu>

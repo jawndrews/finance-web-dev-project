@@ -31,6 +31,7 @@ const AddMembers = () => {
 
   const { organization } = useAuth();
   const [open, setOpen] = useState(true);
+  const { userObject, setUserObject } = useState();
 
   useEffect(() => {
     document.title = "Add Members | Everdant";
@@ -75,6 +76,10 @@ const AddMembers = () => {
 
   const handleSubmit = (values) => {
     console.log(values);
+  };
+
+  const handleImportButton = () => {
+    navigate("/members/create/import");
   };
 
   return (
@@ -131,6 +136,7 @@ const AddMembers = () => {
           Single Member
         </Button>
         <Button
+          onClick={handleImportButton}
           sx={{
             color:
               theme.palette.mode === "dark"
@@ -355,7 +361,10 @@ const AddMembers = () => {
                   className="form_submit-button"
                   type="submit"
                   sx={{
-                    backgroundColor: theme.palette.secondary[500],
+                    backgroundColor:
+                      theme.palette.mode === "dark"
+                        ? theme.palette.secondary[400]
+                        : theme.palette.secondary[600],
                     color:
                       theme.palette.mode === "dark"
                         ? theme.palette.secondary[900]

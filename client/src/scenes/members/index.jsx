@@ -35,8 +35,8 @@ const Members = () => {
     document.title = "Members | Everdant";
   }, []);
 
-  const handleSubmitAdd = () => {
-    navigate("/members/create");
+  const handleAddMembersButton = () => {
+    navigate("/members/create/single");
   };
 
   const columns = [
@@ -79,9 +79,12 @@ const Members = () => {
         <Header title="Members" subtitle="Manage Your Members" />
         <Box>
           <Button
-            onClick={handleSubmitAdd}
+            onClick={handleAddMembersButton}
             sx={{
-              backgroundColor: theme.palette.secondary[500],
+              backgroundColor:
+                theme.palette.mode === "dark"
+                  ? theme.palette.secondary[400]
+                  : theme.palette.secondary[600],
               color:
                 theme.palette.mode === "dark"
                   ? theme.palette.secondary[900]
