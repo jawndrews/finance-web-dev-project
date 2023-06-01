@@ -4,8 +4,12 @@ import {
   useTheme,
   Button,
   TextField,
-  MenuItem,
   Typography,
+  Select,
+  FormControl,
+  InputLabel,
+  Autocomplete,
+  MenuItem,
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Formik } from "formik";
@@ -15,14 +19,18 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "components/Header";
 import FlexBetween from "components/FlexBetween";
 import { useNavigate } from "react-router-dom";
+import { states } from "config/states.js";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DateField, LocalizationProvider } from "@mui/x-date-pickers";
 
 const AddMembers = () => {
   const theme = useTheme();
   const { palette } = useTheme();
   const isNonMobile = useMediaQuery("(min-width:1000px)");
+  const navigate = useNavigate();
+
   const { organization } = useAuth();
   const [open, setOpen] = useState(true);
-  const navigate = useNavigate();
 
   useEffect(() => {
     document.title = "Add Members | Everdant";
@@ -47,21 +55,21 @@ const AddMembers = () => {
     organization: { organization },
     active: true,
     memberEndDate: "",
-    userType: "",
+    userType: "user",
   };
 
   const userSchema = yup.object().shape({
     firstName: yup.string().required("required"),
     lastName: yup.string().required("required"),
     email: yup.string().email("invalid email").required("required"),
-    phoneNumber: yup.string().required("required"),
-    street: yup.string().required("required"),
-    city: yup.string().required("required"),
-    state: yup.string().required("required"),
-    zip: yup.string().required("required"),
-    country: yup.string().required("required"),
-    dob: yup.string().required("required"),
-    active: yup.string().required("required"),
+    phoneNumber: yup.string(),
+    street: yup.string(),
+    city: yup.string(),
+    state: yup.string(),
+    zip: yup.string(),
+    country: yup.string(),
+    dob: yup.string(),
+    active: yup.string().required("*required"),
     userType: yup.string().required("required"),
   });
 
@@ -91,6 +99,58 @@ const AddMembers = () => {
         </Box>
       </FlexBetween>
 
+      <FlexBetween
+        mt="1rem"
+        style={{
+          justifyContent: "flex-start",
+          gridColumn: "span 4",
+        }}
+        gap="2rem"
+      >
+        <Button
+          sx={{
+            color:
+              theme.palette.mode === "dark"
+                ? theme.palette.grey[50]
+                : theme.palette.grey[50],
+            backgroundColor:
+              theme.palette.mode === "dark"
+                ? theme.palette.accent[500]
+                : theme.palette.accent[400],
+            fontSize: "14px",
+            fontWeight: "bold",
+            padding: "5px 10px",
+            "&:hover": {
+              backgroundColor:
+                theme.palette.mode === "dark"
+                  ? theme.palette.accent[500]
+                  : theme.palette.accent[400],
+            },
+          }}
+        >
+          Single Member
+        </Button>
+        <Button
+          sx={{
+            color:
+              theme.palette.mode === "dark"
+                ? theme.palette.grey[50]
+                : theme.palette.accent[400],
+            fontSize: "14px",
+            fontWeight: "bold",
+            padding: "5px 10px",
+            "&:hover": {
+              color:
+                theme.palette.mode === "dark"
+                  ? theme.palette.grey[500]
+                  : theme.palette.accent[200],
+            },
+          }}
+        >
+          Import Members with CSV
+        </Button>
+      </FlexBetween>
+
       <Formik
         onSubmit={handleSubmit}
         initialValues={initialValues}
@@ -114,13 +174,13 @@ const AddMembers = () => {
               }}
             >
               <Typography marginTop="2rem" sx={{ gridColumn: "span 4" }}>
-                Member Info
+                Contact Info
               </Typography>
               <TextField
                 fullWidth
                 variant="filled"
                 type="text"
-                label="First Name"
+                label="First Name*"
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.firstName}
@@ -133,7 +193,7 @@ const AddMembers = () => {
                 fullWidth
                 variant="filled"
                 type="text"
-                label="Last Name"
+                label="Last Name*"
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.lastName}
@@ -146,7 +206,7 @@ const AddMembers = () => {
                 fullWidth
                 variant="filled"
                 type="text"
-                label="Email"
+                label="Email*"
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.email}
@@ -168,6 +228,40 @@ const AddMembers = () => {
                 helperText={touched.phoneNumber && errors.phoneNumber}
                 sx={{ gridColumn: "span 4" }}
               />
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DateField
+                  value={values.dob}
+                  variant="filled"
+                  label="Date of Birth"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  name="dob"
+                  error={!!touched.dob && !!errors.dob}
+                  helperText={touched.dob && errors.dob}
+                  sx={{ gridColumn: "span 2" }}
+                />
+              </LocalizationProvider>
+              <FormControl variant="filled" sx={{ gridColumn: "span 2" }}>
+                <InputLabel id="demo-simple-select-filled-label">
+                  Permissions*
+                </InputLabel>
+                <Select
+                  id="userType-selector"
+                  value={values.userType}
+                  variant="filled"
+                  label="Permissions"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  name="userType"
+                  error={!!touched.dob && !!errors.dob}
+                  helperText={touched.dob && errors.dob}
+                  sx={{ gridColumn: "span 1" }}
+                >
+                  <MenuItem value="user">Member</MenuItem>
+                  <MenuItem value="admin">Admin</MenuItem>
+                </Select>
+              </FormControl>
+
               <Typography marginTop="2rem" sx={{ gridColumn: "span 4" }}>
                 Address
               </Typography>
@@ -197,76 +291,25 @@ const AddMembers = () => {
                 helperText={touched.city && errors.city}
                 sx={{ gridColumn: "span 2" }}
               />
-              <TextField
+              <Autocomplete
                 fullWidth
-                variant="filled"
-                label="State"
-                select
-                value={values.state}
-                name="state"
-                onChange={handleChange}
-                error={!!touched.state && !!errors.state}
-                helperText={touched.state && errors.state}
+                options={states}
+                getOptionLabel={(option) => option.label}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="State"
+                    variant="filled"
+                    name="state"
+                    value={values.state}
+                    onChange={handleChange}
+                    error={!!touched.state && !!errors.state}
+                    helperText={touched.state && errors.state}
+                  />
+                )}
+                freeSolo
                 sx={{ gridColumn: "span 2" }}
-                SelectProps={{
-                  MenuProps: {
-                    style: {
-                      maxHeight: "30rem",
-                    },
-                  },
-                }}
-              >
-                <MenuItem value="AL">Alabama</MenuItem>
-                <MenuItem value="AK">Alaska</MenuItem>
-                <MenuItem value="AZ">Arizona</MenuItem>
-                <MenuItem value="AR">Arkansas</MenuItem>
-                <MenuItem value="CA">California</MenuItem>
-                <MenuItem value="CO">Colorado</MenuItem>
-                <MenuItem value="CT">Connecticut</MenuItem>
-                <MenuItem value="DE">Delaware</MenuItem>
-                <MenuItem value="FL">Florida</MenuItem>
-                <MenuItem value="GA">Georgia</MenuItem>
-                <MenuItem value="HI">Hawaii</MenuItem>
-                <MenuItem value="ID">Idaho</MenuItem>
-                <MenuItem value="IL">Illinois</MenuItem>
-                <MenuItem value="IN">Indiana</MenuItem>
-                <MenuItem value="IA">Iowa</MenuItem>
-                <MenuItem value="KS">Kansas</MenuItem>
-                <MenuItem value="KY">Kentucky</MenuItem>
-                <MenuItem value="LA">Louisiana</MenuItem>
-                <MenuItem value="ME">Maine</MenuItem>
-                <MenuItem value="MD">Maryland</MenuItem>
-                <MenuItem value="MA">Massachusetts</MenuItem>
-                <MenuItem value="MI">Michigan</MenuItem>
-                <MenuItem value="MN">Minnesota</MenuItem>
-                <MenuItem value="MS">Mississippi</MenuItem>
-                <MenuItem value="MO">Missouri</MenuItem>
-                <MenuItem value="MT">Montana</MenuItem>
-                <MenuItem value="NE">Nebraska</MenuItem>
-                <MenuItem value="NV">Nevada</MenuItem>
-                <MenuItem value="NH">New Hampshire</MenuItem>
-                <MenuItem value="NJ">New Jersey</MenuItem>
-                <MenuItem value="NM">New Mexico</MenuItem>
-                <MenuItem value="NY">New York</MenuItem>
-                <MenuItem value="NC">North Carolina</MenuItem>
-                <MenuItem value="ND">North Dakota</MenuItem>
-                <MenuItem value="OH">Ohio</MenuItem>
-                <MenuItem value="OK">Oklahoma</MenuItem>
-                <MenuItem value="OR">Oregon</MenuItem>
-                <MenuItem value="PA">Pennsylvania</MenuItem>
-                <MenuItem value="RI">Rhode Island</MenuItem>
-                <MenuItem value="SC">South Carolina</MenuItem>
-                <MenuItem value="SD">South Dakota</MenuItem>
-                <MenuItem value="TN">Tennessee</MenuItem>
-                <MenuItem value="TX">Texas</MenuItem>
-                <MenuItem value="UT">Utah</MenuItem>
-                <MenuItem value="VT">Vermont</MenuItem>
-                <MenuItem value="VA">Virginia</MenuItem>
-                <MenuItem value="WA">Washington</MenuItem>
-                <MenuItem value="WV">West Virginia</MenuItem>
-                <MenuItem value="WI">Wisconsin</MenuItem>
-                <MenuItem value="WY">Wyoming</MenuItem>
-              </TextField>
+              />
               <TextField
                 fullWidth
                 variant="filled"
@@ -301,22 +344,10 @@ const AddMembers = () => {
               >
                 <MenuItem value="United States">United States</MenuItem>
               </TextField>*/}
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Date of Birth"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.dob}
-                name="dob"
-                error={!!touched.dob && !!errors.dob}
-                helperText={touched.dob && errors.dob}
-                sx={{ gridColumn: "span 4" }}
-              />
+
               <FlexBetween
                 style={{
-                  justifyContent: "flex-end",
+                  justifyContent: "flex-start",
                   gridColumn: "span 4",
                 }}
               >

@@ -71,8 +71,9 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
           <FlexBetween
             backgroundColor={theme.palette.background.alt}
             borderRadius="9px"
-            gap="3rem"
-            p="0.1rem 1.5rem"
+            ml="1rem"
+            gap="2rem"
+            p="0.1rem 0.7rem 0.1rem 1.2rem "
           >
             <InputBase placeholder="Search..." />
             <IconButton>

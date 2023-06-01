@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, useTheme, Button } from "@mui/material";
+import { Box, useTheme, Button, useMediaQuery } from "@mui/material";
 import { PersonAdd } from "@mui/icons-material";
 import { useGetUsersQuery } from "state/api";
 import { DataGrid } from "@mui/x-data-grid";
 import Header from "components/Header";
 import DataGridCustomToolbar from "components/DataGridCustomToolbar";
 import FlexBetween from "components/FlexBetween";
+import StatBox from "components/StatBox";
 
 const Members = () => {
   const theme = useTheme();
+  const isNonMediumScreens = useMediaQuery("(min-width: 1200px)");
   // values sent to the backend
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(20);
@@ -38,11 +40,11 @@ const Members = () => {
   };
 
   const columns = [
-    {
-      field: "_id",
-      headerName: "ID",
-      flex: 0.75,
-    },
+    //{
+    //  field: "_id",
+    //  headerName: "ID",
+    //  flex: 0.75,
+    //},
     {
       field: "firstName",
       headerName: "Name",
@@ -103,65 +105,78 @@ const Members = () => {
         </Box>
       </FlexBetween>
       <Box
-        mt="40px"
-        height="75vh"
+        display="grid"
+        gridTemplateColumns="repeat(12, 1fr)"
+        gridAutoRows="160px"
+        gap="20px"
         sx={{
-          "& .MuiDataGrid-root": {
-            border: "none",
-          },
-          "& .MuiDataGrid-cell": {
-            borderBottom: "none",
-          },
-          "& .MuiDataGrid-columnHeaders": {
-            backgroundColor: theme.palette.background.alt,
-            color:
-              theme.palette.mode === "dark"
-                ? theme.palette.grey[50]
-                : theme.palette.primary[600],
-            borderBotton: "none",
-          },
-          "& .MuiDataGrid-virtualScroller": {
-            backgroundColor: theme.palette.background.alt,
-          },
-          "& .MuiDataGrid-footerContainer": {
-            backgroundColor: theme.palette.background.alt,
-            color:
-              theme.palette.mode === "dark"
-                ? theme.palette.grey[50]
-                : theme.palette.primary[600],
-            borderTop: "none",
-          },
-          "& .MuiButton-text": {
-            color:
-              theme.palette.mode === "dark"
-                ? theme.palette.grey[50]
-                : theme.palette.primary[600],
-          },
-          "& .MuiButton-text:hover": {
-            color: theme.palette.secondary[300],
-          },
+          "& > div": { gridColumn: isNonMediumScreens ? undefined : "span 12" },
         }}
       >
-        <DataGrid
-          loading={isLoading || !data}
-          getRowId={(row) => row._id}
-          rows={(data && data.users) || []}
-          columns={columns}
-          rowCount={(data && data.total) || 0}
-          rowsPerPageOptions={[20, 50, 100]}
-          pagination
-          page={page}
-          pageSize={pageSize}
-          paginationMode="server"
-          sortingMode="server"
-          onPageChange={(newPage) => setPage(newPage)}
-          onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-          onSortModelChange={(newSortModel) => setSort(...newSortModel)}
-          components={{ Toolbar: DataGridCustomToolbar }}
-          componentsProps={{
-            toolbar: { searchInput, setSearchInput, setSearch },
+        <Box
+          mt="40px"
+          height="75vh"
+          gridColumn="span 12"
+          sx={{
+            "& .MuiDataGrid-root": {
+              border: "none",
+            },
+            "& .MuiDataGrid-cell": {
+              borderBottom: "none",
+            },
+            "& .MuiDataGrid-columnHeaders": {
+              backgroundColor: theme.palette.background.alt,
+              color:
+                theme.palette.mode === "dark"
+                  ? theme.palette.grey[50]
+                  : theme.palette.primary[600],
+              borderBotton: "none",
+            },
+            "& .MuiDataGrid-virtualScroller": {
+              backgroundColor: theme.palette.background.alt,
+            },
+            "& .MuiDataGrid-footerContainer": {
+              backgroundColor: theme.palette.background.alt,
+              color:
+                theme.palette.mode === "dark"
+                  ? theme.palette.grey[50]
+                  : theme.palette.primary[600],
+              borderTop: "none",
+            },
+            "& .MuiButton-text": {
+              color:
+                theme.palette.mode === "dark"
+                  ? theme.palette.grey[50]
+                  : theme.palette.primary[600],
+            },
+            "& .MuiButton-text:hover": {
+              color: theme.palette.secondary[300],
+            },
           }}
-        />
+        >
+          <DataGrid
+            gridColumn="span 12"
+            gridRow="span 2"
+            loading={isLoading || !data}
+            getRowId={(row) => row._id}
+            rows={(data && data.users) || []}
+            columns={columns}
+            rowCount={(data && data.total) || 0}
+            rowsPerPageOptions={[20, 50, 100]}
+            pagination
+            page={page}
+            pageSize={pageSize}
+            paginationMode="server"
+            sortingMode="server"
+            onPageChange={(newPage) => setPage(newPage)}
+            onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+            onSortModelChange={(newSortModel) => setSort(...newSortModel)}
+            components={{ Toolbar: DataGridCustomToolbar }}
+            componentsProps={{
+              toolbar: { searchInput, setSearchInput, setSearch },
+            }}
+          />
+        </Box>
       </Box>
     </Box>
   );
