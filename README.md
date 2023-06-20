@@ -1,8 +1,8 @@
-## Full Stack Finance Web App - Fisca
+## Full Stack Finance Web App - Everdant
 
 **About**
 
-Fisca is a web application used for member and financial management for various organizations. Use cases include sororities & fraternities, gyms, clubs, non profits, etc.
+Everdant is a web application used for member and financial management for various organizations. Use cases include sororities & fraternities, gyms, clubs, non profits, etc.
 
 **Technologies Used:**
 
