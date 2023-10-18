@@ -44,7 +44,7 @@ const AddMembers = () => {
   }, []);
 
   useEffect(() => {
-    document.title = "Add Members | Everdant";
+    document.title = "Add Members | MemberMint";
   }, []);
 
   const handleBackButton = () => {

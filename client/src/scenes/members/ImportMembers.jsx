@@ -17,7 +17,7 @@ const AddMembers = () => {
   const { organization } = useAuth();
 
   useEffect(() => {
-    document.title = "Import Members | Everdant";
+    document.title = "Import Members | MemberMint";
   }, []);
 
   const handleBackButton = () => {

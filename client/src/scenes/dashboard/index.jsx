@@ -47,7 +47,7 @@ const Dashboard = () => {
   }
 
   useEffect(() => {
-    document.title = "Dashboard | Everdant";
+    document.title = "Dashboard | MemberMint";
   }, []);
 
   const columns = [

@@ -32,7 +32,7 @@ const Members = () => {
   }
 
   useEffect(() => {
-    document.title = "Members | Everdant";
+    document.title = "Members | MemberMint";
   }, []);
 
   const handleAddMembersButton = () => {

@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 const Collections = () => {
   useEffect(() => {
-    document.title = "Collections | Everdant";
+    document.title = "Collections | MemberMint";
   }, []);
   return (
     <Box m="2rem 2.5rem">

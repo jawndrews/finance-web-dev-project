@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 const Reports = () => {
   useEffect(() => {
-    document.title = "Reports | Everdant";
+    document.title = "Reports | MemberMint";
   }, []);
 
   return (

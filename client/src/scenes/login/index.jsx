@@ -46,7 +46,7 @@ const Login = () => {
   }, [email, password]);
 
   useEffect(() => {
-    document.title = "Login | Everdant";
+    document.title = "Login | MemberMint";
   }, []);
 
   const handleSubmit = async (e) => {
