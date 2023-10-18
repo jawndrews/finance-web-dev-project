@@ -142,7 +142,7 @@ const Login = () => {
             component="img"
             alt="logo"
             src={logo}
-            width="120px"
+            width="250px"
             sx={{ objectFit: "contain" }}
           />
         </Box>

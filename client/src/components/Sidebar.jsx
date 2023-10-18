@@ -186,8 +186,8 @@ const Sidebar = ({
                     component="img"
                     alt="logo"
                     src={logo}
-                    width="120px"
-                    sx={{ ml: "0.5rem", objectFit: "contain" }}
+                    width="150px"
+                    sx={{ ml: "", objectFit: "contain" }}
                   />
                 </Box>
                 {!isNonMobile && (
