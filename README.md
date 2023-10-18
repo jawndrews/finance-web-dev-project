@@ -1,8 +1,8 @@
-## Full Stack Finance Web App - Everdant
+## Full Stack Finance Web App - MemberMint
 
 **About**
 
-Everdant is a web application used for member and financial management for various organizations. Use cases include sororities & fraternities, gyms, clubs, non profits, etc.
+MemberMint is a web application used for member and financial management for various organizations. Use cases include sororities & fraternities, gyms, clubs, nonprofits, etc.
 
 **Technologies Used:**
 
