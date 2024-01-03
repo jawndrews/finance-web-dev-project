@@ -17,8 +17,8 @@ import { setCredentials } from "state/auth/authSlice";
 import { useLoginMutation } from "state/auth/authApiSlice";
 import { usePersist } from "hooks/usePersist";
 import loginBackgroundImage from "assets/login-background.png";
-import logoColorForDark from "assets/svg/logotype-white.svg";
-import logoColorForLight from "assets/svg/logotype-black.svg";
+import logoColorForDark from "assets/svg/logo-dark.svg";
+import logoColorForLight from "assets/svg/logo-light.svg";
 
 const Login = () => {
   const theme = useTheme();
@@ -122,20 +122,19 @@ const Login = () => {
 
   const content = (
     <Box
-      class="loginImage"
-      style={
-        {
-          //backgroundImage: `url(${loginBackgroundImage})`,
-          //backgroundSize: "cover",
-          //height: "100vh",
-        }
-      }
+      sx={{
+        backgroundImage: `url(${loginBackgroundImage})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        height: "100vh",
+      }}
     >
       <Box
         width="100%"
         backgroundColor={theme.palette.background.alt}
         p="1rem 6%"
         textAlign="center"
+        boxShadow="1px 1px 30px rgba(0,0,0,0.1)"
       >
         <Box display="block" alignItems="center" width="100%">
           <Box
@@ -149,14 +148,20 @@ const Login = () => {
       </Box>
 
       <Box
-        width={isNonMobileScreens ? "50%" : "93%"}
+        width={isNonMobileScreens ? "30%" : "93%"}
         p="2rem"
         m="10rem auto"
-        borderRadius="1.5rem"
+        borderRadius="0.55rem"
+        boxShadow="1px 1px 30px rgba(0,0,0,0.1)"
         backgroundColor={theme.palette.background.alt}
       >
-        <Typography fontWeight="500" variant="h5" sx={{ mb: "1.5rem" }}>
-          Login
+        <Typography
+          fontWeight="500"
+          variant="h5"
+          textAlign="center"
+          sx={{ mb: "2rem", opacity: "0.75" }}
+        >
+          Sign In
         </Typography>
         <main className="login">
           <p ref={errRef} className={errClass} aria-live="assertive">
@@ -209,7 +214,7 @@ const Login = () => {
                   "&:hover": { color: palette.secondary[500] },
                 }}
               >
-                {"LOGIN"}
+                {"Sign In"}
               </Button>
               <Box>
                 <Checkbox
@@ -226,7 +231,7 @@ const Login = () => {
                     },
                   }}
                 />
-                Trust this device?
+                Remember Me
               </Box>
             </Box>
           </form>

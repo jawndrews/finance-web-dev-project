@@ -126,6 +126,7 @@ const Payments = () => {
           "& .MuiButton-text:hover": {
             color: theme.palette.secondary[300],
           },
+          "& .MuiDataGrid-main": {},
         }}
       >
         <DataGrid
@@ -145,7 +146,11 @@ const Payments = () => {
           onSortModelChange={(newSortModel) => setSort(...newSortModel)}
           components={{ Toolbar: DataGridCustomToolbar }}
           componentsProps={{
-            toolbar: { searchInput, setSearchInput, setSearch },
+            toolbar: {
+              searchInput,
+              setSearchInput,
+              setSearch,
+            },
           }}
         />
       </Box>

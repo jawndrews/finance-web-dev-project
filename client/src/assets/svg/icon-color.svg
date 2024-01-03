@@ -1,41 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 128.52713 128.0123">
-  <defs>
-    <style>
-      .cls-1 {
-        stroke: url(#linear-gradient-2);
-      }
-
-      .cls-1, .cls-2, .cls-3 {
-        fill: none;
-        stroke-miterlimit: 10;
-        stroke-width: 7.45147px;
-      }
-
-      .cls-2 {
-        stroke: url(#linear-gradient-3);
-      }
-
-      .cls-3 {
-        stroke: url(#linear-gradient);
-      }
-    </style>
-    <linearGradient id="linear-gradient" x1="-283.8319" y1="-862.92695" x2="-200.83094" y2="-862.92695" gradientTransform="translate(273.12285 903.80321)" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#0b7189"/>
-      <stop offset=".14977" stop-color="#238878"/>
-      <stop offset=".37369" stop-color="#41a663"/>
-      <stop offset=".59346" stop-color="#57bb54"/>
-      <stop offset=".80526" stop-color="#64c74b"/>
-      <stop offset="1" stop-color="#69cc48"/>
-    </linearGradient>
-    <linearGradient id="linear-gradient-2" x1="-283.8319" y1="-822.68211" x2="-197.36964" y2="-822.68211" gradientTransform="translate(301.07335 890.79202)" xlink:href="#linear-gradient"/>
-    <linearGradient id="linear-gradient-3" x1="-283.8319" y1="-782.51556" x2="-200.83094" y2="-782.51556" gradientTransform="translate(329.98229 880.25126)" xlink:href="#linear-gradient"/>
-  </defs>
-  <g id="Layer_1-2" data-name="Layer 1">
-    <g>
-      <path class="cls-3" d="M13.63788,28.29472h54.9283v4.5419c0,11.38115-9.24005,20.62119-20.62119,20.62119H-6.98331v-4.5419c0-11.38115,9.24005-20.62119,20.62119-20.62119Z" transform="translate(-19.88528 33.74521) rotate(-45)"/>
-      <path class="cls-1" d="M20.96719,55.52836H99.97798v2.62855c0,12.43715-10.09739,22.53454-22.53454,22.53454H20.96719v-25.16309h0Z" transform="translate(-30.44896 62.7095) rotate(-45)"/>
-      <path class="cls-2" d="M49.87613,85.15415h53.68538c12.06713,0,21.86411,9.79698,21.86411,21.86411v3.29898h-53.68538c-12.06713,0-21.86411-9.79698-21.86411-21.86411v-3.29898h0Z" transform="translate(-43.43723 90.60465) rotate(-45)"/>
-    </g>
+<svg id="b" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" width="164" height="180.164" viewBox="0 0 164 180.164">
+  <g id="c" data-name="Layer 1">
+    <path d="M158.873,151.079l-100.324-41.035c-2.751-1.125-4.549-3.803-4.549-6.775V3.723c0-2.644,2.68-4.443,5.127-3.442l100.324,41.035c2.751,1.125,4.549,3.803,4.549,6.775v99.546c0,2.644-2.68,4.443-5.127,3.442Z" fill="#288db1" stroke-width="0"/>
+    <path d="M131.873,165.481L31.549,124.446c-2.751-1.125-4.549-3.803-4.549-6.775V18.125c0-2.644,2.68-4.443,5.127-3.442l100.324,41.035c2.751,1.125,4.549,3.803,4.549,6.775v99.546c0,2.644-2.68,4.443-5.127,3.442Z" fill="#28a0ad" stroke-width="0"/>
+    <path d="M104.873,179.883L4.549,138.849c-2.751-1.125-4.549-3.803-4.549-6.775V32.528c0-2.644,2.68-4.443,5.127-3.442l100.324,41.035c2.751,1.125,4.549,3.803,4.549,6.775v99.546c0,2.644-2.68,4.443-5.127,3.442Z" fill="#2fc6c1" stroke-width="0"/>
   </g>
 </svg>

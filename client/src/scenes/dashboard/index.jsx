@@ -146,6 +146,7 @@ const Dashboard = () => {
           backgroundColor={theme.palette.background.alt}
           p="1rem"
           borderRadius="0.55rem"
+          boxShadow="1px 1px 30px rgba(0,0,0,0.1)"
         >
           <Typography variant="h6" sx={{ color: theme.palette.secondary[100] }}>
             {/*Income*/}
@@ -178,12 +179,12 @@ const Dashboard = () => {
 
         {/* ROW 2 */}
         <Box
+          boxShadow="1px 1px 30px rgba(0,0,0,0.1)"
           gridColumn="span 8"
           gridRow="span 3"
           sx={{
             "& .MuiDataGrid-root": {
               border: "none",
-              borderRadius: "5rem",
             },
             "& .MuiDataGrid-cell": {
               borderBottom: "none",
@@ -235,6 +236,7 @@ const Dashboard = () => {
           backgroundColor={theme.palette.background.alt}
           p="1.5rem"
           borderRadius="0.55rem"
+          boxShadow="1px 1px 30px rgba(0,0,0,0.1)"
         >
           <Typography
             variant="h6"

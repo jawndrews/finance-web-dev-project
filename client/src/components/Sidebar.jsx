@@ -11,6 +11,7 @@ import {
   ListItemIcon,
   ListItemText,
   Typography,
+  Collapse,
   useTheme,
 } from "@mui/material";
 import {
@@ -25,14 +26,16 @@ import {
   AssessmentOutlined,
   CalendarMonthOutlined,
   LocalPhoneOutlined,
+  ExpandLessOutlined,
+  ExpandMoreOutlined,
 } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "hooks/useAuth";
 import FlexBetween from "./FlexBetween";
 import profileImage from "assets/pfp.jpeg";
-import logoColorForDark from "assets/svg/logotype-white.svg";
-import logoColorForLight from "assets/svg/logotype-black.svg";
+import logoColorForDark from "assets/svg/logo-dark.svg";
+import logoColorForLight from "assets/svg/logo-light.svg";
 
 // nav items
 const navItemsAdmin = [
@@ -40,10 +43,10 @@ const navItemsAdmin = [
     text: "Dashboard",
     icon: <HomeOutlined />,
   },
-  {
+  /*{
     text: "Income",
     icon: null,
-  },
+  },*/
   {
     text: "Payments",
     icon: <PaymentsOutlined />,
@@ -56,10 +59,10 @@ const navItemsAdmin = [
     text: "Transactions",
     icon: <ReceiptLongOutlined />,
   },
-  {
+  /*{
     text: "Management",
     icon: null,
-  },
+  },*/
   {
     text: "Members",
     icon: <GroupsOutlined />,
@@ -140,6 +143,8 @@ const Sidebar = ({
   const [active, setActive] = useState("");
   const navigate = useNavigate();
   const theme = useTheme();
+  const [open, setOpen] = useState({});
+
   //let navItems = [{}];
   let logo = {};
 
@@ -158,9 +163,17 @@ const Sidebar = ({
     setActive(pathname.substring(1));
   }, [pathname]);
 
+  const handleClick = (item) => {
+    // Toggle between true and false
+    setOpen((prevOpen) => ({
+      ...prevOpen,
+      [item]: !prevOpen[item],
+    }));
+  };
+
   // mui persistent drawer as sidebar
   return (
-    <Box component="nav">
+    <Box component="nav" boxShadow="1px 1px 30px rgba(0,0,0,0.1)">
       {isSidebarOpen && (
         <Drawer
           open={isSidebarOpen}
@@ -173,20 +186,21 @@ const Sidebar = ({
               color: theme.palette.secondary[200],
               backgroundColor: theme.palette.background.alt,
               boxSizing: "border-box",
-              borderWidth: isNonMobile ? 0 : "2px",
+              borderWidth: isNonMobile ? 0 : "0px",
               width: drawerWidth,
+              boxShadow: "1px 1px 30px rgba(0,0,0,0.1)",
             },
           }}
         >
           <Box width="100%">
-            <Box m="1.5rem 2rem 2rem 3rem">
+            <Box m="1.8rem 1.5rem 1.5rem 2.2rem">
               <FlexBetween color={theme.palette.secondary.main}>
                 <Box display="flex" alignItems="center" width="100%">
                   <Box
                     component="img"
                     alt="logo"
                     src={logo}
-                    width="150px"
+                    width="175px"
                     sx={{ ml: "", objectFit: "contain" }}
                   />
                 </Box>
@@ -197,6 +211,7 @@ const Sidebar = ({
                 )}
               </FlexBetween>
             </Box>
+            {/* ORGANIZATION NAME, PFP, USER NAME, AND ROLE IN SIDEBAR
             <Divider
               sx={{
                 m: "0 0 2rem 0",
@@ -211,8 +226,7 @@ const Sidebar = ({
                 }}
               >
                 {organization}
-                {/*add functionality to prevent text runoff here */}
-              </Typography>
+            </Typography>
             </Divider>
             <Box display="flex" justifyContent="center" alignItems="center">
               <Box
@@ -252,7 +266,7 @@ const Sidebar = ({
               >
                 {userType.charAt(0).toUpperCase() + userType.slice(1)}
               </Typography>
-            </Box>
+            </Box>*/}
             <List>
               {navItemsAdmin.map(({ text, icon }) => {
                 if (!icon) {
@@ -274,7 +288,11 @@ const Sidebar = ({
                 const lcText = text.toLowerCase();
 
                 return (
-                  <ListItem key={text} disablePadding>
+                  <ListItem
+                    key={text}
+                    disablePadding
+                    sx={{ mt: "0.75rem", mb: "0.75rem" }}
+                  >
                     <ListItemButton
                       onClick={() => {
                         navigate(`/${lcText}`);
@@ -291,7 +309,7 @@ const Sidebar = ({
                     >
                       <ListItemIcon
                         sx={{
-                          ml: "2rem",
+                          ml: "1rem",
                           color:
                             theme.palette.mode === "dark"
                               ? active === lcText
@@ -321,6 +339,7 @@ const Sidebar = ({
                         <ChevronRightOutlined
                           sx={{
                             ml: "auto",
+
                             color:
                               theme.palette.mode === "dark"
                                 ? theme.palette.secondary[500]

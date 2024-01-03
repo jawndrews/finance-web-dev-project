@@ -15,6 +15,7 @@ const StatBox = ({ title, value, increase, icon, description }) => {
       flex="1 1 100%"
       backgroundColor={theme.palette.background.alt}
       borderRadius="0.55rem"
+      boxShadow="1px 1px 30px rgba(0,0,0,0.1)"
     >
       <FlexBetween>
         <Typography
