@@ -211,7 +211,7 @@ const Sidebar = ({
         }}
       >
         <Box width="100%">
-          <Box m="1.8rem 1.5rem 1.5rem 1.3rem">
+          <Box m="1rem 1.5rem 1.5rem 1.3rem">
             <FlexBetween color={theme.palette.secondary.main}>
               <Box display="flex" alignItems="center" width="100%">
                 <Box

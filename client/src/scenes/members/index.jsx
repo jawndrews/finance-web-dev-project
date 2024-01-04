@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, useTheme, Button, useMediaQuery } from "@mui/material";
-import { PersonAdd } from "@mui/icons-material";
+import { Box, useTheme, Button, useMediaQuery, Modal } from "@mui/material";
+import { PersonAdd, PersonAddOutlined } from "@mui/icons-material";
 import { useGetUsersQuery } from "state/api";
 import { DataGrid } from "@mui/x-data-grid";
 import Header from "components/Header";
@@ -78,33 +78,28 @@ const Members = () => {
       <FlexBetween>
         <Header title="Members" subtitle="Manage Your Members" />
         <Box>
-          <Button
-            onClick={handleAddMembersButton}
-            sx={{
-              backgroundColor:
-                theme.palette.mode === "dark"
-                  ? theme.palette.secondary[400]
-                  : theme.palette.secondary[600],
-              color:
-                theme.palette.mode === "dark"
-                  ? theme.palette.secondary[900]
-                  : theme.palette.secondary[100],
-              fontSize: "14px",
-              fontWeight: "bold",
-              padding: "10px 20px",
-              ml: "35px",
-              mt: "6px",
-              "&:hover": {
-                backgroundColor:
-                  theme.palette.mode === "dark"
-                    ? theme.palette.secondary[300]
-                    : theme.palette.secondary[700],
-              },
-            }}
-          >
-            <PersonAdd sx={{ mr: "15px" }} />
-            Add Members
-          </Button>
+          <Box>
+            <Button
+              onClick={handleAddMembersButton}
+              sx={{
+                color: theme.palette.secondary[300],
+                fontSize: "14px",
+                fontWeight: "bold",
+                padding: "10px 20px",
+                ml: "35px",
+                mt: "6px",
+                "&:hover": {
+                  color:
+                    theme.palette.mode === "dark"
+                      ? theme.palette.secondary[200]
+                      : theme.palette.secondary[500],
+                },
+              }}
+            >
+              <PersonAddOutlined sx={{ mr: "15px" }} />
+              Add Members
+            </Button>
+          </Box>
         </Box>
       </FlexBetween>
       <Box

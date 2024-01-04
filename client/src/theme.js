@@ -153,5 +153,19 @@ export const themeSettings = (mode) => {
         fontSize: 14,
       },
     },
+    components: {
+      MuiSwitch: {
+        styleOverrides: {
+          switchBase: {
+            "&.Mui-checked": {
+              color: "white", // changes the thumb color
+            },
+            "&.Mui-checked + .MuiSwitch-track": {
+              backgroundColor: "#2FC6C1",
+            },
+          },
+        },
+      },
+    },
   };
 };

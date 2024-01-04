@@ -1,6 +1,7 @@
 import React from "react";
 import { Search } from "@mui/icons-material";
 import { IconButton, TextField, InputAdornment } from "@mui/material";
+import { useLocation } from "react-router-dom";
 import {
   GridToolbarDensitySelector,
   GridToolbarContainer,
@@ -10,6 +11,8 @@ import {
 import FlexBetween from "./FlexBetween";
 
 const DataGridCustomToolbar = ({ searchInput, setSearchInput, setSearch }) => {
+  const { pathname } = useLocation();
+
   return (
     <GridToolbarContainer>
       <FlexBetween width="100%">
@@ -18,7 +21,7 @@ const DataGridCustomToolbar = ({ searchInput, setSearchInput, setSearch }) => {
           <GridToolbarDensitySelector />
           <GridToolbarExport
             csvOptions={{
-              fileName: "payments",
+              fileName: pathname,
             }}
           />
         </FlexBetween>
