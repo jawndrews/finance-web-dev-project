@@ -16,6 +16,7 @@ import {
 } from "@mui/material";
 import {
   ChevronLeft,
+  ChevronRight,
   ChevronRightOutlined,
   HomeOutlined,
   PaymentsOutlined,
@@ -26,16 +27,15 @@ import {
   AssessmentOutlined,
   CalendarMonthOutlined,
   LocalPhoneOutlined,
-  ExpandLessOutlined,
-  ExpandMoreOutlined,
 } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "hooks/useAuth";
 import FlexBetween from "./FlexBetween";
 import profileImage from "assets/pfp.jpeg";
-import logoColorForDark from "assets/svg/logo-dark.svg";
-import logoColorForLight from "assets/svg/logo-light.svg";
+import logoColorForDark from "assets/svg/logo-dark-alt.svg";
+import logoColorForLight from "assets/svg/logo-light-alt.svg";
+import logoIcon from "assets/svg/icon-color.svg";
 
 // nav items
 const navItemsAdmin = [
@@ -133,17 +133,16 @@ const navItemsUser = [
 ];
 
 const Sidebar = ({
-  drawerWidth,
   isSidebarOpen,
   setIsSidebarOpen,
   isNonMobile,
+  collapsed,
+  setCollapsed,
 }) => {
-  const { firstName, lastName, organization, userType } = useAuth();
   const { pathname } = useLocation();
   const [active, setActive] = useState("");
   const navigate = useNavigate();
   const theme = useTheme();
-  const [open, setOpen] = useState({});
 
   //let navItems = [{}];
   let logo = {};
@@ -163,54 +162,74 @@ const Sidebar = ({
     setActive(pathname.substring(1));
   }, [pathname]);
 
-  const handleClick = (item) => {
-    // Toggle between true and false
-    setOpen((prevOpen) => ({
-      ...prevOpen,
-      [item]: !prevOpen[item],
-    }));
+  // Toggle collapse
+  const toggleCollapse = () => {
+    setCollapsed(!collapsed);
   };
 
+  // Define the drawer widths
+  let collapsedWidth = 62;
+  const expandedWidth = 240;
+
+  if (!isNonMobile) {
+    collapsedWidth = 0;
+  }
   // mui persistent drawer as sidebar
   return (
     <Box component="nav" boxShadow="1px 1px 30px rgba(0,0,0,0.1)">
-      {isSidebarOpen && (
-        <Drawer
-          open={isSidebarOpen}
-          onClose={() => setIsSidebarOpen(false)}
-          variant="persistent"
-          anchor="left"
-          sx={{
-            width: drawerWidth,
-            "& .MuiDrawer-paper": {
-              color: theme.palette.secondary[200],
-              backgroundColor: theme.palette.background.alt,
-              boxSizing: "border-box",
-              borderWidth: isNonMobile ? 0 : "0px",
-              width: drawerWidth,
-              boxShadow: "1px 1px 30px rgba(0,0,0,0.1)",
+      <Drawer
+        open={isSidebarOpen}
+        variant="permanent"
+        anchor="left"
+        sx={{
+          width: collapsed ? collapsedWidth : expandedWidth,
+          flexShrink: 0,
+          "& .MuiDrawer-paper": {
+            width: collapsed ? collapsedWidth : expandedWidth,
+            boxSizing: "border-box",
+            overflowX: "hidden", // Prevent horizontal scroll
+            transition: theme.transitions.create("width", {
+              easing: theme.transitions.easing.sharp,
+              duration: theme.transitions.duration.enteringScreen,
+            }),
+            backgroundColor: theme.palette.background.alt,
+            color: theme.palette.secondary[200],
+            boxShadow: "1px 1px 30px rgba(0,0,0,0.1)",
+            "&:hover": {
+              width: "240px", // Full width on hover
             },
-          }}
-        >
-          <Box width="100%">
-            <Box m="1.8rem 1.5rem 1.5rem 2.2rem">
-              <FlexBetween color={theme.palette.secondary.main}>
-                <Box display="flex" alignItems="center" width="100%">
-                  <Box
-                    component="img"
-                    alt="logo"
-                    src={logo}
-                    width="175px"
-                    sx={{ ml: "", objectFit: "contain" }}
-                  />
-                </Box>
-                {!isNonMobile && (
-                  <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
-                    <ChevronLeft />
-                  </IconButton>
-                )}
-              </FlexBetween>
-            </Box>
+            ...(collapsed && {
+              "&:hover": {
+                width: expandedWidth, // Expand on hover
+                "& .MuiListItemText-root": {
+                  // Show text when hovered
+                  display: "block",
+                },
+              },
+            }),
+          },
+        }}
+      >
+        <Box width="100%">
+          <Box m="1.8rem 1.5rem 1.5rem 1.3rem">
+            <FlexBetween color={theme.palette.secondary.main}>
+              <Box display="flex" alignItems="center" width="100%">
+                <Box
+                  component="img"
+                  alt="logo"
+                  src={logo}
+                  width="180px"
+                  sx={{ ml: "", objectFit: "contain" }}
+                />
+              </Box>
+              {!isNonMobile && (
+                <IconButton onClick={toggleCollapse}>
+                  {collapsed ? <ChevronRight /> : <ChevronLeft />}
+                </IconButton>
+              )}
+            </FlexBetween>
+          </Box>
+          <Box>
             {/* ORGANIZATION NAME, PFP, USER NAME, AND ROLE IN SIDEBAR
             <Divider
               sx={{
@@ -267,130 +286,92 @@ const Sidebar = ({
                 {userType.charAt(0).toUpperCase() + userType.slice(1)}
               </Typography>
             </Box>*/}
-            <List>
-              {navItemsAdmin.map(({ text, icon }) => {
-                if (!icon) {
-                  return (
-                    <Typography
-                      key={text}
-                      sx={{
-                        m: "2.25rem 0 1rem 3rem",
-                        color:
-                          theme.palette.mode === "dark"
-                            ? theme.palette.grey[50]
-                            : theme.palette.primary[600],
-                      }}
-                    >
-                      {text}
-                    </Typography>
-                  );
-                }
-                const lcText = text.toLowerCase();
-
-                return (
-                  <ListItem
-                    key={text}
-                    disablePadding
-                    sx={{ mt: "0.75rem", mb: "0.75rem" }}
-                  >
-                    <ListItemButton
-                      onClick={() => {
-                        navigate(`/${lcText}`);
-                        setActive(lcText);
-                      }}
-                      sx={{
-                        backgroundColor:
-                          active === lcText ? "transparent" : "transparent",
-                        color:
-                          theme.palette.mode === "dark"
-                            ? theme.palette.grey[50]
-                            : theme.palette.primary[600],
-                      }}
-                    >
-                      <ListItemIcon
-                        sx={{
-                          ml: "1rem",
-                          color:
-                            theme.palette.mode === "dark"
-                              ? active === lcText
-                                ? theme.palette.secondary[500]
-                                : theme.palette.grey[50]
-                              : active === lcText
-                              ? theme.palette.secondary[400]
-                              : theme.palette.primary[600],
-                        }}
-                      >
-                        {icon}
-                      </ListItemIcon>
-                      <ListItemText
-                        primary={text}
-                        sx={{
-                          color:
-                            theme.palette.mode === "dark"
-                              ? active === lcText
-                                ? theme.palette.secondary[500]
-                                : theme.palette.grey[50]
-                              : active === lcText
-                              ? theme.palette.secondary[400]
-                              : theme.palette.primary[600],
-                        }}
-                      />
-                      {active === lcText && (
-                        <ChevronRightOutlined
-                          sx={{
-                            ml: "auto",
-
-                            color:
-                              theme.palette.mode === "dark"
-                                ? theme.palette.secondary[500]
-                                : theme.palette.secondary[400],
-                          }}
-                        />
-                      )}
-                    </ListItemButton>
-                  </ListItem>
-                );
-              })}
-            </List>
           </Box>
-          {/*<Box>
-            <Box position="flex" bottom="0rem">
-              <Divider sx={{ pt: "4rem", mt: "auto", mb: 1 }} />
-              <Typography
-                sx={{
-                  m: "1rem 1rem 1rem 1rem",
-                  color:
-                    theme.palette.mode === "dark"
-                      ? theme.palette.grey[50]
-                      : theme.palette.primary[600],
-                }}
-              >
-                Need Help?{" "}
-                <Button
-                  href="#"
-                  alt="submit-a-ticket"
+          <List>
+            {navItemsAdmin.map(({ text, icon }) => {
+              const lcText = text.toLowerCase();
+              return (
+                <ListItem
+                  key={text}
+                  disablePadding
                   sx={{
-                    margin: "0 0 0 1rem",
-                    color:
-                      theme.palette.mode === "dark"
-                        ? theme.palette.grey[50]
-                        : theme.palette.primary[600],
-                    "&:hover": {
+                    mt: "0.5rem",
+                    mb: "0.5rem",
+                    borderLeft:
+                      active === lcText
+                        ? `2px solid ${
+                            theme.palette.mode === "dark"
+                              ? theme.palette.secondary[500]
+                              : theme.palette.secondary[400]
+                          }`
+                        : "transparent",
+                  }}
+                >
+                  <ListItemButton
+                    onClick={() => {
+                      navigate(`/${lcText}`);
+                      setActive(lcText);
+                    }}
+                    sx={{
+                      backgroundColor:
+                        active === lcText ? "transparent" : "transparent",
                       color:
                         theme.palette.mode === "dark"
                           ? theme.palette.grey[50]
                           : theme.palette.primary[600],
-                      backgroundColor: theme.palette.secondary[500],
-                    },
-                  }}
-                >
-                  Submit a ticket
-                </Button>
-              </Typography>
-            </Box>
-                </Box>*/}
-        </Drawer>
-      )}
+                    }}
+                  >
+                    <ListItemIcon
+                      sx={{
+                        mr: collapsed ? 2 : 2, // Remove margin when collapsed, adjust as needed
+                        mt: "0.5rem",
+                        mb: "0.5rem",
+                        ml: "-0.8rem",
+                        justifyContent: "center", // Center the icon
+                        color:
+                          theme.palette.mode === "dark"
+                            ? active === lcText
+                              ? theme.palette.secondary[500]
+                              : theme.palette.grey[50]
+                            : active === lcText
+                            ? theme.palette.secondary[400]
+                            : theme.palette.primary[600],
+                      }}
+                    >
+                      {icon}
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={text}
+                      sx={{
+                        color:
+                          theme.palette.mode === "dark"
+                            ? active === lcText
+                              ? theme.palette.secondary[500]
+                              : theme.palette.grey[50]
+                            : active === lcText
+                            ? theme.palette.secondary[400]
+                            : theme.palette.primary[600],
+                        whiteSpace: "nowrap",
+                      }}
+                    />
+                    {active === lcText && (
+                      <ChevronRightOutlined
+                        sx={{
+                          ml: "auto",
+                          color:
+                            theme.palette.mode === "dark"
+                              ? theme.palette.secondary[500]
+                              : theme.palette.secondary[400],
+                        }}
+                      />
+                    )}
+                  </ListItemButton>
+                </ListItem>
+              );
+            })}
+          </List>
+        </Box>
+      </Drawer>
     </Box>
   );
 };

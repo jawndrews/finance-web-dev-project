@@ -94,10 +94,10 @@ const Dashboard = () => {
               ml: "35px",
               mt: "6px",
               "&:hover": {
-                backgroundColor:
+                color:
                   theme.palette.mode === "dark"
-                    ? theme.palette.secondary[600]
-                    : theme.palette.secondary[700],
+                    ? theme.palette.secondary[200]
+                    : theme.palette.secondary[500],
               },
             }}
           >
@@ -182,9 +182,13 @@ const Dashboard = () => {
           boxShadow="1px 1px 30px rgba(0,0,0,0.1)"
           gridColumn="span 8"
           gridRow="span 3"
+          borderRadius="0.55rem"
           sx={{
             "& .MuiDataGrid-root": {
               border: "none",
+            },
+            "& .MuiDataGrid-main": {
+              borderRadius: "0.55rem 0.55rem 0rem 0rem",
             },
             "& .MuiDataGrid-cell": {
               borderBottom: "none",
@@ -207,6 +211,7 @@ const Dashboard = () => {
                   ? theme.palette.grey[50]
                   : theme.palette.primary[600],
               borderTop: "none",
+              borderRadius: "0rem 0rem 0.55rem 0.55rem",
             },
             "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
               color: `${theme.palette.secondary[200]} !important`,

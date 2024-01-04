@@ -124,6 +124,9 @@ const Members = () => {
             "& .MuiDataGrid-root": {
               border: "none",
             },
+            "& .MuiDataGrid-main": {
+              borderRadius: "0.55rem 0.55rem 0rem 0rem",
+            },
             "& .MuiDataGrid-cell": {
               borderBottom: "none",
             },
@@ -145,6 +148,7 @@ const Members = () => {
                   ? theme.palette.grey[50]
                   : theme.palette.primary[600],
               borderTop: "none",
+              borderRadius: "0rem 0rem 0.55rem 0.55rem ",
             },
             "& .MuiButton-text": {
               color:

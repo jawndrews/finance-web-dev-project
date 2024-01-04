@@ -185,7 +185,17 @@ const Login = () => {
                 inputRef={userRef}
                 onChange={handleUserInput}
                 autoComplete="off"
-                sx={{ gridColumn: "span 4" }}
+                sx={{
+                  gridColumn: "span 4",
+                  "& label.Mui-focused": {
+                    color: theme.palette.secondary[400],
+                  },
+                  "& .MuiOutlinedInput-root": {
+                    "&.Mui-focused fieldset": {
+                      borderColor: theme.palette.secondary[400], // focus
+                    },
+                  },
+                }}
               />
               <TextField
                 className="form_input"
@@ -194,7 +204,17 @@ const Login = () => {
                 name="password"
                 value={password}
                 onChange={handlePwdInput}
-                sx={{ gridColumn: "span 4" }}
+                sx={{
+                  gridColumn: "span 4",
+                  "& label.Mui-focused": {
+                    color: theme.palette.secondary[400],
+                  },
+                  "& .MuiOutlinedInput-root": {
+                    "&.Mui-focused fieldset": {
+                      borderColor: theme.palette.secondary[400], // focus
+                    },
+                  },
+                }}
               />
             </Box>
             {/* BUTTON */}
@@ -211,7 +231,12 @@ const Login = () => {
                       ? palette.secondary[500]
                       : palette.secondary[400],
                   color: palette.background.alt,
-                  "&:hover": { color: palette.secondary[500] },
+                  "&:hover": {
+                    backgroundColor:
+                      theme.palette.mode === "dark"
+                        ? palette.secondary[300]
+                        : palette.secondary[500],
+                  },
                 }}
               >
                 {"Sign In"}

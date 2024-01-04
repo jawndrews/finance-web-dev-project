@@ -7,6 +7,8 @@ import {
   SettingsOutlined,
   ArrowDropDownOutlined,
   ExitToAppOutlined,
+  ChevronLeft,
+  ChevronRight,
 } from "@mui/icons-material";
 import { useNavigate, useLocation } from "react-router-dom";
 import FlexBetween from "components/FlexBetween";
@@ -29,7 +31,7 @@ import {
   Divider,
 } from "@mui/material";
 
-const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
+const Navbar = ({ user, setCollapsed, collapsed }) => {
   const dispatch = useDispatch();
   const theme = useTheme();
 
@@ -44,6 +46,10 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
   const isOpen = Boolean(anchorEl);
   const handleClick = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
+
+  const toggleCollapse = () => {
+    setCollapsed(!collapsed);
+  };
 
   useEffect(() => {
     if (isSuccess) navigate("/login");
@@ -66,12 +72,12 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
       <Toolbar sx={{ justifyContent: "space-between" }}>
         {/* left */}
         <FlexBetween>
-          <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
-            <MenuIcon />
+          <IconButton onClick={toggleCollapse}>
+            {collapsed ? <ChevronRight /> : <ChevronLeft />}
           </IconButton>
           <FlexBetween
             backgroundColor={theme.palette.background.alt}
-            borderRadius="9px"
+            borderRadius="0.55rem"
             ml="1rem"
             gap="2rem"
             p="0.1rem 0.7rem 0.1rem 1.2rem "
