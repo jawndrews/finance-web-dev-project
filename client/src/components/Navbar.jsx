@@ -144,6 +144,12 @@ const Navbar = ({ user, setCollapsed, collapsed }) => {
               open={isOpen}
               onClose={handleClose}
               anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+              sx={{
+                "& .MuiPaper-root": {
+                  // Targeting the Paper component inside the Menu
+                  boxShadow: "1px 1px 30px rgba(0,0,0,0.2)",
+                },
+              }}
             >
               <MenuItem onClick={""}>
                 <Button
