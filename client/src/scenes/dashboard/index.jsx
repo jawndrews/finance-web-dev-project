@@ -111,7 +111,7 @@ const Dashboard = () => {
         mt="20px"
         display="grid"
         gridTemplateColumns="repeat(12, 1fr)"
-        gridAutoRows="160px"
+        gridAutoRows="140px"
         gap="20px"
         sx={{
           "& > div": { gridColumn: isNonMediumScreens ? undefined : "span 12" },
@@ -123,9 +123,11 @@ const Dashboard = () => {
           value={data && data.totalMembers}
           increase="+14%"
           description="Since last month"
+          backgroundColor="#68B8DC"
+          color={theme.palette.grey[900]}
           icon={
             <PersonAdd
-              sx={{ color: theme.palette.secondary[400], fontSize: "26px" }}
+              sx={{ color: theme.palette.grey[900], fontSize: "26px" }}
             />
           }
         />
@@ -134,14 +136,43 @@ const Dashboard = () => {
           value={data && formatCurrency(data.monthlyIncome)}
           increase="+8%"
           description="Since last month"
+          backgroundColor="#75D0DB"
+          color={theme.palette.grey[900]}
           icon={
             <CalendarMonth
-              sx={{ color: theme.palette.secondary[400], fontSize: "26px" }}
+              sx={{ color: theme.palette.grey[900], fontSize: "26px" }}
             />
           }
         />
+
+        <StatBox
+          title="Total Income"
+          value={data && formatCurrency(data.totalIncome)}
+          increase="+21%"
+          description="Since last month"
+          backgroundColor="#97EBED"
+          color={theme.palette.grey[900]}
+          icon={
+            <Paid sx={{ color: theme.palette.grey[900], fontSize: "26px" }} />
+          }
+        />
+        <StatBox
+          title="Total Outstanding"
+          value="16" //{data && data.totalOutstandingInvoices}
+          increase="-13%"
+          description="Since last month"
+          backgroundColor="#D8E641"
+          color={theme.palette.grey[900]}
+          icon={
+            <Description
+              sx={{ color: theme.palette.grey[900], fontSize: "26px" }}
+            />
+          }
+        />
+
+        {/* ROW 2 */}
         <Box
-          gridColumn="span 8"
+          gridColumn="span 6"
           gridRow="span 2"
           backgroundColor={theme.palette.background.alt}
           p="1rem"
@@ -154,30 +185,21 @@ const Dashboard = () => {
           <LineChart />
         </Box>
 
-        <StatBox
-          title="Total Income"
-          value={data && formatCurrency(data.totalIncome)}
-          increase="+21%"
-          description="Since last month"
-          icon={
-            <Paid
-              sx={{ color: theme.palette.secondary[400], fontSize: "26px" }}
-            />
-          }
-        />
-        <StatBox
-          title="Total Outstanding"
-          value="16" //{data && data.totalOutstandingInvoices}
-          increase="-13%"
-          description="Since last month"
-          icon={
-            <Description
-              sx={{ color: theme.palette.secondary[400], fontSize: "26px" }}
-            />
-          }
-        />
+        {/*MAKE ANOTHER DATA VIS TYPE FOR THIS*/}
+        <Box
+          gridColumn="span 6"
+          gridRow="span 2"
+          backgroundColor={theme.palette.background.alt}
+          p="1rem"
+          borderRadius="0.55rem"
+          boxShadow="1px 1px 30px rgba(0,0,0,0.1)"
+        >
+          <Typography variant="h6" sx={{ color: theme.palette.secondary[100] }}>
+            {/*Income*/}
+          </Typography>
+          <LineChart />
+        </Box>
 
-        {/* ROW 2 */}
         <Box
           boxShadow="1px 1px 30px rgba(0,0,0,0.1)"
           gridColumn="span 8"
@@ -235,6 +257,7 @@ const Dashboard = () => {
             onSortModelChange={(newSortModel) => setSort(...newSortModel)}
           />
         </Box>
+
         <Box
           gridColumn="span 4"
           gridRow="span 3"

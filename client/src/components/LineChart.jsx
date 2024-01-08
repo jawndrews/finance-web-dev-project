@@ -77,20 +77,24 @@ const LineChart = () => {
           domain: {
             line: {
               stroke: theme.palette.primary[300],
+              opacity: 0.8,
             },
           },
           legend: {
             text: {
               fill: theme.palette.primary[100],
+              opacity: 0.8,
             },
           },
           ticks: {
             line: {
               stroke: theme.palette.primary[100],
               strokeWidth: 1,
+              opacity: 0.8,
             },
             text: {
               fill: theme.palette.primary[100],
+              opacity: 0.8,
             },
           },
         },
@@ -114,7 +118,7 @@ const LineChart = () => {
         stacked: true,
         reverse: false,
       }}
-      yFormat=" >-.2f"
+      yFormat=">-$.2f"
       curve="catmullRom"
       axisTop={null}
       axisRight={null}
@@ -137,12 +141,13 @@ const LineChart = () => {
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
+        tickValues: [0, 1000, 2000, 3000, 4000, 5000],
         legend: "Amount",
         legendOffset: -55,
         legendPosition: "middle",
       }}
       enableGridX={false}
-      enableGridY={false}
+      enableGridY={true}
       pointSize={10}
       pointColor={{ theme: "background" }}
       pointBorderWidth={2}
@@ -150,7 +155,7 @@ const LineChart = () => {
       pointLabelYOffset={-12}
       useMesh={true}
       enableArea={true}
-      areaOpacity={0.1}
+      areaOpacity={0.3}
       legends={[
         {
           anchor: "bottom-right",
@@ -160,7 +165,7 @@ const LineChart = () => {
           translateY: 0,
           itemsSpacing: 0,
           itemDirection: "left-to-right",
-          itemWidth: 80,
+          itemWidth: 70,
           itemHeight: 20,
           itemOpacity: 0.75,
           symbolSize: 12,

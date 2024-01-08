@@ -20,7 +20,8 @@ export const tokensDark = {
     200: "#a0a0a0",
     300: "#717171",
     400: "#313131",
-    450: "#292929",
+    425: "#252B2B",
+    450: "#222525",
     500: "#121212",
     600: "#0e0e0e",
     700: "#0b0b0b",
@@ -28,28 +29,28 @@ export const tokensDark = {
     900: "#040404",
   },
   secondary: {
-    // robin egg blue
-    100: "#d5f4f3",
-    200: "#ace8e6",
-    300: "#82ddda",
-    400: "#59d1cd",
-    500: "#2fc6c1",
-    600: "#269e9a",
-    700: "#1c7774",
-    800: "#134f4d",
-    900: "#092827",
+    // moonstone
+    100: "#d6f1f4",
+    200: "#ade3e9",
+    300: "#84d4dd",
+    400: "#5bc6d2",
+    500: "#32b8c7",
+    600: "#28939f",
+    700: "#1e6e77",
+    800: "#144a50",
+    900: "#0a2528",
   },
   accent: {
-    // bondi blue
-    100: "#d4e8ef",
-    200: "#a9d1e0",
-    300: "#7ebbd0",
-    400: "#53a4c1",
-    500: "#288db1",
-    600: "#20718e",
-    700: "#18556a",
-    800: "#103847",
-    900: "#081c23",
+    // indigo dye
+    100: "#d0d8e0",
+    200: "#a1b1c2",
+    300: "#728ba3",
+    400: "#436485",
+    500: "#143d66",
+    600: "#103152",
+    700: "#0c253d",
+    800: "#081829",
+    900: "#040c14",
   },
 };
 // function that reverses the color palette
@@ -96,7 +97,7 @@ export const themeSettings = (mode) => {
             },
             background: {
               default: tokensDark.primary[450],
-              alt: tokensDark.primary[400],
+              alt: tokensDark.primary[425],
             },
           }
         : {

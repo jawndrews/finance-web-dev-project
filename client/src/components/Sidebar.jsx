@@ -152,7 +152,7 @@ const Sidebar = ({
   //}
 
   if (theme.palette.mode === "light") {
-    logo = logoColorForLight;
+    logo = logoColorForDark;
   } else if (theme.palette.mode === "dark") {
     logo = logoColorForDark;
   }
@@ -169,10 +169,11 @@ const Sidebar = ({
 
   // Define the drawer widths
   let collapsedWidth = 62;
-  const expandedWidth = 240;
+  let expandedWidth = 225;
 
   if (!isNonMobile) {
     collapsedWidth = 0;
+    expandedWidth = 240;
   }
   // mui persistent drawer as sidebar
   return (
@@ -192,15 +193,16 @@ const Sidebar = ({
               easing: theme.transitions.easing.sharp,
               duration: theme.transitions.duration.enteringScreen,
             }),
-            backgroundColor: theme.palette.background.alt,
+            backgroundColor: "#252B2B",
             color: theme.palette.secondary[200],
             boxShadow: "1px 1px 30px rgba(0,0,0,0.1)",
             "&:hover": {
-              width: "240px", // Full width on hover
+              width: "225px", // Full width on hover
             },
             ...(collapsed && {
               "&:hover": {
                 width: expandedWidth, // Expand on hover
+                border: "none",
                 "& .MuiListItemText-root": {
                   // Show text when hovered
                   display: "block",
@@ -224,7 +226,11 @@ const Sidebar = ({
               </Box>
               {!isNonMobile && (
                 <IconButton onClick={toggleCollapse}>
-                  {collapsed ? <ChevronRight /> : <ChevronLeft />}
+                  {collapsed ? (
+                    <ChevronRight sx={{ color: "#f2f2f2" }} />
+                  ) : (
+                    <ChevronLeft sx={{ color: "#f2f2f2" }} />
+                  )}
                 </IconButton>
               )}
             </FlexBetween>
@@ -302,7 +308,7 @@ const Sidebar = ({
                         ? `2px solid ${
                             theme.palette.mode === "dark"
                               ? theme.palette.secondary[500]
-                              : theme.palette.secondary[400]
+                              : theme.palette.secondary[500]
                           }`
                         : "transparent",
                   }}
@@ -334,8 +340,8 @@ const Sidebar = ({
                               ? theme.palette.secondary[500]
                               : theme.palette.grey[50]
                             : active === lcText
-                            ? theme.palette.secondary[400]
-                            : theme.palette.primary[600],
+                            ? theme.palette.secondary[500]
+                            : theme.palette.grey[50],
                       }}
                     >
                       {icon}
@@ -349,8 +355,8 @@ const Sidebar = ({
                               ? theme.palette.secondary[500]
                               : theme.palette.grey[50]
                             : active === lcText
-                            ? theme.palette.secondary[400]
-                            : theme.palette.primary[600],
+                            ? theme.palette.secondary[500]
+                            : theme.palette.grey[50],
                         whiteSpace: "nowrap",
                       }}
                     />
@@ -361,7 +367,7 @@ const Sidebar = ({
                           color:
                             theme.palette.mode === "dark"
                               ? theme.palette.secondary[500]
-                              : theme.palette.secondary[400],
+                              : theme.palette.secondary[500],
                         }}
                       />
                     )}
