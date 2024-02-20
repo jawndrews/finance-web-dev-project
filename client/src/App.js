@@ -17,6 +17,7 @@ import Events from "scenes/events";
 import Communication from "scenes/communication";
 import Reports from "scenes/reports";
 import Collections from "scenes/collections";
+import Help from "scenes/help";
 import Login from "scenes/login";
 import PersistLogin from "state/auth/PersistLogin";
 import Prefetch from "state/auth/Prefetch";
@@ -62,6 +63,7 @@ function App() {
                     <Route path="/communication" element={<Communication />} />
                     <Route path="/reports" element={<Reports />} />
                     <Route path="/collections" element={<Collections />} />
+                    <Route path="/help" element={<Help />} />
                   </Route>
                 </Route>
               </Route>

@@ -27,6 +27,7 @@ import {
   AssessmentOutlined,
   CalendarMonthOutlined,
   LocalPhoneOutlined,
+  HelpOutline,
 } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -83,6 +84,10 @@ const navItemsAdmin = [
     text: "Collections",
     icon: <LocalPhoneOutlined />,
   },
+  {
+    text: "Help",
+    icon: <HelpOutline />,
+  },
 ];
 
 const navItemsUser = [
@@ -129,6 +134,10 @@ const navItemsUser = [
   {
     text: "Collections",
     icon: <LocalPhoneOutlined />,
+  },
+  {
+    text: "Help",
+    icon: <HelpOutline />,
   },
 ];
 

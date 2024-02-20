@@ -19,6 +19,7 @@ import { usePersist } from "hooks/usePersist";
 import loginBackgroundImage from "assets/login-background.png";
 import logoColorForDark from "assets/svg/logo-dark.svg";
 import logoColorForLight from "assets/svg/logo-light.svg";
+import FlexBetween from "components/FlexBetween";
 
 const Login = () => {
   const theme = useTheme();
@@ -241,7 +242,7 @@ const Login = () => {
               >
                 {"Sign In"}
               </Button>
-              <Box>
+              <Box display="flex" sx={{ alignItems: "center" }}>
                 <Checkbox
                   type="checkbox"
                   id="persist"
@@ -256,7 +257,16 @@ const Login = () => {
                     },
                   }}
                 />
-                Remember Me
+                <Typography
+                  component="label"
+                  onClick={handleToggle}
+                  sx={{
+                    userSelect: "none", // Prevents text selection when double-clicking
+                    cursor: "pointer", // Set the cursor to pointer when hovering over the text
+                  }}
+                >
+                  Remember Me
+                </Typography>
               </Box>
             </Box>
           </form>

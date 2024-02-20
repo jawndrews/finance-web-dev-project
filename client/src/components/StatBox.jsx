@@ -47,12 +47,9 @@ const StatBox = ({
       >
         {value}
       </Typography>
-      <FlexBetween gap="1rem">
-        <Typography variant="h5" fontStyle="italic" sx={{ color: statColor }}>
-          {increase}
-        </Typography>
-        <Typography sx={{ color: color }}>{description}</Typography>
-      </FlexBetween>
+      <Typography variant="p" fontStyle="italic" sx={{ color: statColor }}>
+        {increase} {"  "} {description}
+      </Typography>
     </Box>
   );
 };

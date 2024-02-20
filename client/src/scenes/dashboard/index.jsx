@@ -125,6 +125,7 @@ const Dashboard = () => {
           description="Since last month"
           backgroundColor="#68B8DC"
           color={theme.palette.grey[900]}
+          statColor={theme.palette.grey[900]}
           icon={
             <PersonAdd
               sx={{ color: theme.palette.grey[900], fontSize: "26px" }}
@@ -138,6 +139,7 @@ const Dashboard = () => {
           description="Since last month"
           backgroundColor="#75D0DB"
           color={theme.palette.grey[900]}
+          statColor={theme.palette.grey[900]}
           icon={
             <CalendarMonth
               sx={{ color: theme.palette.grey[900], fontSize: "26px" }}
@@ -152,6 +154,7 @@ const Dashboard = () => {
           description="Since last month"
           backgroundColor="#97EBED"
           color={theme.palette.grey[900]}
+          statColor={theme.palette.grey[900]}
           icon={
             <Paid sx={{ color: theme.palette.grey[900], fontSize: "26px" }} />
           }
@@ -163,6 +166,7 @@ const Dashboard = () => {
           description="Since last month"
           backgroundColor="#D8E641"
           color={theme.palette.grey[900]}
+          statColor={theme.palette.grey[900]}
           icon={
             <Description
               sx={{ color: theme.palette.grey[900], fontSize: "26px" }}
