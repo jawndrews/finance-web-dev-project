@@ -1,8 +1,8 @@
-## Full Stack Finance Web App - MemberMint
+## Full Stack Finance Web App
 
 **About**
 
-MemberMint is a web application used for member and financial management for various organizations. Use cases include sororities & fraternities, gyms, clubs, non profits, etc.
+Web application used for member and financial management for various organizations. Use cases include sororities & fraternities, gyms, clubs, non profits, etc.
 
 **Technologies Used:**
 
